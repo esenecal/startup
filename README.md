@@ -23,14 +23,18 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 ### Elevator pitch
 
 Ideas:
-
+- A simple, user-focused flashcard system. Sign in, allows you to share decks with friends and compare scores. 
+- Connection--allows you to search for similar hobbies as those you may have? Allows you to search for people with the same hobbies.
+    - Perhaps with music--you can list gernes, and it will connect you to people with similar interests and provide contact info that
+    they provide. Then it has links or something for finding shows. Music Genre API?
+- Calendar coordinator--allows people to vote on or say what, where, and when they want to do things? Suggests things nearby?
+- Sharing recipes--users can add tags and share them (such as simple, one pan, etc)
 
 
 ### Design
 
 ![Design image](placeholder.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ```mermaid
 sequenceDiagram
