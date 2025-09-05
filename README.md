@@ -57,17 +57,18 @@ sequenceDiagram
 - Users can upload recipes to a server and attach simple word tags that describe it.
 - Users can select something they need (e.g. "hot" or "spicy") and the app will randomly cycle through recipes.
 - Users can vote on recipes they like (?).
+- Maybe instead of weather recipe stuff, you can just as for a random food or give it some general constraints, and it will pull from an API and provide various food items instead of recipes, which you can then research.
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
-
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+NOTE: These are drafts.
+- **HTML** - Two HTML screens, one for entering a recipe/login and one for viewing recipes
+- **CSS** - Simple styling that provides easy viewing. Allows for good recipe formatting on different screen sizing
+- **React** - Provides options display (upload/view), shows recipes according to requests
+- **Service** - Backend service with endpoints for (research more!)
+- **DB/Login** - Store user ID, recipes, and tags (all associated with each other).
+- **WebSocket** - Notification that someone has uploaded/liked a recipe.
 
 ## 🚀 AWS deliverable
 
