@@ -30,6 +30,12 @@ Ideas:
 - Calendar coordinator--allows people to vote on or say what, where, and when they want to do things? Suggests things nearby?
 - Sharing recipes--users can add tags and share them (such as simple, one pan, etc)
 
+#### Flashcard Pitch
+There are so many applications out there that offer flashcard services, but many provide varied or complexs services. This application instead gives users a simple, direct flashcard service that they can control. They can choose to share these flashcards with friends.
+
+
+#### Recipe Pitch
+Users can write recipes and send them to friends via this website. If they aren't sure what to eat, they can search by tags, such as "hot", "spicy", "cool", "simple", etc. The application can suggest recipes depending on the user's preferences and even the weather (hot for cold weather, cool for hot, etc). This is meant to be used amongst friends and can be used in groups of people who have dietary restrictions.
 
 ### Design
 
