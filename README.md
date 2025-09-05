@@ -44,17 +44,19 @@ Have you ever been unsure of what to make for dinner, and all the recipes online
 
 ```mermaid
 sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    participant Server
+    Actor Bob
+    actor Alice
+    Alice-->>Server: Alice's Recipe (HOT)
+    Bob-->>Server:(HOT) Recipe request
+    Server->>Bob: Alice's Recipe (HOT)
 ```
 
 ### Key features
 
 - Users can upload recipes to a server and attach simple word tags that describe it.
 - Users can select something they need (e.g. "hot" or "spicy") and the app will randomly cycle through recipes.
-- Users can vote on recipes they like (?)
-- 
+- Users can vote on recipes they like (?).
 
 ### Technologies
 
