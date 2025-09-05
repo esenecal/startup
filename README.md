@@ -25,7 +25,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 Ideas:
 - A simple, user-focused flashcard system. Sign in, allows you to share decks with friends and compare scores. 
 - Connection--allows you to search for similar hobbies as those you may have? Allows you to search for people with the same hobbies.
-    - Perhaps with music--you can list gernes, and it will connect you to people with similar interests and provide contact info that
+    - Perhaps with music--you can list genres, and it will connect you to people with similar interests and provide contact info that
     they provide. Then it has links or something for finding shows. Music Genre API?
 - Calendar coordinator--allows people to vote on or say what, where, and when they want to do things? Suggests things nearby?
 - Sharing recipes--users can add tags and share them (such as simple, one pan, etc)
@@ -34,8 +34,8 @@ Ideas:
 There are so many applications out there that offer flashcard services, but many provide varied or complexs services. This application instead gives users a simple, direct flashcard service that they can control. They can choose to share these flashcards with friends.
 
 
-#### Recipe Pitch
-Users can write recipes and send them to friends via this website. If they aren't sure what to eat, they can search by tags, such as "hot", "spicy", "cool", "simple", etc. The application can suggest recipes depending on the user's preferences and even the weather (hot for cold weather, cool for hot, etc). This is meant to be used amongst friends and can be used in groups of people who have dietary restrictions.
+#### Recipe Pitch !! (I don't know what to cook)
+Have you ever been unsure of what to make for dinner, and all the recipes online are a bit too out of your skill level? This app allows users can write recipes and share them with friends via this website. Just select what you're in the mood for, your skill level, or even what the weather is, and the application will suggest recipes! This can be used to find recipes for those with dietary restrictions, beginning chefs, or if someone is just not sure what to have for lunch.
 
 ### Design
 
@@ -51,9 +51,10 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Users can upload recipes to a server and attach simple word tags that describe it.
+- Users can select something they need (e.g. "hot" or "spicy") and the app will randomly cycle through recipes.
+- Users can vote on recipes they like (?)
+- 
 
 ### Technologies
 
