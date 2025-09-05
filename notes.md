@@ -9,6 +9,19 @@
 - [MDN](https://developer.mozilla.org)
 - [AWS] (https://aws.amazon.com/)
 
+## Git and Github
+
+You can access Git and push code to Github via the command line or the VSCode GUI. You should:
+- Always commit! You need to frequently commit your code to ensure that you have back ups.
+
+Forking is where you create a copy of a repository. You can then edit it and request a pull request to merge it with the original. This allows for people to work together. Branches are similar, and allow you to experiment with your code.
+
+The process of making changes with git:
+1. Get the latest code via "git pull"
+2. Add, test, etc. your code.
+3. Commit with "git commit" and then "git push" (push "pushes" the code to Github)
+4. Repeat!!
+
 ## AWS
 
 My IP address is: 54.81.96.130
