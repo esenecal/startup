@@ -1,8 +1,6 @@
-# Startup Project
+# Hungry
 
 [My Notes](notes.md)
-
-A startup project for CS 260. This is will be a startup idea, but currently this is only a repository created from a template.
 
 > [!NOTE]
 >  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
@@ -20,27 +18,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
-### Elevator pitch
-
-Ideas:
-- A simple, user-focused flashcard system. Sign in, allows you to share decks with friends and compare scores. 
-- Connection--allows you to search for similar hobbies as those you may have? Allows you to search for people with the same hobbies.
-    - Perhaps with music--you can list genres, and it will connect you to people with similar interests and provide contact info that
-    they provide. Then it has links or something for finding shows. Music Genre API?
-- Calendar coordinator--allows people to vote on or say what, where, and when they want to do things? Suggests things nearby?
-- Sharing recipes--users can add tags and share them (such as simple, one pan, etc)
-
-#### Flashcard Pitch
-There are so many applications out there that offer flashcard services, but many provide varied or complexs services. This application instead gives users a simple, direct flashcard service that they can control. They can choose to share these flashcards with friends.
-
-
-#### Recipe Pitch !! (I don't know what to cook)
+### Elevator pitch (DRAFT)
 Have you ever been unsure of what to make for dinner, and all the recipes online are a bit too out of your skill level? This app allows users can write recipes and share them with friends via this website. Just select what you're in the mood for, your skill level, or even what the weather is, and the application will suggest recipes! This can be used to find recipes for those with dietary restrictions, beginning chefs, or if someone is just not sure what to have for lunch.
 
 ### Design
 
 ![Design image](placeholder.png)
-
 
 ```mermaid
 sequenceDiagram
@@ -48,7 +31,8 @@ sequenceDiagram
     Actor Bob
     actor Alice
     Alice-->>Server: Alice's Recipe (HOT)
-    Bob-->>Server:(HOT) Recipe request
+    Server->>Bob: Alice Uploaded A Recipe
+    Bob-->>Server: (HOT) Recipe request
     Server->>Bob: Alice's Recipe (HOT)
 ```
 
