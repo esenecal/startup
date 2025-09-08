@@ -12,7 +12,7 @@
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
+- [x] Proper use of Markdown
 - [ ] A concise and compelling elevator pitch
 - [ ] Description of key features
 - [ ] Description of how you will use each technology
@@ -50,9 +50,12 @@ NOTE: These are drafts.
 - **HTML** - Two HTML screens, one for entering a recipe/login and one for viewing recipes
 - **CSS** - Simple styling that provides easy viewing. Allows for good recipe formatting on different screen sizing
 - **React** - Provides options display (upload/view), shows recipes according to requests
-- **Service** - Backend service with endpoints for (research more!)
-- **DB/Login** - Store user ID, recipes, and tags (all associated with each other).
-- **WebSocket** - Notification that someone has uploaded/liked a recipe.
+- **Service** - The application's backend will have endpoints for:
+    - Retrieving and depositing recipe data, such as text and tags
+    - Login information (user ID)
+    - Call to API for weather data
+- **DB/Login** - The app's database will store user ID, recipes, and tags (all associated with each other). This will allow the app to find recipes associated with certain tags and show them to the user.
+- **WebSocket** - The app will provide small notifications whenever someone has uploaded a recipe. It may notify the user that someone has uploaded a reciped with the tag "COLD".
 
 ## 🚀 AWS deliverable
 
