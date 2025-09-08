@@ -1,4 +1,4 @@
-# Hungry
+# Hungry?
 
 [My Notes](notes.md)
 
@@ -14,48 +14,50 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] Proper use of Markdown
 - [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Description of key features
+- [x] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
-### Elevator pitch (DRAFT)
-Have you ever been unsure of what to make for dinner, and all the recipes online are a bit too out of your skill level? This app allows users can write recipes and share them with friends via this website. Just select what you're in the mood for, your skill level, or even what the weather is, and the application will suggest recipes! This can be used to find recipes for those with dietary restrictions, beginning chefs, or if someone is just not sure what to have for lunch.
+### Elevator Pitch
+Sometimes someone may not know what have for a meal, and they just need some ideas. The Hungry? web application helps with this by allowing people to upload recipes and classify them. Then, they can go through and randomly see recipes of a certain criteria to get some ideas on what to make. If they don't want to see recipes, they can simply see a random type of food. The principle is to help people get some ideas flowing and provide some starting points. People can see as other post recipes to notice what may be popular or to provide more information and ideas.
 
 ### Design
 
 ![Design image](placeholder.png)
+
+This diagram shows how users will interact with the application and server to deposit and retrieve recipes.
 
 ```mermaid
 sequenceDiagram
     participant Server
     Actor Bob
     actor Alice
-    Alice-->>Server: Alice's Recipe (HOT)
+    Alice-->>Server: Alice's Recipe (TAG: HOT)
     Server->>Bob: Alice Uploaded A Recipe
-    Bob-->>Server: (HOT) Recipe request
-    Server->>Bob: Alice's Recipe (HOT)
+    Bob-->>Server: (TAG: HOT) Recipe request
+    Server->>Bob: Alice's Recipe (TAG: HOT)
 ```
 
 ### Key features
 
-- Users can upload recipes to a server and attach simple word tags that describe it.
-- Users can select something they need (e.g. "hot" or "spicy") and the app will randomly cycle through recipes.
-- Users can vote on recipes they like (?).
-- Maybe instead of weather recipe stuff, you can just as for a random food or give it some general constraints, and it will pull from an API and provide various food items instead of recipes, which you can then research.
+- Users can upload recipes to a server and attach simple word tag(s) that describe it.
+- Users can select a tag. The app will randomly retrieve a recipe with that tag and provide it to the user.
+- The user can then move to another recipe if they do not like the current one. The app will randomly cycle through recipes.
+- Provides users with the weather for reference and/or can provide a random food name for brainstorming.
+- Users will be notified every time someone uploads a recipe.
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
-NOTE: These are drafts.
-- **HTML** - Two HTML screens, one for entering a recipe/login and one for viewing recipes
-- **CSS** - Simple styling that provides easy viewing. Allows for good recipe formatting on different screen sizing
-- **React** - Provides options display (upload/view), shows recipes according to requests
+- **HTML** - Several HTML screens, one for entering a recipe/login and one for retrieving and viewing recipes and foods. An options display allows the user to choose between the two.
+- **CSS** - Simple styling that provides easy viewing. Allows for good recipe formatting on different screen sizing.
+- **React** - Provides options display (upload/view recipes) and routes the user to the recipe/login page and the view recipe page. Shows recipes or foods according to user requests. In recipe upload view, provides login/User ID.
 - **Service** - The application's backend will have endpoints for:
     - Retrieving and depositing recipe data, such as text and tags
     - Login information (user ID)
-    - Call to API for weather data
+    - Call to API for weather data and/or random foods
 - **DB/Login** - The app's database will store user ID, recipes, and tags (all associated with each other). This will allow the app to find recipes associated with certain tags and show them to the user.
-- **WebSocket** - The app will provide small notifications whenever someone has uploaded a recipe. It may notify the user that someone has uploaded a reciped with the tag "COLD".
+- **WebSocket** - The app will provide small notifications whenever someone has uploaded a recipe. It may notify the user that someone has uploaded a reciped with a tag.
 
 ## 🚀 AWS deliverable
 
