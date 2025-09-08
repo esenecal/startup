@@ -23,7 +23,9 @@ Sometimes someone may not know what have for a meal, and they just need some ide
 
 ### Design
 
-![Design image](placeholder.png)
+Mobile Concept design
+
+![Design image](mobile-concept.png)
 
 This diagram shows how users will interact with the application and server to deposit and retrieve recipes.
 
