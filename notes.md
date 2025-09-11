@@ -30,8 +30,22 @@ From the README on it's purpose:
 
 ## AWS
 
-My IP address is: 54.81.96.130
+My IP address is: 35.168.46.138
 Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+
+To run it in ssh:
+```bash
+ssh -i [key pair file] ubuntu@[ip address]
+```
+
+This command changes your pem file permissions:
+```bash
+chmod  600 yourkeypairfile.pem
+```
+
+The `exit` command will exit the remote shell.
+
+The elastic IP allows you to keep the same IP address if you stop your instance.
 
 ## Caddy
 
