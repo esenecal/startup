@@ -23,7 +23,7 @@ Sometimes, someone may not know what have for a meal, and they just need some id
 
 ### Design
 Basic concept design. The fundamentals are not complicated.
-![Design image](prototype-sketch-small.jpg)
+![Design image](sketch-startup.jpg)
 
 This diagram shows how users will interact with the application and server to deposit and retrieve recipes.
 
