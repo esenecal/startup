@@ -31,7 +31,10 @@ From the README on it's purpose:
 ## AWS
 
 My IP address is: 35.168.46.138
+Domain name: hstart260.click
 Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+
+You use Route 53 Hosted zones to connect your IP address and domain name. * allows for there to be subdomains.
 
 To run it in ssh:
 ```bash
@@ -50,6 +53,12 @@ The elastic IP allows you to keep the same IP address if you stop your instance.
 ## Caddy
 
 No problems worked just like it said in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
+
+Caddy is a gateway/reverse proxy that basically helps manage http requests. It "sits in front of the servers" and manages the client's requests to internal servers. It also has the ability to help with getting a web certificate from Let's Encrypt.
+
+Basically, when a user accesses a domain, if the domain is not recognized by Caddy it will start talking to Let's Encrypt. Let's Encrypt will send a http request to the domain to verify that it is legit; Caddy will respond, and Let's Encrypt will issue the certificate, having now verified the domain. The certificate has public and private keys. The private keys are kept on the server while Caddy sends the public key back to the user. The public key can then be used to securely communicate between the user and the server, as the private key can decrypt the user's information.
+
+We enabled HTTPS on our domain by editing the Caddyfile and replacing the :80 port with our domain name. This makes Caddy handle requests to our domain name instead of port 80 (http). Since the port is now not specified, any request to http (80) is instead sent to 430 (https). Then the certificate process proceeds.
 
 ## HTML
 
