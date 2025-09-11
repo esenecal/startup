@@ -12,11 +12,11 @@
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] Proper use of Markdown
-- [x] A concise and compelling elevator pitch
-- [x] Description of key features
-- [x] Description of how you will use each technology
-- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] Proper use of Markdown - Used markdown for embedding images, lists, and diagrams
+- [x] A concise and compelling elevator pitch - a simple description of how users would use the service and how it would benefit them
+- [x] Description of key features - the basic features of how users would iteract with the service and how it would operate
+- [x] Description of how you will use each technology - Basic information on how each technology will handle their respective features.
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references. - simple sketch of what the pages look like to provide context.
 
 ### Elevator Pitch
 Sometimes, someone may not know what have for a meal, and they just need some ideas. The "Hungry?" web application helps with this by providing random recipes and meal ideas. Users can upload recipes and attach tag(s) that help describe them, like "hot" or "spicy." Then, users can select a criteria and press a button to get a random recipe. If they don't want to see recipes, they can simply see a random type of food. The principle is to help people get some ideas flowing and provide some starting points for their cooking. People can see what and when others post to help them notice what may be popular or to just provide more ideas.
