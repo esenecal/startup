@@ -60,6 +60,17 @@ Basically, when a user accesses a domain, if the domain is not recognized by Cad
 
 We enabled HTTPS on our domain by editing the Caddyfile and replacing the :80 port with our domain name. This makes Caddy handle requests to our domain name instead of port 80 (http). Since the port is now not specified, any request to http (80) is instead sent to 430 (https). Then the certificate process proceeds.
 
+After altering the caddy file, use this command to restart it, ensuring your changes are applied.
+```bash
+sudo service caddy restart
+```
+## Simon Deployment
+We deployed simon using this command from the SimonHTML repository: 
+```bash
+./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s simon
+```
+If you look into deployFiles.sh, you'll see that it is set up to recursively remove the elements in Simon and make a new directory. Basically, by using that command, you are deploying the simon html to your simon.domainname.click.
+
 ## HTML
 
 This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
