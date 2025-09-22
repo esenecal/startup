@@ -79,6 +79,41 @@ The part I didn't like was the duplication of the header and footer code. This i
 
 ## CSS
 
+CSS is used to style HTML elements. This can be done in several ways:
+
+1. The ```style``` attribute
+    - Assign declarations within an HTML element.
+    ```html
+    <p style="color:blue;background-color:red">Text</p>
+    ```
+2. HTML ```style``` element
+    - Define CSS rules within the HTML document. Should be in the ```head``` element of document. This will have all the rules apply to all elements within the document.
+    ```html
+    <head>
+        <style>
+          p {
+            background-color:red;
+            font-family:sans-serif;
+          }
+        </style>
+    </head>
+    ```
+3. HTML ```link``` element to an external CSS file.
+    - ```link``` element in the ```head``` element of the HTML document
+    ```html
+    <link rel="stylesheet" href="styles.css" />
+    ```
+    Then in ```styles.css```:
+    ```css
+    p {
+      color:red;
+      background-color:green;
+    }
+    ```
+
+> [!NOTE]
+> The ```link``` element is the preferred method.
+
 This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
 
 Bootstrap seems a bit like magic. It styles things nicely, but is very opinionated. You either do, or you do not. There doesn't seem to be much in between.
