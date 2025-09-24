@@ -7,17 +7,36 @@
     <body>
         <header>
             <h1>Hungry?</h1>
-            <h2>Find</h2>
             <nav>
                 <menu>
                     <li><a href="index.html">Upload</a></li>
                     <li><a href="find-recipe.html">Find</a></li>
                 </menu>
             </nav>
+
+            <h2>Find</h2>
         </header>
         
         <main>
-            
+            <div>
+                <label for="tagRetrieveDropdown">Tag:</label>
+                <select id="tagRetrieveDropdown">
+                    <option selected>HOT</option>
+                    <option selected>COLD</option>
+                    <option selected>BREAKFAST</option>
+                    <option selected>LUNCH</option>
+                    <option selected>DINNER</option>
+                </select>
+                <button type="submit">Find Recipe</button>
+                <button type="submit">Random Food</button>
+            </div>
+
+            <br>
+
+            <div class="recipeRetrieved">
+                <!--Recipe Text will be here. The below is a sample recipe text.-->
+                <h2></h2>
+            </div>
         </main>
 
         <footer>
