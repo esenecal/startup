@@ -70,9 +70,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I created two html pages, index.html and find-recipe.html, both for a function of the application 
+- [x] **Proper HTML element usage** - I set up each page with an HTML tag, a head and footer, a <nav> section, and a body section with main. Within main I put in various tags for input, text, buttons, etc.
+- [x] **Links** - In the <nav> section of each html file, I added links to the other html files.
 - [ ] **Text** - I did not complete this part of the deliverable.
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
 - [ ] **Images** - I did not complete this part of the deliverable.

@@ -191,3 +191,14 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
+
+
+## Javascript
+A simple way to add javascript to your html file is to add a ```script``` tag in the ```head``` section.
+```html
+<head>
+  <script src="index.js"></script>
+</head>
+```
+
+You can also add scripts within the html file.
