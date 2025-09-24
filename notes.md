@@ -2,6 +2,8 @@
 
 [My startup - Simon](https://simon.cs260.click)
 
+Domain name: hstart260.click
+
 ## Helpful links
 
 - [Course instruction](https://github.com/webprogramming260)
@@ -64,12 +66,15 @@ After altering the caddy file, use this command to restart it, ensuring your cha
 ```bash
 sudo service caddy restart
 ```
-## Simon Deployment
+## Deployment
 We deployed simon using this command from the SimonHTML repository: 
+
 ```bash
 ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s simon
 ```
 If you look into deployFiles.sh, you'll see that it is set up to recursively remove the elements in Simon and make a new directory. Basically, by using that command, you are deploying the simon html to your simon.domainname.click.
+
+You can do this for startup, just change the command to take startup.
 
 ## HTML
 
