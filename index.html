@@ -7,7 +7,7 @@
     <body>
         <header>
             <h1>Hungry?</h1>
-            <h2>Upload</h2>
+            <h2>Upload Recipe</h2>
             <nav>
                 <menu>
                     <li><a href="index.html">Upload</a></li>
@@ -19,11 +19,21 @@
         <main>
             <!--This form contains the input portions of this page-->
             <form>
-                <span><h4>User ID</h4></span> <input type="text" name="userID"/>
-                <!--Add a label and stuff.-->
+                <div>
+                    <label for="userID">User ID </label> <input id="userID" type="text" name="userID"/>
+                </div>
+
+                <div>
+                    <label for="recipeTitle">Recipe Title </label> <input id="recipeTitle" type="text" name="recipeTitle"/>
+                </div>
                 
-                <h4>Title</h4>
-                <p>hello!</p>
+                <p>Enter Recipe Text:</p>
+                <div>
+                    <label for="recipeText"></label>
+                    <textarea id="recipeText" value=>Enter text here...</textarea>
+                </div>
+                <!--Submit will submit the text to the server. -->
+                <button type=""></button>
             </form>
         </main>
 
