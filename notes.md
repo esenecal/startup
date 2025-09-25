@@ -12,8 +12,18 @@ Domain name: hstart260.click
 - [AWS] (https://aws.amazon.com/)
 
 ## Table of Contents:
-- [Git and Github](##git-and-github)
-- [README](##readme)
+- [Git and Github](#git-and-github)
+- [README](#readme)
+- [AWS](#aws)
+- [Caddy](#caddy)
+- [Deployment](#deployment)
+- [HTML](#html)
+- [CSS](#css)
+  - [Implementing CSS in HTML](#implementing-css-in-html)
+  - [Flexbox](#flexbox)
+- [React Part 1: Routing](#react-part-1-routing)
+- [React Part 2: Reactivity](#react-part-2-reactivity)
+- [Javascript](#javascript)
 
 ## Git and Github
 
