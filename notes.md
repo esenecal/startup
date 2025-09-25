@@ -11,6 +11,10 @@ Domain name: hstart260.click
 - [MDN](https://developer.mozilla.org)
 - [AWS] (https://aws.amazon.com/)
 
+## Table of Contents:
+- [Git and Github](##git-and-github)
+- [README](##readme)
+
 ## Git and Github
 
 You can access Git and push code to Github via the command line or the VSCode GUI. You should:
@@ -84,6 +88,7 @@ The part I didn't like was the duplication of the header and footer code. This i
 
 ## CSS
 
+### Implementing CSS in HTML
 CSS is used to style HTML elements. This can be done in several ways:
 
 1. The ```style``` attribute
@@ -118,6 +123,11 @@ CSS is used to style HTML elements. This can be done in several ways:
 
 > [!NOTE]
 > The ```link``` element is the preferred method.
+
+
+### Flexbox
+
+
 
 This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
 
