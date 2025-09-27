@@ -18,6 +18,7 @@ Domain name: hstart260.click
 - [Caddy](#caddy)
 - [Deployment](#deployment)
 - [HTML](#html)
+  - [Media](#media)
 - [CSS](#css)
   - [Implementing CSS in HTML](#implementing-css-in-html)
   - [Flexbox](#flexbox)
@@ -95,6 +96,33 @@ You can do this for startup, just change the command to take startup.
 This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
 
 The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+
+### Media
+
+#### To add an image:
+```html
+<img alt="pie" src="pie.png" width="100"/>
+```
+You can always add a height option as well. The src can be a local path or a url. Be careful to make sure you get the path right.
+
+#### To add audio:
+```html
+<audio controls src="audio.mp3"></audio>
+```
+```controls``` provides the users with a way to control the audio. ```autoplay``` and ```loop``` do what you think they do--autoplay when the audio loads and loop the audio. Warning: be careful, as some people don't like these.
+
+#### To add video:
+```html
+<video controls width="100" crossorigin="anonymous">
+  <source src="video.mp4" />
+</video>
+```
+Video shares the same crontrols and autoplay attributes as audio, but you may need to add the ```crossorigin="anonymous``` attribute from other domains. Why? Not sure.
+
+#### SVG and Canvas
+
+These help you create your own graphics, which can even be animated! SVGs are made with the ```svg``` tag and attributes, and canvas uses the ```canvas``` tag and scripting.
+
 
 ## CSS
 
@@ -216,9 +244,10 @@ Handling the toggling of the checkboxes was particularly interesting.
 ## Javascript
 A simple way to add javascript to your html file is to add a ```script``` tag in the ```head``` section.
 ```html
-<head>
+<body>
   <script src="index.js"></script>
-</head>
+</body>
 ```
 
-You can also add scripts within the html file.
+> [!NOTE]
+> It's a good idea to add it to the bottom of, say, your body section, as it will act on whatever is loaded--and you want everything to be loaded before you start executing Javascript.

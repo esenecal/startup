@@ -72,10 +72,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **HTML pages** - I created two html pages, index.html and find-recipe.html, both for a function of the application 
 - [x] **Proper HTML element usage** - I set up each page with an HTML tag, a head and footer, a <nav> section, and a body section with main. Within main I put in various tags for input, text, buttons, etc.
-- [x] **Links** - In the <nav> section of each html file, I added links to the other html files.
-- [ ] **Text** - I did not complete this part of the deliverable.
+- [x] **Links** - In the <nav> section of each html file, I added links to the other html files. There is also a link to the Github repository on each page.
+- [x] **Text** - Added title text and descriptive text to provide the user with directions and information. I also provided some placeholder text for some things that would be provided by the server/user.
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
+- [x] **Images** - Icons placed in the header that will be formatted with CSS later. Simple food/fall related images.
 - [ ] **Login placeholder** - I did not complete this part of the deliverable.
 - [ ] **DB data placeholder** - I did not complete this part of the deliverable.
 - [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
