@@ -76,7 +76,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Text** - Added title text and descriptive text to provide the user with directions and information. I also provided some placeholder text for some things that would be provided by the server/user.
 - [x] **3rd party API placeholder** - An example of a random food was shown in find-recipe.html. When fully implemented, the application will retrieve a random food name from an API and display it here to the user INSTEAD OF a recipe. Both the recipe and the random food are shown for demonstration purposes.
 - [x] **Images** - Icons placed in the header that will be formatted with CSS later. Simple food/fall related images.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
+- [x] **Login placeholder** - ID and password fields in index.html (as an account is only needed to upload recipes, not view them). Buttons to create a User ID or submit one. Placeholder text shows that the application will tell the user welcome to ensure them that they are logged in.
 - [ ] **DB data placeholder** - I did not complete this part of the deliverable.
 - [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
 
