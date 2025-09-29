@@ -214,6 +214,40 @@ I also used SVG to make the icon and logo for the app. This turned out to be a p
 
 Setting up Vite and React was pretty simple. I had a bit of trouble because of conflicting CSS. This isn't as straight forward as you would find with Svelte or Vue, but I made it work in the end. If there was a ton of CSS it would be a real problem. It sure was nice to have the code structured in a more usable way.
 
+This is an example of function and app in jsx. We are ignoring a bit of code.
+
+Note the subcomponent function and the subcomponent tag within the App function. This essentially takes that div in the subcomponent function and renders it in the App function.
+
+```jsx
+function SubComponent() {
+  return <div>Sub Component</div>
+}
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Hello
+        </p>
+        <SubComponent/>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
+}
+
+export default App
+
+```
+
 ## React Part 2: Reactivity
 
 This was a lot of fun to see it all come together. I had to keep remembering to use React state instead of just manipulating the DOM directly.
