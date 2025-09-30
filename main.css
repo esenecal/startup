@@ -2,4 +2,14 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    margin: 0;
+    background-color:hsl(47, 100%, 84%);
+    font-family: sans-serif;
+}
+
+header {
+    flex: 0 80px;
+    margin: 0;
+    color:white;
+    background-color:hsl(42, 50%, 26%);
 }

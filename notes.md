@@ -179,6 +179,24 @@ body {
 
 ```display``` tells css to make this section a flexbox section. The ```direction``` tells it how to orient the elements within the block--in this case, as a column, stacked on top of each other. ```height``` is self explanatory, but notice that it is set to 100% of the viewport height.
 
+Note these examples:
+```css
+header {
+  flex: 0 80px;
+}
+
+footer {
+  flex: 0 30px;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+```
+
+```header``` and ```footer``` here do NOT flex (that's what the 0 means) and have set heights. ```main``` will flex, as the 1 says. Then we give it appropriate settings for the flexbox.
 
 I did like the navbar it made it super easy to build a responsive header.
 
@@ -239,6 +257,10 @@ To import Bootstrap:
 ```
 
 You get a link from their website. The [CDN links](https://getbootstrap.com/docs/5.3/getting-started/introduction/#cdn-links) are updated, so if needed navigate to the new version's page.
+
+The integrity is to determine the integrity of the files. You can get the hash for the link [here](https://www.srihash.org/).
+
+Add the corssorigin thing too.
 
 You need the Javascript link if you plan to use components that use JS.
 
