@@ -22,6 +22,7 @@ Domain name: hstart260.click
 - [CSS](#css)
   - [Implementing CSS in HTML](#implementing-css-in-html)
   - [Flexbox](#flexbox)
+  - [Frameworks(Bootstrap)](#frameworks-bootstrap)
 - [React Part 1: Routing](#react-part-1-routing)
 - [React Part 2: Reactivity](#react-part-2-reactivity)
 - [Javascript](#javascript)
@@ -217,6 +218,31 @@ I also used SVG to make the icon and logo for the app. This turned out to be a p
   <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-size="72" font-family="Arial" fill="white">C</text>
 </svg>
 ```
+
+### Frameworks (Bootstrap)
+
+Frameworks are essentially ways to import styling into CSS with premade protocols. Bootstrap is one of the most common, and probably a safe bet on starting off.
+
+To import Bootstrap:
+
+```html
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+</head>
+
+<body>
+  ...
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+```
+
+You get a link from their website. The [CDN links](https://getbootstrap.com/docs/5.3/getting-started/introduction/#cdn-links) are updated, so if needed navigate to the new version's page.
+
+You need the Javascript link if you plan to use components that use JS.
+
+You can read their documentation [here](https://getbootstrap.com/). Good luck!
 
 ## React Part 1: Routing
 
