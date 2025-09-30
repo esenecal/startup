@@ -165,11 +165,19 @@ CSS is used to style HTML elements. This can be done in several ways:
 
 ### Flexbox
 
+Flex is used to make a webpage responsive to movement and resizing. Very useful. This is a simple, straightforward way to implement it:
 
+```css
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 100vh;
+}
+```
 
-This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
+```display``` tells css to make this section a flexbox section. The ```direction``` tells it how to orient the elements within the block--in this case, as a column, stacked on top of each other. ```height``` is self explanatory, but notice that it is set to 100% of the viewport height.
 
-Bootstrap seems a bit like magic. It styles things nicely, but is very opinionated. You either do, or you do not. There doesn't seem to be much in between.
 
 I did like the navbar it made it super easy to build a responsive header.
 
