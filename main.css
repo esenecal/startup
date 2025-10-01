@@ -8,26 +8,30 @@ body {
 }
 
 header {
-    flex: 0 90px;
+    flex: 0 160px;
     display: flex;
     flex-direction: column;
-    margin: 0;
+    margin: 0 0 0 0;
     color:white;
     background-color: black;
 }
 
-#Title {
-    padding: 10px;
+#title-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 0 10px 0;
 }
 
 #header-bar {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 0 0 0 10px;
 }
 
 #pie {
-    margin: 0 20px 0 10px;
+    margin: 0 10px 0 10px;
 }
 
 #header-text {
