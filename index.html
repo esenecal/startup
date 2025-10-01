@@ -4,25 +4,25 @@
     <head>
         <title>Hungry: Upload Recipe</title>
         <link rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="upload.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
     </head>
 
     <body>
         <header>
             <div id="title-block">
-                <img id="pie" alt="pie icon" src="pie.png" class="rounded" width="100" height="70"/>
+                <img id="icon" alt="pie icon" src="pie.png" class="rounded" width="100" height="70"/>
                     <!--Image from https://openclipart.org/detail/310794/pumpkin-pie-sticker. It is in the public domain.-->
                     <!--I would like it to the next of the Hungry? title, but this will be done in CSS-->
                 <h1 id="title">Hungry?</h1>
             </div>
+
             <div id="header-bar">
             
                 <div id="header-text">
-                    <h2>Upload Recipe</h2>
+                    <h3>Upload Recipe</h3>
                     <p>Upload your favorite recipe below!</p>
-
                 </div>
-
                 <nav>
                     <menu>
                         <!--We can do this in the class because bootstrap is typically loaded first. Then we are just putting the menu-button attributes over it.-->
@@ -33,20 +33,25 @@
             </div>
             
         </header>
+
+        
         <br>
         <main>
             <!--This form contains the input portions of this page-->
             <form>
-                <div>
-                    <label for="userID">User ID </label> <input id="userID" type="text" name="userID"/>
-                    <label for="password">&ensp;Password</label> <input id="password" type="password" name="password"/>
+                <div id="login">
+                    
+                    <label for="userID">User ID&ensp;</label> <input id="userID" class="form-control" type="text" name="userID"/>
+                    <label for="password">&ensp;&ensp;Password&ensp;</label> <input id="password" class="form-control" type="password" name="password"/>
                     
                     <button type="submit" class="btn btn-primary">Submit ID</button>
                     <button type="submit" class="btn btn-secondary">Create ID</button>
                     
-                    <!--This is example text for when they submit their user credentials, so they know they can proceed-->
-                    <p>ID submitted! Welcome <strong>USER1</strong>!</p>
                 </div>
+
+                <!--This is example text for when they submit their user credentials, so they know they can proceed-->
+                <p>ID submitted! Welcome <strong>USER1</strong>!</p>
+
                 <br>
                 <div>
                     <label for="recipeTitle">Recipe Title </label> <input id="recipeTitle" type="text" name="recipeTitle"/>
@@ -78,7 +83,7 @@
         </main>
 
         <footer>
-            <a href="https://github.com/esenecal/startup">Take a look at our Github!</a>
+            <a href="https://github.com/esenecal/startup" class="btn btn-outline-primary menu-button" role="button">Take a look at our Github!</a>
         </footer>
     </body>
     

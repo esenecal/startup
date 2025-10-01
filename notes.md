@@ -196,6 +196,8 @@ main {
 }
 ```
 
+The only things that are flex items to a flex container are the direct children. This is why, if you look in main.css, you'll see how there are multiple parent-child sets. Nesting them allows better funcitonality. This is also why all other things inside the header container can have flex: 1 and not interfere with footer and main. header and main are children of body, and so separate from what is inside header.
+
 ```header``` and ```footer``` here do NOT flex (that's what the 0 means) and have set heights. ```main``` will flex, as the 1 says. Then we give it appropriate settings for the flexbox.
 
 I did like the navbar it made it super easy to build a responsive header.

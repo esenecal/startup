@@ -84,8 +84,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
+- [ ] **Header, footer, and main content body** - Created a header with an image, two rows of text, and two buttons with links. There is a footer of the same color with a button leading to the github page.
+- [ ] **Navigation elements** - Each page had a header with two link buttons, each leading to one of the webpages of the application.
 - [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
 - [ ] **Application elements** - I did not complete this part of the deliverable.
 - [ ] **Application text content** - I did not complete this part of the deliverable.

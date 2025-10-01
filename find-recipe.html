@@ -3,24 +3,34 @@
 <html>
     <head>
         <title>Hungry: Find Recipe</title>
+        <link rel="stylesheet" href="main.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
     </head>
     <body>
         <header>
-            <h1>Hungry?</h1>
-            <nav>
-                <menu>
-                    <li><a href="index.html">Upload Recipe</a></li>
-                    <li><a href="find-recipe.html">Find Recipe</a></li>
-                </menu>
-            </nav>
+            <div id="title-block">
 
-            <!--Image from https://openclipart.org/detail/310793/pumpkin-sticker with some editing by me. It is in the public domain.-->
-            <!--I would like it to the next of the Hungry? title, but this will be done in CSS-->
-            <!--I just decided to go with a fall theme. I like pumpkin pie.-->
-            <img alt="pumpkin icon" src="pumpkin.png" width="75"/>
+                <!--Image from https://openclipart.org/detail/310793/pumpkin-sticker with some editing by me. It is in the public domain.-->
+                <!--I would like it to the next of the Hungry? title, but this will be done in CSS-->
+                <!--I just decided to go with a fall theme. I like pumpkin pie.-->
+                <img id="icon" alt="pumpkin icon" class="rounded" src="pumpkin.png" width="75" height="75"/>
+                <h1 id="title">Hungry?</h1>
 
-            <h2>Find</h2>
-            <p>Select a tag to randomly search by. Select "Random Food"</p>
+            </div>
+
+            <div id="header-bar">
+
+                <div id="header-text">
+                    <h3>Find</h3>
+                    <p>Select a tag to randomly search by or a random food</p>
+                </div>
+                <nav>
+                    <menu>
+                        <a href="index.html" class="btn btn-outline-primary menu-button" role="button">Upload Recipe</a>
+                        <a href="find-recipe.html" class="btn btn-outline-primary menu-button" role="button">Find Recipe</a>
+                    </menu>
+                </nav>
+            </div>
         </header>
         
         <main>
@@ -74,7 +84,7 @@
         </main>
 
         <footer>
-            <a href="https://github.com/esenecal/startup">Take a look at our Github!</a>
+            <a href="https://github.com/esenecal/startup" class="btn btn-outline-primary menu-button" role="button">Take a look at our Github!</a>
         </footer>
     </body>
     
