@@ -10,19 +10,27 @@
     <body>
         <header>
             <h1>Hungry?</h1>
-            <nav>
-                <menu>
-                    <li><a href="index.html">Upload Recipe</a></li>
-                    <li><a href="find-recipe.html">Find Recipe</a></li>
-                </menu>
-            </nav>
+            <div id="header-bar">
+            
+                <img alt="pie icon" src="pie.png" width="100" height="70"/>
+                <!--Image from https://openclipart.org/detail/310794/pumpkin-pie-sticker. It is in the public domain.-->
+                <!--I would like it to the next of the Hungry? title, but this will be done in CSS-->
 
-            <!--Image from https://openclipart.org/detail/310794/pumpkin-pie-sticker. It is in the public domain.-->
-            <!--I would like it to the next of the Hungry? title, but this will be done in CSS-->
-            <img alt="pie icon" src="pie.png" width="100"/>
+                <div id="header-text">
+                    <h2>Upload Recipe</h2>
+                    <p>Upload your favorite recipe below!</p>
 
-            <h2>Upload Recipe</h2>
-            <p>Upload your favorite recipe below!</p>
+                </div>
+
+                <nav>
+                    <menu>
+                        <!--We can do this in the class because bootstrap is typically loaded first. Then we are just putting the menu-button attributes over it.-->
+                        <a href="index.html" class="btn btn-outline-primary menu-button" role="button">Upload Recipe</a>
+                        <a href="find-recipe.html" class="btn btn-outline-primary menu-button" role="button">Find Recipe</a>
+                    </menu>
+                </nav>
+            </div>
+            
         </header>
         <br>
         <main>
@@ -32,8 +40,8 @@
                     <label for="userID">User ID </label> <input id="userID" type="text" name="userID"/>
                     <label for="password">&ensp;Password</label> <input id="password" type="password" name="password"/>
                     
-                    <button type="submit">Submit ID</button>
-                    <button type="submit">Create ID</button>
+                    <button type="submit" class="btn btn-primary">Submit ID</button>
+                    <button type="submit" class="btn btn-secondary">Create ID</button>
                     
                     <!--This is example text for when they submit their user credentials, so they know they can proceed-->
                     <p>ID submitted! Welcome <strong>USER1</strong>!</p>
