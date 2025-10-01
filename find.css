@@ -1,0 +1,14 @@
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#user-alert {
+    background-color: rgb(46, 46, 46) !important;
+    color:white;
+}
+
+#tagDropdown {
+    width: 10rem;
+}
