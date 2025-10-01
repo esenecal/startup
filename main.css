@@ -68,6 +68,11 @@ footer {
     padding: 10px;
 }
 
+#tagDropdown {
+    width: 10rem;
+    background-color:gray;
+}
+
 @media (max-height: 500px) {
     header {
         display: none;

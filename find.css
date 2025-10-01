@@ -27,8 +27,3 @@ main {
 #recipe-output {
     flex: 1 1;
 }
-
-
-#tagDropdown {
-    width: 10rem;
-}
