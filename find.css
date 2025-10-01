@@ -12,8 +12,10 @@ main {
 }
 
 #user-alert {
+    flex: 0 1 25%;
     background-color: rgb(46, 46, 46) !important;
     color:white;
+    margin: 0 5vw 0 0;
 }
 
 #text-retrieved {
@@ -26,10 +28,6 @@ main {
     flex: 1 1;
 }
 
-#user-alert {
-    flex: 0 1 25%;
-    margin: 0 10px 0 0;
-}
 
 #tagDropdown {
     width: 10rem;

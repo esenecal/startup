@@ -23,15 +23,15 @@ header {
     margin: 20px 0 10px 0;
 }
 
+#icon {
+    margin: 0 10px 0 10px;
+}
+
 #header-bar {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 0 0 0 10px;
-}
-
-#icon {
-    margin: 0 10px 0 10px;
 }
 
 #header-text {
