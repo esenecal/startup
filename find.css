@@ -4,9 +4,31 @@ main {
     padding: 10px;
 }
 
+#find-input {
+    display:flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 10px;
+}
+
 #user-alert {
     background-color: rgb(46, 46, 46) !important;
     color:white;
+}
+
+#text-retrieved {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#recipe-output {
+    flex: 1 1;
+}
+
+#user-alert {
+    flex: 0 1 25%;
+    margin: 0 10px 0 0;
 }
 
 #tagDropdown {
