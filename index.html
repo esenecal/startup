@@ -34,52 +34,59 @@
             
         </header>
 
-        
-        <br>
         <main>
             <!--This form contains the input portions of this page-->
             <form>
-                <div id="login">
-                    
-                    <label for="userID">User ID&ensp;</label> <input id="userID" class="form-control" type="text" name="userID"/>
-                    <label for="password">&ensp;&ensp;Password&ensp;</label> <input id="password" class="form-control" type="password" name="password"/>
-                    
+                <div id="login" class="mb-3">
+
+                    <label for="userID">User ID&ensp;</label> 
+                    <div class="col-2">
+                        <input id="userID" class="form-control" type="text" name="userID"/>
+                    </div>
+
+                    <label for="password">&ensp;&ensp;&ensp;&ensp;Password&ensp;</label> 
+                    <div class="col-2">
+                        <input id="password" class="form-control" type="password" name="password"/>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Submit ID</button>
                     <button type="submit" class="btn btn-secondary">Create ID</button>
-                    
+
                 </div>
 
                 <!--This is example text for when they submit their user credentials, so they know they can proceed-->
-                <p>ID submitted! Welcome <strong>USER1</strong>!</p>
+                
+                <p id="user-alert" class="form-control border-3 border-success">ID submitted! Welcome <strong>USER1</strong>!</p>
 
-                <br>
-                <div>
-                    <label for="recipeTitle">Recipe Title </label> <input id="recipeTitle" type="text" name="recipeTitle"/>
+                
+                <div id="recipe-title-input" class="mb-3">
+                    <label for="recipeTitle">Recipe Title&ensp;</label>
+                    <div class="col-3">
+                        <input id="recipeTitle" class="form-control" type="text" name="recipeTitle"/>
+                    </div>
                 </div>
                 
                 <p>Enter recipe text below. Add a tag that relates to the recipe.</p>
-                <div>
-                    <label for="recipeText"></label>
-                    <textarea id="recipeText">Enter text here...</textarea>
-                    <br>
 
-                    <!--Tags will be submitted via a drop down menu-->
-                    <label for="tagDropdown">Tag:</label>
-                    <select id="tagDropdown">
-                        <option selected>HOT</option>
-                        <option selected>COLD</option>
-                        <option selected>BREAKFAST</option>
-                        <option selected>LUNCH</option>
-                        <option selected>DINNER</option>
-                    </select>
-                </div>
+                <label for="recipeText"></label>
+                <textarea id="recipeText" class="form-control mb-2">Enter text here...</textarea>
 
-                <br>
+                <!--Tags will be submitted via a drop down menu-->
+                <label for="tagDropdown">Tag:</label>
+                <select id="tagDropdown" class="form-control mb-3">
+                    <option selected>HOT</option>
+                    <option>COLD</option>
+                    <option>BREAKFAST</option>
+                    <option>LUNCH</option>
+                    <option>DINNER</option>
+                </select>
+
+                <div id="submit-buttons">
                 <!--Submit will submit the text to the server. Reset will clear it.-->
-                <button type="reset">Clear</button>
-                <button type="submit">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Clear</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
-            <br>
         </main>
 
         <footer>

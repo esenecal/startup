@@ -86,7 +86,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [ ] **Header, footer, and main content body** - Created a header with an image, two rows of text, and two buttons with links. There is a footer of the same color with a button leading to the github page.
 - [ ] **Navigation elements** - Each page had a header with two link buttons, each leading to one of the webpages of the application.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
+- [ ] **Responsive to window resizing** - Each page is built with flexbox, so window resizing is fairly well handled. I added media elements in the CSS to hide the headers and footers at a certain size.
 - [ ] **Application elements** - I did not complete this part of the deliverable.
 - [ ] **Application text content** - I did not complete this part of the deliverable.
 - [ ] **Application images** - I did not complete this part of the deliverable.

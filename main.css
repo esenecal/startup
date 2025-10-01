@@ -13,7 +13,7 @@ header {
     flex-direction: column;
     margin: 0 0 0 0;
     color:white;
-    background-color: black;
+    background-color: rgb(53, 36, 15);
 }
 
 #title-block {
@@ -55,8 +55,8 @@ header {
 
 main {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    background-color: rgb(72, 67, 60);
+    color: white;
 }
 
 footer {
@@ -64,6 +64,15 @@ footer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    background-color: black;
+    background-color: rgb(53, 36, 15);
     padding: 10px;
+}
+
+@media (max-height: 500px) {
+    header {
+        display: none;
+    }
+    footer{
+        display: none;
+    }
 }

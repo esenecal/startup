@@ -1,10 +1,39 @@
+main {
+    flex: 1;
+}
+
+form {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+.form-control {
+    background-color: rgb(158, 158, 158) !important;
+}
+
 #login {
     display: flex;
     flex-direction: row;
-    margin: 0 0 0 20px;
     align-items: center;
 }
 
 #login button {
     margin: 0 0 0 10px;
+}
+
+#user-alert {
+    background-color: rgb(46, 46, 46) !important;
+    color:white;
+}
+
+#recipe-title-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#tagDropdown {
+    width: 10rem;
 }

@@ -4,6 +4,7 @@
     <head>
         <title>Hungry: Find Recipe</title>
         <link rel="stylesheet" href="main.css"/>
+        <link rel="stylesheet" href="find.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
     </head>
     <body>
@@ -35,13 +36,13 @@
         
         <main>
             <div>
-                <label for="tagRetrieveDropdown">Tag:</label>
-                <select id="tagRetrieveDropdown">
+                <label for="tagDropdown">Tag:</label>
+                <select id="tagDropdown" class="form-control mb-3">
                     <option selected>HOT</option>
-                    <option selected>COLD</option>
-                    <option selected>BREAKFAST</option>
-                    <option selected>LUNCH</option>
-                    <option selected>DINNER</option>
+                    <option>COLD</option>
+                    <option>BREAKFAST</option>
+                    <option>LUNCH</option>
+                    <option>DINNER</option>
                 </select>
                 <button type="submit">Find Recipe</button>
                 <button type="submit">Random Food</button>
