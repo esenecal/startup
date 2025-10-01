@@ -84,12 +84,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Header, footer, and main content body** - Created a header with an image, two rows of text, and two buttons with links. There is a footer of the same color with a button leading to the github page. There is content in the main part of each webpage, containing recipe text, input fields, and and buttons.
-- [ ] **Navigation elements** - Each page had a header with two link buttons, each leading to one of the webpages of the application.
-- [ ] **Responsive to window resizing** - Each page is built with flexbox, so window resizing is fairly well handled. I added media elements in the CSS to hide the headers and footers at a certain size.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - The text content is written in a sans-serif font.
-- [x] **Application images** - I formatted some small icons to be next to the title. I also used bootstrap to format them to have rounded corners.
+- [x] **Header, footer, and main content body** - Created a header with an image, two rows of text, and two buttons with links. There is a footer of the same color with a button leading to the github page. There is content in the main part of each webpage, containing recipe text, input fields, and and buttons. The main content body is able to grow while the header/footer stay consistent.
+- [x] **Navigation elements** - Each page had a header with two link buttons, each leading to one of the webpages of the application. There is a github link in the footer. The link buttons are formatted with bootstrap and some custom styling.
+- [x] **Responsive to window resizing** - Each page is built with flexbox, so window resizing is fairly well handled. I added media elements in the CSS to hide the headers and footers at a certain size. When the application is resized, there is empty space at the bottom, allowing for a greater text box/recipe output.
+- [x] **Application elements** - I used CSS to manipulate many of the HTML elements, including main, nav, header, footer, and some that I ID'd, such as find-input, user-alert, header-text, etc. I used a main.css file to create consistent format between shared elements on the html pages, and then separate css files (upload and find) for more specific and typically HTML main related styling.
+- [x] **Application text content** - The text content is written in a sans-serif font. I formatted it mainly using flexbox. A body element and various other sub-elements use color attributes for the text.
+- [x] **Application images** - I formatted some small icons to be next to the title using flexbox. I also used bootstrap to format them to have rounded corners.
 
 ## 🚀 React part 1: Routing deliverable
 
