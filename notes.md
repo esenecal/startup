@@ -270,7 +270,79 @@ You can read their documentation [here](https://getbootstrap.com/). Good luck!
 
 ## React Part 1: Routing
 
-Setting up Vite and React was pretty simple. I had a bit of trouble because of conflicting CSS. This isn't as straight forward as you would find with Svelte or Vue, but I made it work in the end. If there was a ton of CSS it would be a real problem. It sure was nice to have the code structured in a more usable way.
+Some definitions: JSX is a way for us to put HTML in JS. Use JSX.
+
+Okay.
+
+To create a Vite project with the name "folder":
+
+```bash
+mkdir folder
+cd folder
+npm init -y
+npm install vite@latest -D
+npm install react react-Dom
+```
+
+```npm init``` creates a ```package.json``` file. ```npm install``` installs React stuff.
+
+The way that React works is that there is an ```index.html``` file. This file has a ```<div>``` with a root ID. ```main.jsx``` will then get that element and run this fun little function where it creates a root and render the ```App.jsx```. What is ```App.jsx```? We'll get to that. Inside the ```App.jsx``` is the code that is to be rendered.
+
+```npm run dev``` is a good way to live test your page. Use ```npm run build``` to bundle it for deployment. It'll create a subdirectory named dist that will have a bunch of weird looking files, since it packaged up all your files.
+
+Within the ```App.jsx``` file is a component. It looks like a function, and you can call it with ```<App />```. The component returns what looks like HTML. That is passed up to ```main.jsx```, which then connects it and ```index.html``` and renders it. Simple?
+
+You can use inline CSS or link a CSS file to a ```.jsx``` file. Keep in mind that some conventions will change. For example, as ```class``` is a keyword in JS, ```className``` replaces the HTML class attribute. A lot of CSS elements such as ```background-color``` become ```backgroundColor``` to better align with JS conventions. Be aware.
+
+Also, you can have components within components--as in, within the ```App``` component, you could then reference another component named ```app2```.
+
+### Properties
+
+These are a little weird. Here's an example:
+JSX:
+
+```jsx
+
+function App(props) {
+  return <p> Print out the input: {props.input} </p>;
+}
+
+<div> Component: <App input="hello!"/> </div>
+```
+
+Just note what matches with what.
+
+### States
+
+Oh goody these are fun.
+
+A component can have an internal state. Listen closely. Here's some example code:
+
+```jsx
+function App() {
+  const [clicked, updateClicked] = React.useState(false);
+  
+  function onClicked() {
+    updateClicked(!clicked);
+  }
+
+  return <p onClick={onClicked}>clicked: {`${clicked}`}</p>;
+}
+// render app etc etc.
+```
+
+Okay.
+
+See ```onClick```? This is an ***event handler***.
+
+```onClick``` is a built-in HTML attribute. What it's doing is listening to the HTML and noticing when the HTML element generates an event. So, when it notices a click, it calls the ```onClicked``` function.
+
+Back up to ```const [clicked, updateClicked] = React.useState(false);```. Here we are creating *two* things. A useState function returns a *variable with the current state* (this variable can contain anything!) and a *function that will update the state*.
+
+So, here, we create a ```clicked``` variable that has a value ```false```. We also created a function ```updateClicked``` that will change ```clicked```. Instead of calling this function directly, we create a nice little ```onClicked``` function. Look inside, and you see that, by passing ```!clicked``` into ```updateClicked```, we are changing the value of ```clicked``` to ```!clicked``` (flipping it).
+
+Now that we have a way to change the state ```clicked```, we can use ```onClicked``` to change ```clicked```, then use the value of ```clicked``` to do whatever.
+
 
 This is an example of function and app in jsx. We are ignoring a bit of code.
 
