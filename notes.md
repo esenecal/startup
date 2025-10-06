@@ -24,6 +24,9 @@ Domain name: hstart260.click
   - [Flexbox](#flexbox)
   - [Frameworks(Bootstrap)](#frameworks-bootstrap)
 - [React Part 1: Routing](#react-part-1-routing)
+  - [Properties](#properties)
+  - [States](#states)
+  - [Deploying React](#deploying-react)
 - [React Part 2: Reactivity](#react-part-2-reactivity)
 - [Javascript](#javascript)
 
@@ -87,6 +90,8 @@ We deployed simon using this command from the SimonHTML repository:
 
 ```bash
 ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s simon
+
+./deployReact.sh
 ```
 If you look into deployFiles.sh, you'll see that it is set up to recursively remove the elements in Simon and make a new directory. Basically, by using that command, you are deploying the simon html to your simon.domainname.click.
 
@@ -274,17 +279,43 @@ Some definitions: JSX is a way for us to put HTML in JS. Use JSX.
 
 Okay.
 
-To create a Vite project with the name "folder":
+To create a basic Vite React template project:
 
 ```bash
-mkdir folder
-cd folder
-npm init -y
-npm install vite@latest -D
-npm install react react-Dom
+npm create vite@latest demoVite -- --template react
+cd demoVite
+npm install
+npm run dev
 ```
 
 ```npm init``` creates a ```package.json``` file. ```npm install``` installs React stuff.
+
+Or, in the root directory:
+
+```bash
+npm init-y
+npm install vite@latest-D
+```
+
+Open the package.json file (creaetd by ```npm init```). Replace the ```scripts``` section with this:
+
+```
+ "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+```
+
+ADD node_modules TO .gitignore SO YOU DON'T COMMIT THEM.
+
+You'll also probably want to use the React version of Bootstrap.
+
+```bash
+npm install bootstrap react-bootstrap
+```
+
+Then you can import the Bootstrap styles using ```import 'bootstrap/dist/css/bootstrap.min.css';```
 
 The way that React works is that there is an ```index.html``` file. This file has a ```<div>``` with a root ID. ```main.jsx``` will then get that element and run this fun little function where it creates a root and render the ```App.jsx```. What is ```App.jsx```? We'll get to that. Inside the ```App.jsx``` is the code that is to be rendered.
 
@@ -343,6 +374,58 @@ So, here, we create a ```clicked``` variable that has a value ```false```. We al
 
 Now that we have a way to change the state ```clicked```, we can use ```onClicked``` to change ```clicked```, then use the value of ```clicked``` to do whatever.
 
+### Deploying React
+
+Using vite does require some different deployment. 
+
+Delete the ```deployFiles.sh``` script, create a ```deployReact.sh```.
+
+In it, add:
+
+```
+while getopts k:h:s: flag
+do
+    case "${flag}" in
+        k) key=${OPTARG};;
+        h) hostname=${OPTARG};;
+        s) service=${OPTARG};;
+    esac
+done
+
+if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
+    printf "\nMissing required parameter.\n"
+    printf "  syntax: deployReact.sh -k <pem key file> -h <hostname> -s <service>\n\n"
+    exit 1
+fi
+
+printf "\n----> Deploying React bundle $service to $hostname with $key\n"
+
+# Step 1
+printf "\n----> Build the distribution package\n"
+rm -rf build
+mkdir build
+npm install # make sure vite is installed so that we can bundle
+npm run build # build the React front end
+cp -rf dist/* build # move the React front end to the target distribution
+
+# Step 2
+printf "\n----> Clearing out previous distribution on the target\n"
+ssh -i "$key" ubuntu@$hostname << ENDSSH
+rm -rf services/${service}/public
+mkdir -p services/${service}/public
+ENDSSH
+
+# Step 3
+printf "\n----> Copy the distribution package to the target\n"
+scp -r -i "$key" build/* ubuntu@$hostname:services/$service/public
+
+# Step 5
+printf "\n----> Removing local copy of the distribution package\n"
+rm -rf build
+rm -rf dist
+```
+
+You can now deploy it using the same command as normal, just with ```deployReact.sh```.
 
 This is an example of function and app in jsx. We are ignoring a bit of code.
 
