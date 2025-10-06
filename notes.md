@@ -317,6 +317,12 @@ npm install bootstrap react-bootstrap
 
 Then you can import the Bootstrap styles using ```import 'bootstrap/dist/css/bootstrap.min.css';```
 
+This enables react:
+
+```bash
+npm install react react-dom react-router-dom
+```
+
 The way that React works is that there is an ```index.html``` file. This file has a ```<div>``` with a root ID. ```main.jsx``` will then get that element and run this fun little function where it creates a root and render the ```App.jsx```. What is ```App.jsx```? We'll get to that. Inside the ```App.jsx``` is the code that is to be rendered.
 
 ```npm run dev``` is a good way to live test your page. Use ```npm run build``` to bundle it for deployment. It'll create a subdirectory named dist that will have a bunch of weird looking files, since it packaged up all your files.
