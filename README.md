@@ -95,7 +95,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - I installed vite using npm init and npm install. The git history shows the incremental changes to the project as I installed various components.
 - [ ] **Components** - I did not complete this part of the deliverable.
 - [ ] **Router** - I did not complete this part of the deliverable.
 
