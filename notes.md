@@ -24,6 +24,7 @@ Domain name: hstart260.click
   - [Flexbox](#flexbox)
   - [Frameworks(Bootstrap)](#frameworks-bootstrap)
 - [React Part 1: Routing](#react-part-1-routing)
+  - [Files the Way Vite Likes](#files-the-way-that-vite-likes)
   - [Properties](#properties)
   - [States](#states)
   - [Deploying React](#deploying-react)
@@ -323,11 +324,22 @@ This enables react:
 npm install react react-dom react-router-dom
 ```
 
-The way that React works is that there is an ```index.html``` file. This file has a ```<div>``` with a root ID. ```main.jsx``` will then get that element and run this fun little function where it creates a root and render the ```App.jsx```. What is ```App.jsx```? We'll get to that. Inside the ```App.jsx``` is the code that is to be rendered.
+### Files the way that Vite likes
+
+There are a few things that you need to be aware of with files and how the project is set up. Vite expects things to be a certain way.
+
+- A ```public``` folder holds all the images, sounds, etc.
+- ```src``` is the directory where all the React code is. It contains folders for each view component.
+
+Rename main.css to app.css.
+
+
+
+The way that React works is that there is an ```index.html``` file. This file has a ```<div>``` with a root ID. ```index.jsx``` will then get that element and run this fun little function where it creates a root and render the ```App.jsx```. What is ```App.jsx```? We'll get to that. Inside the ```App.jsx``` is the code that is to be rendered.
 
 ```npm run dev``` is a good way to live test your page. Use ```npm run build``` to bundle it for deployment. It'll create a subdirectory named dist that will have a bunch of weird looking files, since it packaged up all your files.
 
-Within the ```App.jsx``` file is a component. It looks like a function, and you can call it with ```<App />```. The component returns what looks like HTML. That is passed up to ```main.jsx```, which then connects it and ```index.html``` and renders it. Simple?
+Within the ```App.jsx``` file is a component. It looks like a function, and you can call it with ```<App />```. The component returns what looks like HTML. That is passed up to ```index.jsx```, which then connects it and ```index.html``` and renders it. Simple?
 
 You can use inline CSS or link a CSS file to a ```.jsx``` file. Keep in mind that some conventions will change. For example, as ```class``` is a keyword in JS, ```className``` replaces the HTML class attribute. A lot of CSS elements such as ```background-color``` become ```backgroundColor``` to better align with JS conventions. Be aware.
 
