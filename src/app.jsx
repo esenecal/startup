@@ -1,7 +1,7 @@
 import React from "react";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing bootstrap components.
 import "./app.css"   // The local css file.
-import "./upload.css"
+import "./upload/upload.css"
 
 // Note that placing the className "body" was required, and changing app.css to accomodate it.
 export default function App() {
