@@ -8,10 +8,11 @@
 }
 
 header {
-    flex: 0 170px;
+    flex: 0 150px;
     display: flex;
     flex-direction: column;
     margin: 0 0 0 0;
+    gap: 10px;
     color:white;
     background-color: rgb(53, 36, 15);
 }
@@ -42,7 +43,7 @@ header {
     gap: 30px;
 }
 
-#header-bar nav {
+#title-block nav {
     display: flex;
     flex: 1;
     justify-content: flex-end;
