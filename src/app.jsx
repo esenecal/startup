@@ -4,12 +4,13 @@ import "/src/app.css";   // The local css file.
 
 // // Router components and files.
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-// import { Find } from "./find-recipe/find";       // Uncommenting these breaks the page right now.
-// import { Upload } from "./upload/upload";
+import { Find } from "./find-recipe/find";       // Uncommenting these breaks the page right now.
+import { Upload } from "./upload/upload";
 
 // Note that placing the className "body" was required, and changing app.css to accomodate it.
 export default function App() {
     return (
+        <BrowserRouter>
             <div className="body">
                 <header>
                     <div id="title-block">
@@ -19,8 +20,10 @@ export default function App() {
 
                         <nav>
                             <menu>
-                                <a href="index.html" class="btn btn-outline-primary menu-button" role="button">Upload Recipe</a>
-                                <a href="find-recipe.html" class="btn btn-outline-primary menu-button" role="button">Find Recipe</a>
+
+                                <NavLink className="btn btn-outline-primary menu-button" to="upload">Upload Recipe</NavLink>
+                                <NavLink className="btn btn-outline-primary menu-button" to="find">Find Recipes</NavLink>
+                            
                             </menu>
                         </nav>
                     </div>
@@ -35,11 +38,21 @@ export default function App() {
                     </div>
                 </header>
             
-                <main>hello!</main>
+                <Routes>
+                    <Route path="/" element={<Upload />} exact />
+                    <Route path="/find" element={<Find />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+
 
                 <footer>
                     <a href="https://github.com/esenecal/startup" class="btn btn-outline-primary menu-button" role="button">Made by Edwin Senecal. Check out the Github!</a>
                 </footer>
             </div>
+        </BrowserRouter>
     );
+}
+
+function NotFound() {
+    return <main>404: Adress Unknown</main>;
 }
