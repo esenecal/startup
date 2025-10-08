@@ -8,7 +8,7 @@
 }
 
 header {
-    flex: 0 150px;
+    flex: 0 50px;
     display: flex;
     flex-direction: column;
     margin: 0 0 0 0;
@@ -28,19 +28,13 @@ header {
     margin: 0 10px 0 10px;
 }
 
-#header-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 0 0 0 10px;
-}
-
 #header-text {
     display: flex;
     flex: 0 1 auto;
     flex-direction: row;
     align-items: baseline;
     gap: 30px;
+    margin: 0 0 0 10px;
 }
 
 #title-block nav {

@@ -12,6 +12,17 @@ import "./upload.css"; // page css file
 export function Upload() {
     return(
         <div className="body">
+
+            <header>
+
+                <div id="header-text">
+                    <h3>Upload Recipe</h3>
+                    <p>Upload your favorite recipe below!</p>
+                </div>
+
+            </header>
+
+
             <main>
                 <form>
                     <div id="login" className="mb-3">

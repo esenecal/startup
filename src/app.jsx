@@ -29,15 +29,6 @@ export default function App() {
                             </menu>
                         </nav>
                     </div>
-
-                    <div id="header-bar">
-                    
-                        <div id="header-text">
-                            <h3>Upload Recipe</h3>
-                            <p>Upload your favorite recipe below!</p>
-                        </div>
-                        
-                    </div>
                 </header>
             
                 <Routes>
