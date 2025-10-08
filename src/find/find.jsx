@@ -6,6 +6,15 @@ import "./find.css"     // page css file.
 export function Find() {
     return(
         <div className="body">
+
+            <header>
+                <div id="header-text">
+                    <h3>Find</h3>
+                    <p>Select a tag to randomly search by or a random food</p>
+                </div>
+            </header>
+
+
             <main>
                 <div id="find-input">
                     <label for="tagDropdown">Tag:</label>
