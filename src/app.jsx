@@ -4,8 +4,9 @@ import "/src/app.css";   // The local css file.
 
 // // Router components and files.
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import { Find } from "./find-recipe/find";       // Uncommenting these breaks the page right now.
+import { Find } from "./find/find";       // Uncommenting these breaks the page right now.
 import { Upload } from "./upload/upload";
+
 
 // Note that placing the className "body" was required, and changing app.css to accomodate it.
 export default function App() {
@@ -39,7 +40,7 @@ export default function App() {
                 </header>
             
                 <Routes>
-                    <Route path="/" element={<Upload />} exact />
+                    <Route path="/upload" element={<Upload />} exact />
                     <Route path="/find" element={<Find />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>

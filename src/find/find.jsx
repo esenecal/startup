@@ -3,7 +3,7 @@ import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing boots
 // import "/src/app.css"    // main css file
 import "./find.css"     // page css file.
 
-export default function Find() {
+export function Find() {
     return(
         <div className="body">
             Find page
