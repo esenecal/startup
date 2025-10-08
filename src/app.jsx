@@ -9,6 +9,7 @@ import { Upload } from "./upload/upload";
 
 
 // Note that placing the className "body" was required, and changing app.css to accomodate it.
+// Make sure only App is listed as default.
 export default function App() {
     return (
         <BrowserRouter>
@@ -40,7 +41,7 @@ export default function App() {
                 </header>
             
                 <Routes>
-                    <Route path="/upload" element={<Upload />} exact />
+                    <Route path="/" element={<Upload />} exact />
                     <Route path="/find" element={<Find />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
