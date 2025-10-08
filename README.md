@@ -96,8 +96,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **Bundled using Vite** - I installed vite using npm init and npm install. The git history shows the incremental changes to the project as I installed various components.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Components** - Multiple components, including App, Upload, Find, and NotFound. App acts as the main body and includes the header and footer that stay constant. It is rendered by index.html. Upload and Find contain body HTML for those specific functions, as well as a custom part of the header. App, Upload, and Find each have their respective css files, with app.css also acting as a overall css style for Upload and Find as well. NotFound is a component found in app.jsx that simply is to render a 404 error.
+- [x] **Router** - Router components can be found within ```app.jsx```. The entire body section is wrapped in a ```<BrowserRouter>``` tag, and in the header ```<nav>``` tag there are NavLinks to several directories. Where the ```<main>``` tag would be there is the ```<Routes>``` tag, with three different routes. One is for ```/```, which directs to Upload, one is for ```/find```, which directs to Find, and the other is for any other path, which results in a 404 error.
 
 ## 🚀 React part 2: Reactivity deliverable
 
