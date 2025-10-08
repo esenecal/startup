@@ -60,7 +60,7 @@ export function Find() {
 
                     {/* <!--Notification Alert. Ideally, this will be off to the side, so CSS will be needed to place this in the correct place.-->
                     <!--Sample Notification alert.--> */}
-                    <p id="user-alert" class="form-control border-3 border-success">User 2 just uploaded a COLD recipe!</p>
+                    <p id="user-notification" class="form-control border-3 border-success">User 2 just uploaded a COLD recipe!</p>
 
                 </div>
 

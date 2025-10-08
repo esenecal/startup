@@ -12,7 +12,6 @@ header {
     display: flex;
     flex-direction: column;
     margin: 0 0 0 0;
-    gap: 10px;
     color:white;
     background-color: rgb(53, 36, 15);
 }
@@ -44,8 +43,18 @@ header {
     margin: 0 10px 0 0;
 }
 
+#title-block nav menu {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .menu-button{
     color: white !important;
+}
+
+.btn-secondary {
+    background: rgb(63, 63, 63) !important;
 }
 
 main {
