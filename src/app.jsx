@@ -1,6 +1,6 @@
 import React from "react";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing bootstrap components.
-import "/src/app.css";   // The local css file.
+import "./app.css";   // The local css file.
 
 // // Router components and files.
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";

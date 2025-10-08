@@ -1,6 +1,5 @@
 import React from "react";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing bootstrap components.
-import "/src/app.css"; // main css file.
 import "./upload.css"; // page css file
 
 /* Some things to change:
