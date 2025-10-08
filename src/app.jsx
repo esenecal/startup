@@ -23,7 +23,7 @@ export default function App() {
                         <nav>
                             <menu>
 
-                                <NavLink className="btn btn-outline-primary menu-button" to="upload">Upload Recipe</NavLink>
+                                <NavLink className="btn btn-outline-primary menu-button" to="/">Upload Recipe</NavLink>
                                 <NavLink className="btn btn-outline-primary menu-button" to="find">Find Recipes</NavLink>
                             
                             </menu>
@@ -41,7 +41,7 @@ export default function App() {
                 </header>
             
                 <Routes>
-                    <Route path="/" element={<Upload />} exact />
+                    <Route path="/" element={<Upload />} />
                     <Route path="/find" element={<Find />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
