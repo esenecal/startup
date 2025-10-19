@@ -16,7 +16,9 @@ Domain name: hstart260.click
 ## Table of Contents:
 - [Git and Github](#git-and-github)
 - [README](#readme)
+- [General Web Things](#general-web-things)
 - [AWS](#aws)
+- [The Console](#the-console)
 - [Caddy](#caddy)
 - [Deployment](#deployment)
 - [HTML](#html)
@@ -57,6 +59,8 @@ From the README on it's purpose:
 > [!NOTE]
 >  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
 
+## General Web Things
+
 ## AWS
 
 My IP address is: 35.168.46.138
@@ -78,6 +82,24 @@ chmod  600 yourkeypairfile.pem
 The `exit` command will exit the remote shell.
 
 The elastic IP allows you to keep the same IP address if you stop your instance.
+
+## The Console
+
+- cd: change directory. Place directory you wish to go to next.
+- chmod: change file permissions.
+- pwd: present working directory. See which directory you are in.
+- ls: list files in directory.
+  - add ```-la``` parameter to see hidden files and long format.
+- man: manual. Look up a command there.
+- mkdir: make a directory.
+- mv: Move a file. Provide file name and new dir.
+- nano: Open  a file in nano editor
+- ps: view currently running processes.
+- rm: remove file(s)
+- ssh: create secure shell on remote computer
+- sudo: run command as superuser
+- vim: open file in vim editor.
+- wget: download file from web. Provide a URL.
 
 ## Caddy
 
