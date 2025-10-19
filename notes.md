@@ -26,6 +26,7 @@ Domain name: hstart260.click
   - [Media](#media)
 - [CSS](#css)
   - [Implementing CSS in HTML](#implementing-css-in-html)
+  - [CSS Basics](#css-basics)
   - [Flexbox](#flexbox)
   - [Frameworks(Bootstrap)](#frameworks-bootstrap)
 - [React Part 1: Routing](#react-part-1-routing)
@@ -34,6 +35,7 @@ Domain name: hstart260.click
   - [States](#states)
   - [Deploying React](#deploying-react)
 - [React Part 2: Reactivity](#react-part-2-reactivity)
+- [JSON Files](#json-files)
 - [Javascript](#javascript)
 
 ## Git and Github
@@ -313,6 +315,57 @@ CSS is used to style HTML elements. This can be done in several ways:
 
 > [!NOTE]
 > The ```link``` element is the preferred method.
+
+### CSS Basics
+
+You can use CSS selectors to alter all of a specific element:
+```css
+body {
+  blah blah blah.
+}
+```
+
+```*``` could be used to select all elements. It's the wildcard.
+
+Combinators can be used to alter values that are descendants of others.
+```css
+body h1 {
+  body section. Changes any section that is a descendant of a body.
+}
+body > p {
+  child--alters direct children. In this case, any p that is a direct child of body.
+}
+div ~ p {
+  Gets a list of siblings. This is any p that has a div sibling.
+}
+div + p {
+  This gets a list of adjacent siblings--so any p with an adjacent div sibling.
+}
+```
+
+Classes are selected by doing:
+```css
+.classname {
+  blah blah blah.
+}
+p.classname{
+  This would select all paragraphs with the sumamry class
+}
+```
+
+Id are similar.
+```css
+#idname {
+  blah blah blah
+}
+```
+
+Attribute selection too!
+css```
+p[class='classname']{
+  blah blah blah
+}
+```
 
 
 ### Flexbox
@@ -649,7 +702,26 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
+## JSON files
 
+JSON stands for Javascript Object Notation. It's basically a simple way to store and share data, and can easily be converted to a JS object (or from one).
+
+Typically, a JSON doc will contain an object, which itself has 0+ key value pairs. They key is a string, and the value is a JSON data type.
+
+Here is an example:
+
+```json
+{
+  "Cat": {
+    "title": "Jeffery",
+    "description": "He's very nice"
+  },
+  "Dogs": ["James", "Jordan", "puppy"],
+  "other": null
+}
+```
+
+JSON.parse and JSON.stringify are used to convert JSON to and from JS, respectively. Stringify is JS->JSON, parse is JSON->JS.
 
 ## Javascript
 A simple way to add javascript to your html file is to add a ```script``` tag in the ```head``` section.
