@@ -2,6 +2,8 @@
 
 [My startup - Simon](https://simon.cs260.click)
 
+TODO: add html/css examples.
+
 Domain name: hstart260.click
 
 ## Helpful links
@@ -18,6 +20,9 @@ Domain name: hstart260.click
 - [Caddy](#caddy)
 - [Deployment](#deployment)
 - [HTML](#html)
+  - [Basics](#basics)
+  - [Structural Elements](#structural-elements)
+  - [Input Elements](#input-elements)
   - [Media](#media)
 - [CSS](#css)
   - [Implementing CSS in HTML](#implementing-css-in-html)
@@ -100,9 +105,149 @@ You can do this for startup, just change the command to take startup.
 
 ## HTML
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
+### Basics
 
-The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+HTML is the foundational content structure for web applications. It can be used with CSS and JS.
+
+HTML elements are enclosed in tags. These tags can contain other attributes in them. This is a paragraph tag with an id attribute:
+
+```html
+<p id="this is the id">wow html</p>
+```
+
+The basic structure of an html page looks something like this:
+```html
+<!DOCTYPE html>
+<!--This tells the browser about the document--the type and version.-->
+<!--You should always include it.-->
+
+<!--This wraps the entire html program.-->
+<html>
+
+    <!--This contains metadata about the title and page.-->
+    <head>
+        <title>Title</title> <!--Title fo the page.-->
+    </head>
+
+    <!--This contains content structure--headers, footers, main, navigation, etc.-->
+    <body>
+        <!--Each of these--header, main, footer--can contain their own structural content.-->
+
+        <!--This is the header.-->
+        <header></header>
+
+        <!--This contains main content structure-->
+        <main>
+            <!--Insert content here.-->
+        </main>
+
+        <footer></footer>
+    </body>
+</html>
+```
+
+Class and id elements are used to distinguish elements from each other, giving greater functionality especially when paired with CSS and JS.
+
+Oftentimes, the filename ```index.html``` will be used as the default file to display.
+
+### Structural Elements
+
+There are a lot of different structural elements. But, you should know the difference between **inline** and **block** elements.
+
+Block elements are "blocks" in the flow of a content structure, whereas an inline element goes with a line of a block element. In other words, you stick inline elements in a line, while block elements create a whole new section.
+
+Some block elements include ```div``` and ```p```, while ```span``` and ```b``` are inline.
+
+Here are some good elements to know:
+
+- ```html```: page container
+- ```head```: header info
+- ```title```: page title.
+- ```script```: JS reference
+- ```body```: entire content
+- ```nav```: nav inputs
+- ```section```: section of content
+- ```div```: a block division in the content. Super common.
+- ```span```: inline span of content.
+- ```h<1-9>```: heading.
+- ```table```: Table.
+  - ```tr```: table row
+  - ```th```: table header
+  - ```td```: table data
+- ```ol/ul```: ordered or unordered list.
+  - ```li```: list item
+- ```a```: anchor text to a link
+
+Example of ```a```:
+```html
+<a href="https://google.com">Google link</a>
+```
+
+Example of table:
+```html
+<table>
+    <tr>
+        <!--Note that this row contains headers-->
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <!--Note that this is DATA-->
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+```
+
+Example of Ordered/Unordered lists:
+```html
+<ul>
+    <li></li>
+    <li></li>
+</ul>
+
+<ol>
+    <li></li>
+    <li></li>
+</ol>
+```
+
+### Input Elements
+
+There are a lot of types of input elements--```form```, ```fieldset```, ```select```, ```optgroup```, ```option```... ```input``` is common.
+
+Using the ```input``` element, you can make various forms of input by giving it certain attributes. You would give the input tag a type attribute and place the type of input there. Here are some notable ones:
+
+- ```text```: single line of text
+- ```password```: obscured password
+- ```url```: it's a url.
+- ```number```: please don't make me explain this.
+- ```checkbox```: inclusive selection
+- ```radio```: exclusive selection
+- ```color```: guess what it is!?
+- ```file```: local file
+- ```submit```: button to submit
+- ```range```: limited range of numbers.
+
+ex:
+```html
+<label for="box">box1</label> <input type="checkbox" name="checkBox" value="box" checked />
+```
+
+Note the label. These are common to place before input elements.
+
+Some other common attributes:
+- ```name```: it's... the name of the input.
+- ```disabled```: disables the input
+- ```value```: initial value of the input
+- ```required```: required to be filled out.
+
+Other input elements:
+- ```option```: Gives options.
+- ```optgroup```: Gives options in a group.
+- ```textarea```: input in multi lines.
+- ```output```: Actually not input, it's output of input.
+- ```select```: selection dropdown.
 
 ### Media
 
