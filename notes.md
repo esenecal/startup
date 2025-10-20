@@ -2,8 +2,6 @@
 
 [My startup - Simon](https://simon.cs260.click)
 
-TODO: add html/css examples.
-
 Domain name: hstart260.click
 
 ## Helpful links
@@ -17,6 +15,10 @@ Domain name: hstart260.click
 - [Git and Github](#git-and-github)
 - [README](#readme)
 - [General Web Things](#general-web-things)
+  - [Ports](#ports)
+  - [HTTPS](#https)
+  - [Domains](#domains)
+  - [DNS](#dns)
 - [AWS](#aws)
 - [The Console](#the-console)
 - [Caddy](#caddy)
@@ -39,6 +41,10 @@ Domain name: hstart260.click
 - [React Part 2: Reactivity](#react-part-2-reactivity)
 - [JSON Files](#json-files)
 - [Javascript](#javascript)
+  - [Node.js](#nodejs)
+  - [Syntax](#syntax)
+  - [Functions](#functions)
+  - [Object and Classes](#objects-and-classes)
 
 ## Git and Github
 
@@ -60,6 +66,50 @@ From the README on it's purpose:
 >  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
 
 ## General Web Things
+
+### Ports
+
+Ports are essentially numbers associated with certain protocols. You need an IP address and a port number to connect to a device on the internet. This allows the device to support multiple protocols. 
+
+These are some common ports:
+- 22: Shell secure (SSH). Connecting to remote devices.
+- 80: HTTP for web
+- 443:  HTTPS--secure web requests.
+
+We use different port numbers for our subdomains. Caddy listens on port 80 and 443 (and redirects 80 to 443 to ensure a secure connection), and then looks at the path. If the path matches a definition, the Caddy will make a connectoin to a service's port--for example, 3000 or 4000. We have assigned a subdomain to each.
+
+### HTTPS
+
+See Caddy for more information. HTTPS is HTTP with a secure connection--all data is encrypted using TLS. The server and the computer use a web certificate to ensure that a connection is legit.
+
+### Domains
+
+An IP address can be referenced using a domain. Domains have a naming convention.
+
+This is the convention for domain names:
+```subdomain.secondary.top```
+secondary.top is the **root domain**. The **top level domain** is something like ```com``` or ```edu```. A root domain would be, for example, ```hstart260.click```.
+
+There can be any number of subdomains built off of the root. We have two--```simon``` and ```startup```. Each subdomain can resolve to a different IP address. We could have ```simon.startup.hstart260.click```, for example, if we wanted to.
+
+### DNS
+
+DNS stands for **domain name system**. A domain name can be listed with a DNS server and then associated with an IP address. There are some DNS servers called **authoritative name servers** that every DNS server references.
+
+There are DNS records called ```address (A)``` records and ```canonical name (CNAME)``` records.
+
+A records are mappings from a domain name to an IP address--just a straight mapping. 
+
+CNAME records map a domain name to another domain name. This allows you to map something like byu.com to the same IP as byu.edu.
+
+This is how a DNS works:
+1. You enter in a domain name into a browser. The browser checks to see if it has the name in a cache.
+2. If not, the browser contacts a DNS server and gets the IP address associated with the domain.
+3. The DNS server has a cache of names. If the domain is not in the cache, then the DNS will contact an authoritative name server. 
+4. If the authority doesn't know the name, then there is an unknown domain name error.
+5. If the process resolves, the browser connects to the IP address.
+
+The levels in name caching allows for performance, but there can be issues with updating because of this.
 
 ## AWS
 
@@ -753,5 +803,94 @@ A simple way to add javascript to your html file is to add a ```script``` tag in
 </body>
 ```
 
+You can also directly include it into the HTML within a ```script``` element, or put it inline as part of an event attribute handler.
+
+### Node.js
+
+Node.js is for deploying JS outside of a browser. You can run ```node``` in the command line to open a JS interpreter.
+
+To install node, run these commands:
+
+```bash
+➜  mkdir npmtest
+➜  cd npmtest
+➜  npm init -y
+```
+
 > [!NOTE]
 > It's a good idea to add it to the bottom of, say, your body section, as it will act on whatever is loaded--and you want everything to be loaded before you start executing Javascript.
+
+### Syntax
+
+Here's some basic JS syntax.
+
+It is good practice to end your lines in ;
+
+VARIABLES:
+You can use ```let``` or ```const```. ```const``` just means that the value should not be changed.
+
+IF/ELSE:
+```javascript
+if (conditional) {
+  statement;
+} else if {
+  statement;
+} else {
+  statement;
+}
+```
+
+FOR:
+```javascript
+for (exp 1; exp 2; exp 3) {}
+for (let i = 0; i < 5; i++) {}
+```
+exp 1: executed before execution of block of code.
+exp 2: defines condition for executing code
+exp 3: executed after code block has been executed.
+
+WHILE:
+```javascript
+while (condition) {}
+```
+
+SWITCH:
+```javascript
+switch(expression) {    // Expression is evaluated once.
+  case x:
+    break;
+  case y:
+    break;
+  default:
+    // code
+}
+```
+switch is evaluated once, and it's value is compared to each case. The associated block of code is run, and if there is none, then no code is executed (unless there is a default case, which is optional and is run if there is no match).
+
+### Functions
+
+### Objects and Classes
+
+An object is a collection of name value pairs (properties). The name is a string or symbol, and then a value of any type.
+
+This is now to create an object:
+```javascript
+const obj = new Object({name:value});
+```
+
+Constructors are objects that return an object.
+
+```javascript
+function object(value) {
+  return {
+    name: value,
+  };
+}
+
+const o = new Object("wow");
+console.log(o);
+// Output will be the name value pair.
+```
+
+A class ob
+
