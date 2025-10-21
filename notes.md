@@ -999,3 +999,95 @@ console.log(o);
 
 ### Promises and Async
 
+Promises are kind of weird.
+
+Promises are a way to ansychronously run code--when a promise is create, it starts running whatever is in it alongside whatever code may be running.
+
+A promise has 3 states:
+- pending: currently running asynchronously.
+- fulfilled: completed successfully.
+- rejected: failed to complete.
+
+Here's an example promise:
+
+```js
+const coinToss = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (Math.random() > 0.1) {
+      resolve(Math.random() > 0.5 ? 'heads' : 'tails');
+    } else {
+      reject('fell off table');
+    }
+  }, 10000);
+});
+```
+
+When this is created, we are immediately creating a promise. *The promise immediately executes the code within it*. Then, you will notice that we have two functions--resolve and reject. These are built in. Basically, when you run the code, you can call resolve to set the promise to its fulfilled state, or reject to its rejected state.
+
+We can use then, catch, and finally to then handle the results of the promise.
+
+```js
+coinToss
+  .then((result) => console.log(`Coin toss result: ${result}`))
+  .catch((err) => console.log(`Error: ${err}`))
+  .finally(() => console.log('Toss completed'));
+```
+
+then runs when it is resolved. catch runs when it is rejected. finally runs when the process is complete.
+
+So, something neat--You can chain then statements together. For example:
+
+```js
+function pickupPizza() {
+  const order = createOrder();
+
+  // Promise
+  placeOrder(order)
+    .then((order) => createPizza(order))
+    .then((order) => serveOrder(order))
+    .catch((order) => {
+      orderFailure(order);
+    });
+}
+```
+
+PlaceOrder calls a promise. When it is resolved, then it moves to the first then. This funciton calls createPizza, which, incidentally, also returns a promise. When that one is resolved, Javascript automatically kicks it into the nexxt then, which calls serveOrder. Pretty neat.
+
+Async and await are ways to make this easier.
+
+An await keyword wraps the execution of a promise. It will block the execution of the code until the promise is fulfilled, or throw an exception if it is rejected. So, you can use a try catch statement instead of chaining then and catch:
+
+```js
+try{
+  const p = await functionThatReturnsAPromise();
+  // The code here will NOT run until funcitonThatReturnsAPromise is fulfilled.
+} catch (err) {
+  // If the promise was rejected
+} finally {
+  // final code
+}
+```
+
+await cannot be called unless it is at the top level of JS or in a function defined with async. If a function is defined with async, the function returns the return statement as a promise. Note: if you define an async function to return a promise manually, it will just return a promise, not a promise of a promise.
+
+So, for example,
+
+```js
+async function foo() {
+  return "wow";
+}
+```
+
+This would return a function with the fufilled state as "wow"
+
+Then we could do this:
+
+```js
+async function foo() {
+  return new Promise((resolve) => {
+    resolve("wow");
+  });
+}
+```
+
+This gives us more control. This one and the previous function are not identical--the promise's resolution is a bit different on execution. In order to get the resolve for the latter one, we would need to call await foo(). Thus, console.log(await foo()); would give us wow, but console.log(foo()) wouldn't--it would give us some pending promise stuff.
