@@ -39,6 +39,7 @@ Domain name: hstart260.click
   - [Files the Way Vite Likes](#files-the-way-that-vite-likes)
   - [Properties](#properties)
   - [States](#states)
+  - [Hooks](#hooks)
   - [Deploying React](#deploying-react)
 - [React Part 2: Reactivity](#react-part-2-reactivity)
 - [JSON Files](#json-files)
@@ -714,6 +715,27 @@ Back up to ```const [clicked, updateClicked] = React.useState(false);```. Here w
 So, here, we create a ```clicked``` variable that has a value ```false```. We also created a function ```updateClicked``` that will change ```clicked```. Instead of calling this function directly, we create a nice little ```onClicked``` function. Look inside, and you see that, by passing ```!clicked``` into ```updateClicked```, we are changing the value of ```clicked``` to ```!clicked``` (flipping it).
 
 Now that we have a way to change the state ```clicked```, we can use ```onClicked``` to change ```clicked```, then use the value of ```clicked``` to do whatever.
+
+### Hooks
+
+Hooks allow class style functionality for react components.
+
+useEffect allows for lifecycle events--running a function every time a compenent renders, for example.
+
+```js
+function UseEffectHookDemo() {
+  React.useEffect(() => {
+    console.log('rendered');
+  });
+
+  return <div>useEffectExample</div>;
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<UseEffectHookDemo />);
+```
+
+The function is the logic for the effect. Dependencies are reactive values referenced in the first parameter (the function).
 
 ### Deploying React
 
