@@ -28,6 +28,7 @@ Domain name: hstart260.click
   - [Structural Elements](#structural-elements)
   - [Input Elements](#input-elements)
   - [Media](#media)
+  - [Document Object Model](#document-object-model)
 - [CSS](#css)
   - [Implementing CSS in HTML](#implementing-css-in-html)
   - [CSS Basics](#css-basics)
@@ -349,6 +350,41 @@ Video shares the same crontrols and autoplay attributes as audio, but you may ne
 
 These help you create your own graphics, which can even be animated! SVGs are made with the ```svg``` tag and attributes, and canvas uses the ```canvas``` tag and scripting.
 
+### Document Object Model
+
+The DOM is a representation of HTML elements. It's a structural concept that is used to represent HTML files, and code can be used using this structural concept to manipulate an HTML file.
+
+A DOM is basically an inverted tree. Each element is a node on the tree. The html element may be the root, then body. Then, the body may have multiple children, like paragraphs and headers, and those may have children of text or span or div, etc. Each node also has CSS data.
+
+The ```document``` variable points to the root element of a DOM.
+
+The **DOM Element Interface** allows you to iterate through child elements and manipulate an element's attributes. For example, by starting at root (```document```), you use the .children attribute and a for loop to iterate through the child elements of the document.
+
+Various functions can be used to alter, delete, or insert elements into the DOM. By calling .appendChild to an element (for example, use queryselector(#word) to select all those elements), you can create a new child.
+
+```.innerHTML = insert html here``` is a simple way to insert HTML, but this is also a source of potential attacks.
+
+All DOM elements have the ability to attatch a function that is called when an event occurs on the element called an **event listener**. For example:
+
+```js
+const submitDataEl = document.querySelector('submitData');
+submitDataEl.addEventListener('click', function (event) {
+  console.log(event.type);
+});
+```
+
+```html
+<button onclick='alert("clicked")'>click</button>
+```
+
+This is called when an element gets clicked.
+
+These are some common events:
+- Clipboard: cut, copied, pasted
+- Focus: an element gets focus
+- keyboard: keys pressed
+- mouse: click events.
+- text selection: when text is selected.
 
 ## CSS
 
@@ -867,7 +903,59 @@ switch(expression) {    // Expression is evaluated once.
 ```
 switch is evaluated once, and it's value is compared to each case. The associated block of code is run, and if there is none, then no code is executed (unless there is a default case, which is optional and is run if there is no match).
 
+ARRAYS:
+Arrays are used to store objects and primitives in a sequence.
+
+Creating an array:
+```js
+const arr = [0, 1, 2];
+```
+arr.length can be used to get the length. There are also a few other functions that are useful:
+
+- push: add item to end of array.
+- pop: remove item from end of array.
+- sort: run function to sort an array.
+- values: creates an iterator, allows you to use for ```for (i of arr.values()) {}```
+- map: run a funciton to map array to another array. ```arr.map(i => i+i)```
+
+
 ### Functions
+
+Functions are first class objects in JS--they can be assigned a name, passed as a parameter, returned as a result, referenced from an object or an array--like a variable.
+
+```js
+function func(value = 0) {
+  return value + 2;
+}
+```
+
+#### Anonymous Functions
+
+Functions are often assigned to a variable, allowing it to be passed as a paramemter to other functions or stored as properties.
+
+```js
+const add = function (a, b) {
+  return a - b;
+}
+```
+
+Arrow syntax can be used to write an anonymous function:
+```js
+() => 3
+```
+
+Here is an anonymous function with it's (almost) equivalent alternative:
+```js
+sort(
+  function (v1, v2) {
+    return v1-v2;
+  }
+);
+
+sort((v1, v2) => v1-v2);
+```
+
+In arrow anonymous functions, return is optional if no curly braces are given and there is one expression--for example, ```() => 3;```. This returns 3. ```() => {3;}``` is undefined, while ```() => {return 3;}``` is 3.
 
 ### Objects and Classes
 
