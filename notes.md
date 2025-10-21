@@ -32,6 +32,7 @@ Domain name: hstart260.click
 - [CSS](#css)
   - [Implementing CSS in HTML](#implementing-css-in-html)
   - [CSS Basics](#css-basics)
+  - [The Box Model](#the-box-model)
   - [Flexbox](#flexbox)
   - [Frameworks(Bootstrap)](#frameworks-bootstrap)
 - [React Part 1: Routing](#react-part-1-routing)
@@ -46,6 +47,7 @@ Domain name: hstart260.click
   - [Syntax](#syntax)
   - [Functions](#functions)
   - [Object and Classes](#objects-and-classes)
+  - [Promises and Async](#promises-and-async)
 
 ## Git and Github
 
@@ -469,12 +471,27 @@ Id are similar.
 ```
 
 Attribute selection too!
-css```
+```css
 p[class='classname']{
   blah blah blah
 }
 ```
 
+### The Box Model
+
+This is a bit more under the hood of how CSS works.
+
+Everything in CSS is defined as a box. When a style is applied, it is applied to a region of the display that is a rectangle--a box. Inside each box are MORE boxes.
+
+So, from inside->out:
+- content: text, image.
+  - Padding: inherits background color
+    - Border: color, thickness, line style.
+      - margin: external to actual styling of the box. Just whitespace.
+
+By default, an element's width and height is defined by the width and height of the inner content box. Changing the CSS property box-sizing can redefine the size to include the padding and border, which will get you closer to it's actual size.
+    
+      
 
 ### Flexbox
 
@@ -980,5 +997,5 @@ console.log(o);
 // Output will be the name value pair.
 ```
 
-A class ob
+### Promises and Async
 
