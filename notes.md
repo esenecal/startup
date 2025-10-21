@@ -601,7 +601,7 @@ Or, in the root directory:
 
 ```bash
 npm init-y
-npm install vite@latest-D
+npm install vite@latest -D
 ```
 
 Open the package.json file (creaetd by ```npm init```). Replace the ```scripts``` section with this:

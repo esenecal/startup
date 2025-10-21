@@ -4,7 +4,7 @@ import "./app.css";   // The local css file.
 
 // // Router components and files.
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
-import { Find } from "./find/find";       // Uncommenting these breaks the page right now.
+import { Find } from "./find/find";
 import { Upload } from "./upload/upload";
 
 
