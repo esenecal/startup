@@ -7,23 +7,6 @@ import { RecipeOutput } from "./display-recipe";    // For whatever reason, this
 export function Find() {
     const [clicked, updateClicked] = React.useState(true)
 
-    function DisplayRecipe() {
-    if (clicked == true) {
-        return (
-            <div id="recipe-output">
-                <p>hello</p>
-            </div>
-        );
-    } else {
-        return (
-            <div id="recipe-output">
-                <p>goodbye</p>   
-            </div>
-        );
-    }
-    
-}
-
     return(
         <div className="body">
 
@@ -53,13 +36,22 @@ export function Find() {
                 
                 <div id="text-retrieved">
 
-                    <DisplayRecipe />
+                    <div id="recipe-output">
+                        <DisplayFood clicked={clicked}/>
+
+                        <DisplayRecipe clicked={clicked} />
+
+                    </div>
+
                     
                     {/* <!--Notification Alert. Ideally, this will be off to the side, so CSS will be needed to place this in the correct place.-->
                     <!--Sample Notification alert.--> */}
-                    <p id="user-notification" className="form-control border-3 border-success">User 2 just uploaded a COLD recipe!</p>
+
+                    <p id="user-notification" className="form-control border-3 border-success">User 2 just uploaded a COLD recipe!</p>  
 
                 </div>
+
+                
 
             </main>
 
@@ -67,6 +59,7 @@ export function Find() {
     );
 }
 
+// this function handles the button click for Find Recipe.
 function ClickRecipe({clicked, updateClicked}) {
 
     function onClicked() {
@@ -75,4 +68,57 @@ function ClickRecipe({clicked, updateClicked}) {
     }
 
     return(<button type="submit" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
+}
+
+// This function works to display the random food.
+function DisplayFood({clicked}) {
+    if (clicked == true) {
+        return(<div></div>);
+    } else {
+        return(
+            <div>
+                <h3>Example Random Food: Goulash</h3>
+            </div>
+        );
+    }
+    
+}
+
+// This function works to display recipe.
+function DisplayRecipe({clicked}) {
+    if (clicked == true) {
+        return (
+            <div>
+                
+                {/* <!--Recipe Text will be here. The below is a sample recipe text.-->
+                <!--The blockquote is to show how this text should be indented. CSS can be used to implement this.-->
+                <!--If the user instead selects Random Food, then a random food name will be displayed instead.-->
+
+                <!--This is a placeholder for the third-party API access.--> */}
+
+                <h2>Simple Rice</h2>
+                <blockquote>
+                    <p>Ingredients:</p>
+                    <ul>
+                        <li>Rice</li>
+                        <li>Water</li>
+                    </ul>
+                    <p>Directions:</p>
+                    <ol>
+                        <li>Measure out rice (example: 1 cup). Add to pot.</li>
+                        <li>Wash rice thoroughly.</li>
+                        <li>Measure out twice as much water as rice (example: 2 cups). Add to pot.</li>
+                        <li>Bring to boil uncovered. Once boiling, cover and put on low heat. Cook until soft.</li>
+                        <li>Some experimentation needed.</li>
+                        <li>For an easier time, buy a rice cooker.</li>
+                    </ol>
+                </blockquote>
+            </div>
+        );
+    } else {
+        return (
+            <p>goodbye</p>   
+        );
+    }
+    
 }
