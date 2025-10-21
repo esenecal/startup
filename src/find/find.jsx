@@ -4,41 +4,26 @@ import "./find.css"     // page css file.
 
 import { RecipeOutput } from "./display-recipe";    // For whatever reason, this must be uppercase.
 
-let bool = true;
-
-export function ClickRecipe() {
+export function Find() {
     const [clicked, updateClicked] = React.useState(true)
 
-    function onClicked() {
-        updateClicked(!clicked);
-        bool = clicked;
-        console.log(bool);
-        
-    }
-
-    return(<button type="submit" class="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
-}
-
-export function DisplayRecipe() {
-    if (bool == true) {
+    function DisplayRecipe() {
+    if (clicked == true) {
         return (
             <div id="recipe-output">
                 <p>hello</p>
-                
             </div>
         );
     } else {
         return (
             <div id="recipe-output">
-                <p>goodbye</p>
-                
+                <p>goodbye</p>   
             </div>
         );
     }
     
 }
 
-export function Find() {
     return(
         <div className="body">
 
@@ -52,17 +37,17 @@ export function Find() {
 
             <main>
                 <div id="find-input">
-                    <label for="tagDropdown">Tag:</label>
-                    <select id="tagDropdown" class="form-control mb-3">
+                    <label htmlFor="tagDropdown">Tag:</label>
+                    <select id="tagDropdown" className="form-control mb-3">
                         <option selected>HOT</option>
                         <option>COLD</option>
                         <option>BREAKFAST</option>
                         <option>LUNCH</option>
                         <option>DINNER</option>
                     </select>
-                    <ClickRecipe />
+                    <ClickRecipe clicked={clicked} updateClicked={updateClicked} />
                     {/* <button type="submit" class="btn btn-secondary">Find Recipe</button> */}
-                    <button type="submit" class="btn btn-secondary">Random Food</button>
+                    <button type="submit" className="btn btn-secondary">Random Food</button>
                 </div>
                 
                 
@@ -72,7 +57,7 @@ export function Find() {
                     
                     {/* <!--Notification Alert. Ideally, this will be off to the side, so CSS will be needed to place this in the correct place.-->
                     <!--Sample Notification alert.--> */}
-                    <p id="user-notification" class="form-control border-3 border-success">User 2 just uploaded a COLD recipe!</p>
+                    <p id="user-notification" className="form-control border-3 border-success">User 2 just uploaded a COLD recipe!</p>
 
                 </div>
 
@@ -80,4 +65,14 @@ export function Find() {
 
         </div>
     );
+}
+
+function ClickRecipe({clicked, updateClicked}) {
+
+    function onClicked() {
+        updateClicked(!clicked);
+        console.log(clicked);
+    }
+
+    return(<button type="submit" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
 }

@@ -16,7 +16,7 @@ export default function App() {
             <div className="body">
                 <header>
                     <div id="title-block">
-                        <img id="icon" alt="pie icon" src="pie.png" class="rounded" width="100" height="70"/>
+                        <img id="icon" alt="pie icon" src="pie.png" className="rounded" width="100" height="70"/>
                             
                         <h1 id="title">Hungry?</h1>
 
@@ -39,7 +39,7 @@ export default function App() {
 
 
                 <footer>
-                    <a href="https://github.com/esenecal/startup" class="btn btn-outline-primary menu-button" role="button">Made by Edwin Senecal. Check out the Github!</a>
+                    <a href="https://github.com/esenecal/startup" className="btn btn-outline-primary menu-button" role="button">Made by Edwin Senecal. Check out the Github!</a>
                 </footer>
             </div>
         </BrowserRouter>
