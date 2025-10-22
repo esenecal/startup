@@ -2,12 +2,9 @@ import React from "react";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing bootstrap components.
 import "./find.css"     // page css file.
 
-export function RecipeOutput() {
+export function RecipeOutput({ recipe }) {
     return(
-        <div id="recipe-output">
-
-
-            <h3>Example Random Food: Goulash</h3>
+        <div>
             <h2>Simple Rice</h2>
             <blockquote>
                 <p>Ingredients:</p>
