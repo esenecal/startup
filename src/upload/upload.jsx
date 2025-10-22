@@ -10,6 +10,9 @@ import "./upload.css"; // page css file
 */
 
 export function Upload() {
+
+    const [submitForm, updateSubmitForm] = React.useState("Bread");
+
     return(
         <div className="body">
 
@@ -24,7 +27,8 @@ export function Upload() {
 
 
             <main>
-                <form>
+                {/* Action here runs this function when the form is submitted. */}
+                <form action={sendRecipeData}>
                     <div id="login" className="mb-3">
 
                         <label htmlFor="userID">User ID</label> 
@@ -62,11 +66,11 @@ export function Upload() {
                     <p>Enter recipe text below. Add a tag that relates to the recipe.</p>
 
                     <label htmlFor="recipeText"></label>
-                    <textarea id="recipeText" className="form-control mb-2" required>Enter text here...</textarea>
+                    <textarea id="recipeText" className="form-control mb-2" name="recipeText" required>Enter text here...</textarea>
 
                     {/* <!--Tags will be submitted via a drop down menu--> */}
                     <label htmlFor="tagDropdown">Tag:</label>
-                    <select id="tagDropdown" className="form-control mb-3">
+                    <select id="tagDropdown" className="form-control mb-3" name="tagDropdown">
                         <option selected>HOT</option>
                         <option>COLD</option>
                         <option>BREAKFAST</option>
@@ -77,11 +81,33 @@ export function Upload() {
                     <div id="submit-buttons">
                     {/* <!--Submit will submit the text to the server. Reset will clear it.--> */}
                         {/* The clear button can remain--it does its job. */}
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <SubmitButton submitForm={submitForm} updateSubmitForm={updateSubmitForm}/>
                         <button type="reset" className="btn btn-secondary">Clear</button>
                     </div>
                 </form>
             </main>
         </div>
     );
+}
+
+function SubmitButton({submitForm, updateSubmitForm}) {
+
+    function onSubmit() {
+        alert("submitted!");
+    }
+
+
+    return <button type="submit" className="btn btn-primary" onSubmit={onSubmit}>Submit</button>;
+}
+
+// This function gets the recipe title and recipe text and sends it to the database.
+// We will use local data for now.
+function sendRecipeData() {
+    const form = document.querySelector("form");
+    const formData = new FormData(form);
+    console.log(formData.get("userID"));
+    console.log(formData.get("password"));
+    console.log(formData.get("recipeTitle"));
+    console.log(formData.get("recipeText"));
+    console.log(formData.get("tagDropdown"));
 }
