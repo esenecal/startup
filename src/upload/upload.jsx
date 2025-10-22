@@ -17,7 +17,8 @@ When they are logged in, then they can submit the page.
  */
 export function Upload() {
     // State for handling the authentication message.
-    const [userAuth, updateUserAuth] = React.useState(false);
+    const [userAuth, updateUserAuth] = React.useState(null);
+    const [createUser, updateCreateUser] = React.useState(null);
 
     return(
         <div className="body">
@@ -34,7 +35,7 @@ export function Upload() {
 
             <main>
                 {/* Action here runs this function when the form is submitted. */}
-                <form action={sendRecipeData}>
+                <form id="loginData">
                     <div id="login" className="mb-3">
 
                         <label htmlFor="userID">User ID</label> 
@@ -47,19 +48,17 @@ export function Upload() {
                             <input id="password" className="form-control" type="password" name="password" />
                         </div>
 
-                        <button type="button" className="btn btn-primary" onClick={submitID}>Submit ID</button>
-                        <button type="button" className="btn btn-secondary">Create ID</button>
+                        <SubmitID userAuth={userAuth} updateUserAuth={updateUserAuth} />
+                        <CreateID createUser={createUser} updateCreateUser={updateCreateUser} />
 
                         <DisplayAuthMessage userAuth={userAuth} />
 
                     </div>
+                </form>
 
                     {/* <!--This is example text for when they submit their user credentials, so they know they can proceed--> */}
                     
-                    
-
-
-                    
+                <form id="recipeData" action={sendRecipeData}>
                     <div id="recipe-title-input" className="mb-3">
                         <label htmlFor="recipeTitle">Recipe Title&ensp;</label>
                         <div className="col-3">
@@ -83,7 +82,7 @@ export function Upload() {
                     </select>
 
                     <div id="submit-buttons">
-                    {/* <!--Submit will submit the text to the server. Reset will clear it.--> */}
+                        {/* <!--Submit will submit the text to the server. Reset will clear it.--> */}
                         {/* The clear button can remain--it does its job. */}
                         <button type="submit" className="btn btn-primary">Submit</button>
                         <button type="reset" className="btn btn-secondary">Clear</button>
@@ -94,33 +93,50 @@ export function Upload() {
     );
 }
 
-function submitID() {
-    let verify = verifyAuth();
-    if(verify) {
-        // Update userAuth to true.
-        updateUserAuth(true);
+function CreateID({createUser, updateCreateUser}) {
+
+    function onClick() {
+        <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>USER1</strong>!</p>;
     }
-    console.log("Submitted!");
+
+    return <button type="button" className="btn btn-secondary" onClick={onClick}>Create ID</button>
 }
 
-function verifyAuth() {
-    
+function SubmitID({userAuth, updateUserAuth}) {
+
+    function onClick() {
+        verifyID(userAuth, updateUserAuth);
+        console.log("userAuth: " + !userAuth);
+    }
+
+    return <button type="button" className="btn btn-primary" onClick={onClick}>Submit ID</button>;
+
+}
+
+// This is a mock function for login services--this would be replaced by a system to check the login.
+function verifyID(userAuth, updateUserAuth) {
+    // Sending the data to the server--in actuality, this would be done, then we would hear back if this was correct or not. But it works well enough now.
+    sendLoginData();
+
+    // Updates the state.
+    let newUserAuth = !userAuth
+    updateUserAuth(newUserAuth);    // This would re
 }
 
 function DisplayAuthMessage({userAuth}) {
-
-    if (userAuth) {
+    // If it is updated and userAuth is changed, set the output to that.
+    
+    if (userAuth === null) {
+        return <div></div>;
+    } else if (userAuth) {
         return <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>USER1</strong>!</p>;
     } else {
         return <p id="user-alert" className="form-control border-3 border-danger">Incorrect login</p>;
-    }
-               
+    }  
 }
 
-// This function gets the recipe title and recipe text and sends it to the database.
-// We will use local data for now.
-function sendRecipeData() {
-    const form = document.querySelector("form");
+function sendLoginData() {
+    const form = document.getElementById("loginData");
     const formData = new FormData(form);
     let formValues = formData.entries();
     console.log(formValues);
@@ -129,7 +145,25 @@ function sendRecipeData() {
         console.log(pair[0] + " " + pair[1]);
         formPairs[pair[0]] = pair[1];
     }
+
     console.log(formPairs);
+}
+
+// This function gets the recipe title, recipe text, and tag and sends it to the database.
+// We will use local data for now.
+function sendRecipeData() {
+    const form = document.getElementById("recipeData");
+    const formData = new FormData(form);
+    let formValues = formData.entries();
+    console.log(formValues);
+    let formPairs = new Object({});
+    for (let pair of formValues) {      // Write each of the key/value pairs to an object.
+        console.log(pair[0] + " " + pair[1]);
+        formPairs[pair[0]] = pair[1];
+    }
+
+    console.log(formPairs);
+
     // Now we write that object into localstorage, thus allowing us to access it.
     // For this mockup, we are just going to use the title and the text of the recipe.
     localStorage.setItem(formPairs.recipeTitle, formPairs.recipeText);
