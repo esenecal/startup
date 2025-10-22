@@ -27,14 +27,14 @@ export function Upload() {
                 <form>
                     <div id="login" className="mb-3">
 
-                        <label for="userID">User ID</label> 
+                        <label htmlFor="userID">User ID</label> 
                         <div className="col-2">
-                            <input id="userID" className="form-control" type="text" name="userID"/>
+                            <input id="userID" className="form-control" type="text" name="userID" required/>
                         </div>
 
-                        <label for="password">&ensp;Password</label> 
+                        <label htmlFor="password">&ensp;Password</label> 
                         <div className="col-2">
-                            <input id="password" className="form-control" type="password" name="password"/>
+                            <input id="password" className="form-control" type="password" name="password" required/>
                         </div>
 
                         <button type="submit" className="btn btn-primary">Submit ID</button>
@@ -53,19 +53,19 @@ export function Upload() {
 
                     
                     <div id="recipe-title-input" className="mb-3">
-                        <label for="recipeTitle">Recipe Title&ensp;</label>
+                        <label htmlFor="recipeTitle">Recipe Title&ensp;</label>
                         <div className="col-3">
-                            <input id="recipeTitle" className="form-control" type="text" name="recipeTitle"/>
+                            <input id="recipeTitle" className="form-control" type="text" name="recipeTitle" required/>
                         </div>
                     </div>
                     
                     <p>Enter recipe text below. Add a tag that relates to the recipe.</p>
 
-                    <label for="recipeText"></label>
-                    <textarea id="recipeText" className="form-control mb-2">Enter text here...</textarea>
+                    <label htmlFor="recipeText"></label>
+                    <textarea id="recipeText" className="form-control mb-2" required>Enter text here...</textarea>
 
                     {/* <!--Tags will be submitted via a drop down menu--> */}
-                    <label for="tagDropdown">Tag:</label>
+                    <label htmlFor="tagDropdown">Tag:</label>
                     <select id="tagDropdown" className="form-control mb-3">
                         <option selected>HOT</option>
                         <option>COLD</option>
@@ -76,8 +76,9 @@ export function Upload() {
 
                     <div id="submit-buttons">
                     {/* <!--Submit will submit the text to the server. Reset will clear it.--> */}
-                        <button type="reset" className="btn btn-secondary">Clear</button>
+                        {/* The clear button can remain--it does its job. */}
                         <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="reset" className="btn btn-secondary">Clear</button>
                     </div>
                 </form>
             </main>

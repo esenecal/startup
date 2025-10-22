@@ -85,6 +85,8 @@ export function Find() {
     );
 }
 
+// Create a useEffect for the notification?
+
 // FUNCTIONS FOR FIND RECIPE
 
 // When the Find Recipe button, this updates clickRecipe to a recipe from getRecipe.
@@ -102,7 +104,7 @@ function ClickRecipe({clickRecipe, updateRecipe}) {
 
 // Function that gets recipes from database. Right now we are using localstorage.
 function getRecipe(tagValue) {
-    
+
     console.log(TagValue);
 
     // Code to get a recipe with the correct tag using tagValue. Use an object! recipename: tag?
