@@ -49,7 +49,7 @@ export function Find() {
                 <div id="find-input">
                     <label htmlFor="tagDropdown">Tag:</label>
                     <select id="tagDropdown" className="form-control mb-3">
-                        <option selected>HOT</option>
+                        <option>HOT</option>
                         <option>COLD</option>
                         <option>BREAKFAST</option>
                         <option>LUNCH</option>
@@ -91,24 +91,22 @@ export function Find() {
 function ClickRecipe({clickRecipe, updateRecipe}) {
 
     function onClicked() {
-        updateRecipe(getRecipe());      // Set updateRecipe to a recipe
-        console.log("Set clickRecipe to " + clickRecipe);
+        const tagValue = document.getElementById("tagDropdown").value;      // Get the current value of the tag.
+        // console.log(tagValue);
+        updateRecipe(getRecipe(tagValue));      // Set updateRecipe to a recipe
+        console.log("Set clickRecipe to new clickRecipe");
     }
 
     return(<button type="submit" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
 }
 
-// Displays clickRecipe
-function DisplayRecipe({ clickRecipe }) {
-    return(
-        <div>
-            {clickRecipe}
-        </div>
-    );
-}
-
 // Function that gets recipes from database. Right now we are using localstorage.
-function getRecipe() {
+function getRecipe(tagValue) {
+    
+    console.log(TagValue);
+
+    // Code to get a recipe with the correct tag using tagValue. Use an object! recipename: tag?
+
     let recipeTitle = localStorage.getItem("RecipeTitle");
     let recipeText = localStorage.getItem("Recipe1");
     return (
@@ -121,6 +119,15 @@ function getRecipe() {
     );
 }
 
+
+// Displays clickRecipe
+function DisplayRecipe({ clickRecipe }) {
+    return(
+        <div>
+            {clickRecipe}
+        </div>
+    );
+}
 
 // FUNCTIONS FOR RANDOM FOOD
 
