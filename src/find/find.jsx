@@ -99,13 +99,13 @@ function ClickRecipe({clickRecipe, updateRecipe}) {
         console.log("Set clickRecipe to new clickRecipe");
     }
 
-    return(<button type="submit" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
+    return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
 }
 
 // Function that gets recipes from database. Right now we are using localstorage.
 function getRecipe(tagValue) {
 
-    console.log(TagValue);
+    console.log(tagValue);
 
     // Code to get a recipe with the correct tag using tagValue. Use an object! recipename: tag?
 
@@ -143,7 +143,7 @@ function ClickFood({clickFood, updateRandomFood}) {
         console.log("clickFood set to " + clickFood);
     }
 
-    return(<button type="submit" className="btn btn-secondary" onClick={onClicked}>Random Food</button>);
+    return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Random Food</button>);
 }
 
 // MOCK FUNCTION. Gets a random food from an API and returns it as a string.
