@@ -93,10 +93,12 @@ export function Upload() {
     );
 }
 
-function CreateID({createUser, updateCreateUser}) {
+// In the case that we get the 
+function CreateID({userAuth, createUser, updateUserAuth}) {
 
+    let userID;
     function onClick() {
-        <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>USER1</strong>!</p>;
+        createNewID();  // All we are doing here is getting the new login data on the click.
     }
 
     return <button type="button" className="btn btn-secondary" onClick={onClick}>Create ID</button>
@@ -104,6 +106,7 @@ function CreateID({createUser, updateCreateUser}) {
 
 function SubmitID({userAuth, updateUserAuth}) {
 
+    let userID;
     function onClick() {
         verifyID(userAuth, updateUserAuth);
         console.log("userAuth: " + !userAuth);
@@ -111,6 +114,11 @@ function SubmitID({userAuth, updateUserAuth}) {
 
     return <button type="button" className="btn btn-primary" onClick={onClick}>Submit ID</button>;
 
+}
+
+// Create a new ID.
+function createNewID() {
+    sendLoginData();
 }
 
 // This is a mock function for login services--this would be replaced by a system to check the login.
@@ -124,17 +132,21 @@ function verifyID(userAuth, updateUserAuth) {
 }
 
 function DisplayAuthMessage({userAuth}) {
+    console.log("updated");
     // If it is updated and userAuth is changed, set the output to that.
+    let userID = localStorage.getItem("a");
+    console.log(userID);
     
     if (userAuth === null) {
         return <div></div>;
     } else if (userAuth) {
-        return <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>USER1</strong>!</p>;
+        return <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{`${userID}`}</strong>!</p>;
     } else {
         return <p id="user-alert" className="form-control border-3 border-danger">Incorrect login</p>;
     }  
 }
 
+// Mock function for sending login data to the server.
 function sendLoginData() {
     const form = document.getElementById("loginData");
     const formData = new FormData(form);
@@ -147,6 +159,10 @@ function sendLoginData() {
     }
 
     console.log(formPairs);
+    // Now we write that object into localstorage, thus allowing us to access it.
+    // For this mockup, we are just going to use the  and the text of the recipe.
+    localStorage.setItem(formPairs.userID, formPairs.password);
+    console.log(localStorage.getItem(formPairs.userID));
 }
 
 // This function gets the recipe title, recipe text, and tag and sends it to the database.
