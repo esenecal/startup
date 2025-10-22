@@ -11,8 +11,6 @@ import "./upload.css"; // page css file
 
 export function Upload() {
 
-    const [submitForm, updateSubmitForm] = React.useState("Bread");
-
     return(
         <div className="body">
 
@@ -81,7 +79,7 @@ export function Upload() {
                     <div id="submit-buttons">
                     {/* <!--Submit will submit the text to the server. Reset will clear it.--> */}
                         {/* The clear button can remain--it does its job. */}
-                        <SubmitButton submitForm={submitForm} updateSubmitForm={updateSubmitForm}/>
+                        <button type="submit" className="btn btn-primary">Submit</button>
                         <button type="reset" className="btn btn-secondary">Clear</button>
                     </div>
                 </form>
@@ -90,24 +88,25 @@ export function Upload() {
     );
 }
 
-function SubmitButton({submitForm, updateSubmitForm}) {
-
-    function onSubmit() {
-        alert("submitted!");
-    }
-
-
-    return <button type="submit" className="btn btn-primary" onSubmit={onSubmit}>Submit</button>;
-}
 
 // This function gets the recipe title and recipe text and sends it to the database.
 // We will use local data for now.
 function sendRecipeData() {
     const form = document.querySelector("form");
     const formData = new FormData(form);
-    console.log(formData.get("userID"));
-    console.log(formData.get("password"));
-    console.log(formData.get("recipeTitle"));
-    console.log(formData.get("recipeText"));
-    console.log(formData.get("tagDropdown"));
+    let formValues = formData.entries();
+    console.log(formValues);
+    let formPairs = new Object({});
+    for (let pair of formValues) {      // Write each of the key/value pairs to an object.
+        console.log(pair[0] + " " + pair[1]);
+        formPairs[pair[0]] = pair[1];
+    }
+    console.log(formPairs);
+
+    // Now we write that object into localstorage, thus allowing us to access it.
+    // For this mockup, we are just going to use the title and the text of the recipe.
+    localStorage.setItem(formPairs.recipeTitle, formPairs.recipeText);
+    // console.log(localStorage.getItem(formPairs.recipeTitle));
+    
+
 }

@@ -26,9 +26,8 @@ let defaultClickRecipe = (
         </div>
     );
 
-// These are some mock local storage for recipes.
-localStorage.setItem("RecipeTitle", "How to Cook Rice!");
-localStorage.setItem("Recipe1", "Instructions:");
+// This is a some mock local storage for recipes.
+localStorage.setItem("RecipeTitle", "RecipeText");
 
 export function Find() {
     const [clickRecipe, updateRecipe] = React.useState(defaultClickRecipe);
@@ -108,9 +107,10 @@ function getRecipe(tagValue) {
     console.log(tagValue);
 
     // Code to get a recipe with the correct tag using tagValue. Use an object! recipename: tag?
-
+    // console.log(localStorage.getItem("a")); //
     let recipeTitle = localStorage.getItem("RecipeTitle");
     let recipeText = localStorage.getItem("Recipe1");
+
     return (
         <div>
             <h2>{recipeTitle}</h2>
