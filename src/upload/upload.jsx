@@ -94,11 +94,9 @@ export function Upload() {
 }
 
 // In the case that we get the 
-function CreateID({userAuth, createUser, updateUserAuth}) {
-
-    let userID;
+function CreateID({createUser, updateUserAuth}) {
     function onClick() {
-        createNewID();  // All we are doing here is getting the new login data on the click.
+        
     }
 
     return <button type="button" className="btn btn-secondary" onClick={onClick}>Create ID</button>
@@ -116,19 +114,13 @@ function SubmitID({userAuth, updateUserAuth}) {
 
 }
 
-// Create a new ID.
-function createNewID() {
-    sendLoginData();
-}
-
 // This is a mock function for login services--this would be replaced by a system to check the login.
 function verifyID(userAuth, updateUserAuth) {
     // Sending the data to the server--in actuality, this would be done, then we would hear back if this was correct or not. But it works well enough now.
     sendLoginData();
-
     // Updates the state.
     let newUserAuth = !userAuth
-    updateUserAuth(newUserAuth);    // This would re
+    updateUserAuth(newUserAuth);
 }
 
 function DisplayAuthMessage({userAuth}) {

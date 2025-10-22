@@ -32,6 +32,34 @@ localStorage.setItem("RecipeTitle", "RecipeText");
 export function Find() {
     const [clickRecipe, updateRecipe] = React.useState(defaultClickRecipe);
     const [clickFood, updateRandomFood] = React.useState("Bread");  // State for the random food. Default is bread.
+    const [username, updateUsername] = React.useState(Math.random());
+
+    // What is happening here:
+    // React us running on render. It says hey, run this interval. The interval runs the update funciton which 
+    // updates username. useEffect says, wait a minute, username was updated! So it runs again.
+    // Essentially, we are getting useEffect to run itself by having it update the very variable that it
+    // is waiting to be updated.
+    React.useEffect(() => {
+
+            const intervalID = setInterval(() => {
+                updateUsername(Math.random());
+                console.log(username);
+            }, 1000);
+
+            // console.log(random);
+
+            return () => clearInterval(intervalID);
+            
+    }, [username]);
+
+    function UserNotification() {
+        // Mock code to simulate server.
+
+        // console.log(random);
+        
+        return <p id="user-notification" className="form-control border-3 border-success">{`${username}`} just uploaded a COLD recipe!</p>;
+    }
+
 
     return(
         <div className="body">
@@ -72,11 +100,9 @@ export function Find() {
                     {/* <!--Notification Alert. Ideally, this will be off to the side, so CSS will be needed to place this in the correct place.-->
                     <!--Sample Notification alert.--> */}
 
-                    <p id="user-notification" className="form-control border-3 border-success">User 2 just uploaded a COLD recipe!</p>  
+                    <UserNotification />
 
                 </div>
-
-                
 
             </main>
 
@@ -85,6 +111,14 @@ export function Find() {
 }
 
 // Create a useEffect for the notification?
+
+// For the Notification:
+function getNotification() {
+    console.log(1);
+}
+
+
+
 
 // FUNCTIONS FOR FIND RECIPE
 
