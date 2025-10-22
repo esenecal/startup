@@ -9,7 +9,15 @@ import "./upload.css"; // page css file
     Then, for a smaller header, you can use the smaller title that describes the page.
 */
 
+
+/*
+Basic flow of use:
+A user logs in. They cannot submit the page unless they are authorized (userAuth is true).
+When they are logged in, then they can submit the page.
+ */
 export function Upload() {
+    // State for handling the authentication message.
+    const [userAuth, updateUserAuth] = React.useState(false);
 
     return(
         <div className="body">
@@ -31,20 +39,18 @@ export function Upload() {
 
                         <label htmlFor="userID">User ID</label> 
                         <div className="col-2">
-                            <input id="userID" className="form-control" type="text" name="userID" required/>
+                            <input id="userID" className="form-control" type="text" name="userID" />
                         </div>
 
                         <label htmlFor="password">&ensp;Password</label> 
                         <div className="col-2">
-                            <input id="password" className="form-control" type="password" name="password" required/>
+                            <input id="password" className="form-control" type="password" name="password" />
                         </div>
 
-                        <button type="submit" className="btn btn-primary">Submit ID</button>
-                        <button type="submit" className="btn btn-secondary">Create ID</button>
+                        <button type="button" className="btn btn-primary" onClick={submitID}>Submit ID</button>
+                        <button type="button" className="btn btn-secondary">Create ID</button>
 
-
-                        <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>USER1</strong>!</p>
-                        <p id="user-alert" className="form-control border-3 border-danger">Incorrect login</p>
+                        <DisplayAuthMessage userAuth={userAuth} />
 
                     </div>
 
@@ -88,6 +94,28 @@ export function Upload() {
     );
 }
 
+function submitID() {
+    let verify = verifyAuth();
+    if(verify) {
+        // Update userAuth to true.
+        updateUserAuth(true);
+    }
+    console.log("Submitted!");
+}
+
+function verifyAuth() {
+    
+}
+
+function DisplayAuthMessage({userAuth}) {
+
+    if (userAuth) {
+        return <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>USER1</strong>!</p>;
+    } else {
+        return <p id="user-alert" className="form-control border-3 border-danger">Incorrect login</p>;
+    }
+               
+}
 
 // This function gets the recipe title and recipe text and sends it to the database.
 // We will use local data for now.
@@ -102,11 +130,8 @@ function sendRecipeData() {
         formPairs[pair[0]] = pair[1];
     }
     console.log(formPairs);
-
     // Now we write that object into localstorage, thus allowing us to access it.
     // For this mockup, we are just going to use the title and the text of the recipe.
     localStorage.setItem(formPairs.recipeTitle, formPairs.recipeText);
     // console.log(localStorage.getItem(formPairs.recipeTitle));
-    
-
 }
