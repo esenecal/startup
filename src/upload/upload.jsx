@@ -2,6 +2,7 @@ import React from "react";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing bootstrap components.
 import "./upload.css"; // page css file
 
+// localStorage.clear();   
 
 /* Some things to change:
     Change the main header so that it has one picture. Place the page buttons on this header, so that this will not change.
@@ -21,9 +22,9 @@ export function Upload() {
 
     // In the case that we get the 
     function CreateID() {
-
         function onClick() {
             sendLoginData();
+            updateUserAuth(true);       // When we create an ID, we assume they are also signing in.
         }
 
         return <button type="button" className="btn btn-secondary" onClick={onClick}>Create ID</button>
@@ -35,6 +36,7 @@ export function Upload() {
             verifyID(userAuth, updateUserAuth);
             console.log(userAuth);
             printLocalStorage();
+
         }
 
         return <button type="button" className="btn btn-primary" onClick={onClick}>Submit ID</button>;
@@ -55,7 +57,7 @@ export function Upload() {
         const form = document.getElementById("loginData");
         const formData = new FormData(form);
         let formValues = formData.entries();
-        console.log(formValues);
+        // console.log(formValues);
 
         for (let pair of formValues) {      // Write each of the key/value pairs to local storage WITH a -temp added to the key.
             // console.log(pair[0] + " " + pair[1]);
@@ -80,12 +82,14 @@ export function Upload() {
 
     function DisplayAuthMessage() {
         console.log("updated");
+        console.log(userAuth);
+
         // If it is updated and userAuth is changed, set the output to that.
-        // This gets the first user.
+        // This gets the user
         let userID = localStorage.getItem("userID");
         // console.log(userID); 
         
-        if (userAuth === null) {        // At the start, this is blank.
+        if (userAuth == null) {        // At the start, this is blank.
             return <div></div>;
         } else if (userAuth === true) {
             return <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{`${userID}`}</strong>!</p>;
@@ -114,6 +118,11 @@ export function Upload() {
     // This function gets the recipe title, recipe text, and tag and sends it to the database.
     // We will use local data for now.
     function sendRecipeData() {
+
+        if (!userAuth) {        // If the user has not logged in, then we will not send the recipe data.
+            return;
+        }
+
         const form = document.getElementById("recipeData");
         const formData = new FormData(form);
         let formValues = formData.entries();
@@ -126,9 +135,10 @@ export function Upload() {
 
         // Now we write that object into localstorage, thus allowing us to access it.
         // For this mockup, we are just going to use the title and the text of the recipe.
+        printLocalStorage();
     }
 
-    // function for checking what is in local storage.
+    // function for checking what is in local storage. Debugging.
     function printLocalStorage() {
         console.log("LOCAL STORAGE ---------------------------");
         for (let i = 0; i < localStorage.length; i++) {
@@ -201,7 +211,7 @@ export function Upload() {
                     <div id="submit-buttons">
                         {/* <!--Submit will submit the text to the server. Reset will clear it.--> */}
                         {/* The clear button can remain--it does its job. */}
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button id="submitRecipeData" type="submit" className="btn btn-primary">Submit</button>
                         <button type="reset" className="btn btn-secondary">Clear</button>
                     </div>
                 </form>

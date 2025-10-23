@@ -27,8 +27,8 @@ let defaultClickRecipe = (
     );
 
 // This is a some mock local storage for recipes.
-// localStorage.setItem("RecipeTitle", "How to make...");
-// localStorage.setItem("RecipeText", "First, take...");
+// localStorage.setItem("recipeTitle", "How to make...");
+// localStorage.setItem("recipeText", "First, take...");
 // localStorage.setItem("tagDropdown", "COLD");
 
 let tags = ["HOT", "COLD", "BREAKFAST", "LUNCH", "DINNER"];
@@ -38,6 +38,16 @@ export function Find() {
     const [clickFood, updateRandomFood] = React.useState("Bread");  // State for the random food. Default is bread.
     const [username, updateUsername] = React.useState(1);
     const [tag, updateTag] = React.useState(tags[0]);
+
+    printLocalStorage();
+
+    function printLocalStorage() {
+        console.log("LOCAL STORAGE ---------------------------");
+        for (let i = 0; i < localStorage.length; i++) {
+            console.log(localStorage.key(i) + ": " + localStorage.getItem(localStorage.key(i)));
+        }
+        console.log("-----------------------------------------");
+    }
 
     // What is happening here:
     // React us running on render. It says hey, run this interval. The interval runs the update funciton which 
@@ -75,7 +85,7 @@ export function Find() {
             // console.log(clickRecipe)
             let newRecipe = getRecipe(tagValue);
             updateRecipe(newRecipe);      // Set updateRecipe to a recipe
-            console.log(clickRecipe);
+            // console.log(clickRecipe);
         }
 
         return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
@@ -89,8 +99,8 @@ export function Find() {
         // Code to get a recipe with the correct tag using tagValue. Use an object! recipename: tag?
         // console.log(localStorage.getItem("a")); //
 
-        let recipeTitle = localStorage.getItem("RecipeTitle");
-        let recipeText = localStorage.getItem("RecipeText");
+        let recipeTitle = localStorage.getItem("recipeTitle");
+        let recipeText = localStorage.getItem("recipeText");
         let recipeTag = localStorage.getItem("tagDropdown");
 
         // console.log(recipeTitle);
