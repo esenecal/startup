@@ -9,16 +9,133 @@ import "./upload.css"; // page css file
     Then, for a smaller header, you can use the smaller title that describes the page.
 */
 
-
 /*
 Basic flow of use:
 A user logs in. They cannot submit the page unless they are authorized (userAuth is true).
 When they are logged in, then they can submit the page.
  */
 export function Upload() {
+    
     // State for handling the authentication message.
     const [userAuth, updateUserAuth] = React.useState(null);
-    const [createUser, updateCreateUser] = React.useState(null);
+
+    // In the case that we get the 
+    function CreateID() {
+
+        function onClick() {
+            sendLoginData();
+        }
+
+        return <button type="button" className="btn btn-secondary" onClick={onClick}>Create ID</button>
+    }
+
+    function SubmitID() {
+
+        function onClick() {
+            verifyID(userAuth, updateUserAuth);
+            console.log(userAuth);
+            printLocalStorage();
+        }
+
+        return <button type="button" className="btn btn-primary" onClick={onClick}>Submit ID</button>;
+
+    }
+
+    // This is a mock function for login services--this would be replaced by a system to check the login.
+    function verifyID() {
+        // Here, we have code that interacts with the server to ensure that we have a correct login.
+        // Here, what we will do is make sure that the user credentials submitted by SubmitID equal
+        // the credentials submitted by CreateID.
+        
+        // Since we are working with localStorage, the credentials will be overwritten everytime CreateID is clicked,
+        // But that is unfortunately the limitations of the mockup.
+
+        // Save submitted user information to temporary localStorage. Then check it with the localStorage created by 
+        // CreateID.
+        const form = document.getElementById("loginData");
+        const formData = new FormData(form);
+        let formValues = formData.entries();
+        console.log(formValues);
+
+        for (let pair of formValues) {      // Write each of the key/value pairs to local storage WITH a -temp added to the key.
+            // console.log(pair[0] + " " + pair[1]);
+            localStorage.setItem(pair[0] + "-temp", pair[1]);
+        }
+
+        let tempUserID = localStorage.getItem("userID-temp");
+        let tempPassword = localStorage.getItem("password-temp");
+        let userID = localStorage.getItem("userID");
+        let password = localStorage.getItem("password");
+
+        // Update the state.
+        if (tempUserID == "" && tempPassword == "") {   // if the credentials are blank, even if they match, it's false. 
+            updateUserAuth(false);
+        } else if (tempUserID == userID && tempPassword == password) {
+            updateUserAuth(true);
+        } else {
+            updateUserAuth(false);
+        }
+        
+    }
+
+    function DisplayAuthMessage() {
+        console.log("updated");
+        // If it is updated and userAuth is changed, set the output to that.
+        // This gets the first user.
+        let userID = localStorage.getItem("userID");
+        // console.log(userID); 
+        
+        if (userAuth === null) {        // At the start, this is blank.
+            return <div></div>;
+        } else if (userAuth === true) {
+            return <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{`${userID}`}</strong>!</p>;
+        } else {
+            return <p id="user-alert" className="form-control border-3 border-danger">Incorrect login</p>;
+        }  
+    }
+
+    // Mock function for sending login data to the server.
+    // Write now, we are just writing each value to a key that describes it. Of course, this means we only get
+    // One set of data, but this is good enough for our mockup.
+    function sendLoginData() {
+        const form = document.getElementById("loginData");
+        const formData = new FormData(form);
+        let formValues = formData.entries();
+        console.log(formValues);
+
+        // console.log(formValues);
+        for (let pair of formValues) {      // Write each of the key/value pairs to localStorage
+
+            // console.log(pair[0] + " " + pair[1]);
+            localStorage.setItem(pair[0], pair[1]);
+        }
+    }
+
+    // This function gets the recipe title, recipe text, and tag and sends it to the database.
+    // We will use local data for now.
+    function sendRecipeData() {
+        const form = document.getElementById("recipeData");
+        const formData = new FormData(form);
+        let formValues = formData.entries();
+        // console.log(formValues);
+        
+        for (let pair of formValues) {      // Write each of the key/value pairs to localStorage.
+            console.log(pair[0] + " " + pair[1]);
+            localStorage.setItem(pair[0], pair[1]);
+        }
+
+        // Now we write that object into localstorage, thus allowing us to access it.
+        // For this mockup, we are just going to use the title and the text of the recipe.
+    }
+
+    // function for checking what is in local storage.
+    function printLocalStorage() {
+        console.log("LOCAL STORAGE ---------------------------");
+        for (let i = 0; i < localStorage.length; i++) {
+            console.log(localStorage.key(i) + ": " + localStorage.getItem(localStorage.key(i)));
+        }
+        console.log("-----------------------------------------");
+    }
 
     return(
         <div className="body">
@@ -40,18 +157,18 @@ export function Upload() {
 
                         <label htmlFor="userID">User ID</label> 
                         <div className="col-2">
-                            <input id="userID" className="form-control" type="text" name="userID" />
+                            <input id="userID" className="form-control" type="text" name="userID" required/>
                         </div>
 
                         <label htmlFor="password">&ensp;Password</label> 
                         <div className="col-2">
-                            <input id="password" className="form-control" type="password" name="password" />
+                            <input id="password" className="form-control" type="password" name="password" required/>
                         </div>
 
-                        <SubmitID userAuth={userAuth} updateUserAuth={updateUserAuth} />
-                        <CreateID createUser={createUser} updateCreateUser={updateCreateUser} />
+                        <SubmitID />
+                        <CreateID />
 
-                        <DisplayAuthMessage userAuth={userAuth} />
+                        <DisplayAuthMessage />
 
                     </div>
                 </form>
@@ -91,89 +208,4 @@ export function Upload() {
             </main>
         </div>
     );
-}
-
-// In the case that we get the 
-function CreateID({createUser, updateUserAuth}) {
-    function onClick() {
-        
-    }
-
-    return <button type="button" className="btn btn-secondary" onClick={onClick}>Create ID</button>
-}
-
-function SubmitID({userAuth, updateUserAuth}) {
-
-    let userID;
-    function onClick() {
-        verifyID(userAuth, updateUserAuth);
-        console.log("userAuth: " + !userAuth);
-    }
-
-    return <button type="button" className="btn btn-primary" onClick={onClick}>Submit ID</button>;
-
-}
-
-// This is a mock function for login services--this would be replaced by a system to check the login.
-function verifyID(userAuth, updateUserAuth) {
-    // Sending the data to the server--in actuality, this would be done, then we would hear back if this was correct or not. But it works well enough now.
-    sendLoginData();
-    // Updates the state.
-    let newUserAuth = !userAuth
-    updateUserAuth(newUserAuth);
-}
-
-function DisplayAuthMessage({userAuth}) {
-    console.log("updated");
-    // If it is updated and userAuth is changed, set the output to that.
-    let userID = localStorage.getItem("a");
-    console.log(userID);
-    
-    if (userAuth === null) {
-        return <div></div>;
-    } else if (userAuth) {
-        return <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{`${userID}`}</strong>!</p>;
-    } else {
-        return <p id="user-alert" className="form-control border-3 border-danger">Incorrect login</p>;
-    }  
-}
-
-// Mock function for sending login data to the server.
-function sendLoginData() {
-    const form = document.getElementById("loginData");
-    const formData = new FormData(form);
-    let formValues = formData.entries();
-    console.log(formValues);
-    let formPairs = new Object({});
-    for (let pair of formValues) {      // Write each of the key/value pairs to an object.
-        console.log(pair[0] + " " + pair[1]);
-        formPairs[pair[0]] = pair[1];
-    }
-
-    console.log(formPairs);
-    // Now we write that object into localstorage, thus allowing us to access it.
-    // For this mockup, we are just going to use the  and the text of the recipe.
-    localStorage.setItem(formPairs.userID, formPairs.password);
-    console.log(localStorage.getItem(formPairs.userID));
-}
-
-// This function gets the recipe title, recipe text, and tag and sends it to the database.
-// We will use local data for now.
-function sendRecipeData() {
-    const form = document.getElementById("recipeData");
-    const formData = new FormData(form);
-    let formValues = formData.entries();
-    console.log(formValues);
-    let formPairs = new Object({});
-    for (let pair of formValues) {      // Write each of the key/value pairs to an object.
-        console.log(pair[0] + " " + pair[1]);
-        formPairs[pair[0]] = pair[1];
-    }
-
-    console.log(formPairs);
-
-    // Now we write that object into localstorage, thus allowing us to access it.
-    // For this mockup, we are just going to use the title and the text of the recipe.
-    localStorage.setItem(formPairs.recipeTitle, formPairs.recipeText);
-    // console.log(localStorage.getItem(formPairs.recipeTitle));
 }

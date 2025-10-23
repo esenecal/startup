@@ -27,12 +27,17 @@ let defaultClickRecipe = (
     );
 
 // This is a some mock local storage for recipes.
-localStorage.setItem("RecipeTitle", "RecipeText");
+// localStorage.setItem("RecipeTitle", "How to make...");
+// localStorage.setItem("RecipeText", "First, take...");
+// localStorage.setItem("tagDropdown", "COLD");
+
+let tags = ["HOT", "COLD", "BREAKFAST", "LUNCH", "DINNER"];
 
 export function Find() {
     const [clickRecipe, updateRecipe] = React.useState(defaultClickRecipe);
     const [clickFood, updateRandomFood] = React.useState("Bread");  // State for the random food. Default is bread.
-    const [username, updateUsername] = React.useState(Math.random());
+    const [username, updateUsername] = React.useState(1);
+    const [tag, updateTag] = React.useState(tags[0]);
 
     // What is happening here:
     // React us running on render. It says hey, run this interval. The interval runs the update funciton which 
@@ -41,10 +46,13 @@ export function Find() {
     // is waiting to be updated.
     React.useEffect(() => {
 
+        // This is the MOCK server pull. Obviously, when actually implemented, actual usernames will be given.
+        // The random number generator is just to show that this is actually being updated.
             const intervalID = setInterval(() => {
-                updateUsername(Math.random());
+                updateUsername(Math.trunc(Math.random()*10));
+                updateTag(tags[Math.floor(Math.random() * (tags.length))]);        // get a random tag for display.
                 console.log(username);
-            }, 1000);
+            }, 10000);
 
             // console.log(random);
 
@@ -53,11 +61,104 @@ export function Find() {
     }, [username]);
 
     function UserNotification() {
-        // Mock code to simulate server.
+        return <p id="user-notification" className="form-control border-3 border-success"> User {`${username}`} just uploaded a {`${tag}`} recipe!</p>;
+    }
 
-        // console.log(random);
-        
-        return <p id="user-notification" className="form-control border-3 border-success">{`${username}`} just uploaded a COLD recipe!</p>;
+    // FUNCTIONS FOR FIND RECIPE
+
+    // When the Find Recipe button, this updates clickRecipe to a recipe from getRecipe.
+    function ClickRecipe() {
+
+        function onClicked() {
+            let tagValue = document.getElementById("tagDropdown").value;      // Get the current value of the tag.
+            console.log(tagValue);
+            // console.log(clickRecipe)
+            let newRecipe = getRecipe(tagValue);
+            updateRecipe(newRecipe);      // Set updateRecipe to a recipe
+            console.log(clickRecipe);
+        }
+
+        return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
+    }
+
+    // MOCK Function that gets recipes from database. Right now we are using localstorage.
+    function getRecipe(tagValue) {
+
+        // console.log(tagValue);
+
+        // Code to get a recipe with the correct tag using tagValue. Use an object! recipename: tag?
+        // console.log(localStorage.getItem("a")); //
+
+        let recipeTitle = localStorage.getItem("RecipeTitle");
+        let recipeText = localStorage.getItem("RecipeText");
+        let recipeTag = localStorage.getItem("tagDropdown");
+
+        // console.log(recipeTitle);
+        // console.log(recipeText);
+        // console.log(tagValue);
+        // console.log(recipeTag);
+
+        let output;
+        // Check for the tag. In this case, we are assuming we want to get a COLD recipe in the database, so the recipe
+        // will only display if a cold tag is selected, as that is what it will match.
+        if (tagValue == recipeTag) {
+            output = (
+                <div>
+                    <h2>{`${recipeTitle}`}</h2>
+                    <blockquote>
+                        <p>{`${recipeText}`}</p>
+                    </blockquote>
+                </div>
+            );
+        } else {
+            output = (<div></div>);
+        }
+
+        return output
+    }
+
+
+    // Displays clickRecipe
+    function DisplayRecipe() {
+        return(
+            <div>
+                {clickRecipe}
+            </div>
+        );
+    }
+
+    // FUNCTIONS FOR RANDOM FOOD
+
+    // Function for the button for Random Food
+    function ClickFood() {
+
+        // run when button is clicked.
+        function onClicked() {
+            console.log("ClickFood clicked");
+            updateRandomFood(getRandomFood());      // Updates clickFood to a random food name string returned by getRandomFood
+            console.log("clickFood set to " + clickFood);
+        }
+
+        return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Random Food</button>);
+    }
+
+    // MOCK FUNCTION. Gets a random food from an API and returns it as a string.
+    function getRandomFood() {
+        // This is a mock function that will return a random food from an API. This random food will be passed into 
+        // updateRandomFood. For now, I am just adding a random number generator to show it's basic funcitonality.
+
+        // Imagine this is returning a random food instead of a random number.
+        return Math.random();
+    }
+
+    // This function works to display the random food. We are using a function in case we want to add more functionality.
+    function DisplayFood() {
+        // clickFood contains a string variable containing a random food.
+        return (
+            <div>
+                <h3>{clickFood}</h3>
+            </div>
+        );
     }
 
 
@@ -82,8 +183,8 @@ export function Find() {
                         <option>LUNCH</option>
                         <option>DINNER</option>
                     </select>
-                    <ClickRecipe clickRecipe={clickRecipe} updateRecipe={updateRecipe} />
-                    <ClickFood clickFood={clickFood} updateRandomFood={updateRandomFood} />
+                    <ClickRecipe />
+                    <ClickFood />
                 </div>
                 
                 
@@ -91,8 +192,8 @@ export function Find() {
 
                     <div id="recipe-output">
 
-                        <DisplayFood clickFood={clickFood} />
-                        <DisplayRecipe clickRecipe={clickRecipe} />
+                        <DisplayFood />
+                        <DisplayRecipe />
 
                     </div>
 
@@ -106,95 +207,6 @@ export function Find() {
 
             </main>
 
-        </div>
-    );
-}
-
-// Create a useEffect for the notification?
-
-// For the Notification:
-function getNotification() {
-    console.log(1);
-}
-
-
-
-
-// FUNCTIONS FOR FIND RECIPE
-
-// When the Find Recipe button, this updates clickRecipe to a recipe from getRecipe.
-function ClickRecipe({clickRecipe, updateRecipe}) {
-
-    function onClicked() {
-        const tagValue = document.getElementById("tagDropdown").value;      // Get the current value of the tag.
-        // console.log(tagValue);
-        updateRecipe(getRecipe(tagValue));      // Set updateRecipe to a recipe
-        console.log("Set clickRecipe to new clickRecipe");
-    }
-
-    return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
-}
-
-// Function that gets recipes from database. Right now we are using localstorage.
-function getRecipe(tagValue) {
-
-    console.log(tagValue);
-
-    // Code to get a recipe with the correct tag using tagValue. Use an object! recipename: tag?
-    // console.log(localStorage.getItem("a")); //
-    let recipeTitle = localStorage.getItem("RecipeTitle");
-    let recipeText = localStorage.getItem("Recipe1");
-
-    return (
-        <div>
-            <h2>{recipeTitle}</h2>
-            <blockquote>
-                {recipeText}
-            </blockquote>
-        </div>
-    );
-}
-
-
-// Displays clickRecipe
-function DisplayRecipe({ clickRecipe }) {
-    return(
-        <div>
-            {clickRecipe}
-        </div>
-    );
-}
-
-// FUNCTIONS FOR RANDOM FOOD
-
-// Function for the button for Random Food
-function ClickFood({clickFood, updateRandomFood}) {
-
-    // run when button is clicked.
-    function onClicked() {
-        console.log("ClickFood clicked");
-        updateRandomFood(getRandomFood());      // Updates clickFood to a random food name string returned by getRandomFood
-        console.log("clickFood set to " + clickFood);
-    }
-
-    return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Random Food</button>);
-}
-
-// MOCK FUNCTION. Gets a random food from an API and returns it as a string.
-function getRandomFood() {
-    // This is a mock function that will return a random food from an API. This random food will be passed into 
-    // updateRandomFood. For now, I am just adding a random number generator to show it's basic funcitonality.
-
-    // Imagine this is returning a random food instead of a random number.
-    return Math.random();
-}
-
-// This function works to display the random food. We are using a function in case we want to add more functionality.
-function DisplayFood({clickFood}) {
-    // clickFood contains a string variable containing a random food.
-    return (
-        <div>
-            <h3>{clickFood}</h3>
         </div>
     );
 }
