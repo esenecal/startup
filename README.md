@@ -103,14 +103,33 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [x] **Hooks** - In find.jsx, I added a useState for the Random Food button, which has a mocked function for accessing an API on a click.
+- [x] **All functionality implemented or mocked out**
+    - The login credentials are implemented and mocked out by allowing a user to enter in credentials and click submit or create. The application uses local storage as a mock server. It stores the credentials there when created and authenticates the user; if credentials are submitted instead of created, it checks them against the local storage already existing to verify them. It provides a notification depending on the authentication status to alert the user if they have been authenticated or not.
+    - Recipe submission is implemented/mocked out. It uses function sendRecipeData that is called on the recipeData form when the submit button is clicked. sendRecipeData checks if the user is authenticated; if they are, then it gets the form data, reads it to a FormData object, which then maps the form data to the "server" (local storage). This form data includes the recipe title, recipe text, and the tag.
+    - The Find Recipe functionality has been implemented/mocked out. When this button is clicked, the application reads the data in the "server" and checks it against the tag selected (due to the limitations of localStorage, we are only able to have one recipe set; however, this is just the mockup, and server implmentation will allow us to instead check for a random recipe of the tag type). It then displays the recipe, which is associated with that tag type selected.
+    - The Random Food functionality is implemented/mocked out. When this button is clicked, it pulls a random value from an array containing various food names. This array represents an API, and the random call represents a random call to the API. This random "API call" is then displayed.
+    - The user notification/websocket functionality is implemented/mocked out. It uses a useEffect to listen for changes in state variables from a setInterval representing a server data being pushed over a Websocket. State change functions are used to take the user and food tag data coming from the "server" and change the states, which are displayed as the data comes in; the setInterval updates every 10 seconds to represent the server data being pushed.
+- [x] **Hooks** -
+    In upload.jsx, there is 1 useState hook with the userAuth state and updateUserAuth state update function.
+    - userAuth contains a default value of null and then is a boolean. It is updated by verifyID run by SubmitID, which is run when "Submit ID" is clicked (it changes to true when login credentials match those existing in the "server data") or in CreateID (when a user creates a new ID by clicking "Create ID"). It is used to verify that a user has logged in, allowing recipe data to be sent to the server (localStorage) and to display a login confirmation (true), a login rejection (false), or be blank (null).
+
+    In find.jsx, there are 5 useState hooks and one useEffect hook. clickRecipe, clickFood, username, tag, and show are the states associated with the 5 useStates.
+    - clickRecipe contains text to be displayed when "Find Recipe" is clicked. When this button is clicked, it changes the state of clickRecipe to be the recipeText associated with the selected tag.
+    - clickFood contains a random food. When "Random Food" is clicked, it updates clickFood to a random food.
+    - username contains a random number representing a userID that is displayed in the green notification on the right. It is updated by the mock server pull.
+    - tag contains a tag value, found in the tags array. It is displayed in the notification on the right as well. It is updated by the mock server pull. Together, username and tag represent server/websocket data being displayed in realtime.
+    - show contains a boolean. Depending on the value of the boolean, either DisplayRecipe or DisplayFood is displayed or blank. show is updated by clicking on "Random Food" or "Find Recipe", which will update it to the correct value to allow their corresponding displays to display.
+    - useEffect hook: This useEffect hook contains an arrow function with an interval, which runs every 10 seconds. Every 10 seconds, it updates username and tag via their state change functions. When username updates, it triggers the useEffect again. The hook is listening to the setInterval, which is simulating a server pull, and acts as a way to update these states according to this server pull.
 
     To see a full test, enter a user ID and a password and click "Create ID". Note that if you try to sign in with another password, you will be unable too, and if you have a failed login, the recipe data will not be submitted to localstorage even if you hit submit and it clears (see the console). 
 
     After you have signed in (a green box should show), enter a Recipe Title and some Recipe text, and select a recipe tag. REMEMBER THE TAG YOU SELECT. Hit submit. The fields should clear.
 
-    Then, go to the Find Recipes page. You will see a default recipe. If you click "Random Food", then the recipe will disappear and a random number will appear. This random number is a placeholder for a random
+    Then, go to the Find Recipes page. You will see a default recipe. If you click "Random Food", then the recipe will disappear and a random food will appear.
+
+    Select the tag that you had submitted earlier. If you click "Random Food" then your recipe from before should show up.
+
+    You'll notice notifications on the right.
 
 
 

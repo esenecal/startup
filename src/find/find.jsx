@@ -35,11 +35,11 @@ let tags = ["HOT", "COLD", "BREAKFAST", "LUNCH", "DINNER"];
 let foods = ["Bread", "Pasta", "Fried Chicken", "Steak", "Salad"];
 
 export function Find() {
-    const [clickRecipe, updateRecipe] = React.useState(defaultClickRecipe);
-    const [clickFood, updateRandomFood] = React.useState("Bread");  // State for the random food. Default is bread.
-    const [username, updateUsername] = React.useState(1);
-    const [tag, updateTag] = React.useState(tags[0]);
-    const [show, updateShow] = React.useState(true);
+    const [clickRecipe, updateRecipe] = React.useState(defaultClickRecipe);     // State for random recipe. clickRecipe contains recipe text.
+    const [clickFood, updateRandomFood] = React.useState(foods[0]);  // State for the random food. Default is bread.
+    const [username, updateUsername] = React.useState(1);       // State for notifications. username is a number standing in for a name that would be received by websocket.
+    const [tag, updateTag] = React.useState(tags[0]);   // State for tags for notifications. tag is an element in the tags array.
+    const [show, updateShow] = React.useState(true);    // State for controlling if recipe or food should be displayed.
 
     printLocalStorage();
 
