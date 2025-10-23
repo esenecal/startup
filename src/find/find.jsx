@@ -32,12 +32,14 @@ let defaultClickRecipe = (
 // localStorage.setItem("tagDropdown", "COLD");
 
 let tags = ["HOT", "COLD", "BREAKFAST", "LUNCH", "DINNER"];
+let foods = ["Bread", "Pasta", "Fried Chicken", "Steak", "Salad"];
 
 export function Find() {
     const [clickRecipe, updateRecipe] = React.useState(defaultClickRecipe);
     const [clickFood, updateRandomFood] = React.useState("Bread");  // State for the random food. Default is bread.
     const [username, updateUsername] = React.useState(1);
     const [tag, updateTag] = React.useState(tags[0]);
+    const [show, updateShow] = React.useState(true);
 
     printLocalStorage();
 
@@ -80,6 +82,9 @@ export function Find() {
     function ClickRecipe() {
 
         function onClicked() {
+            if (show == false) {     // Random food displays when show is false. So, only change it if show is true.
+                updateShow(!show);
+            }
             let tagValue = document.getElementById("tagDropdown").value;      // Get the current value of the tag.
             console.log(tagValue);
             // console.log(clickRecipe)
@@ -130,11 +135,19 @@ export function Find() {
 
     // Displays clickRecipe
     function DisplayRecipe() {
-        return(
-            <div>
-                {clickRecipe}
-            </div>
-        );
+
+        if (show) {
+            return(
+                <div>
+                    {clickRecipe}
+                </div>
+            );
+        } else {
+            return (
+                <div></div>
+            );
+        }
+        
     }
 
     // FUNCTIONS FOR RANDOM FOOD
@@ -144,6 +157,9 @@ export function Find() {
 
         // run when button is clicked.
         function onClicked() {
+            if (show == true) {     // Random food displays when show is false. So, only change it if show is true.
+                updateShow(!show);
+            }
             console.log("ClickFood clicked");
             updateRandomFood(getRandomFood());      // Updates clickFood to a random food name string returned by getRandomFood
             console.log("clickFood set to " + clickFood);
@@ -158,17 +174,23 @@ export function Find() {
         // updateRandomFood. For now, I am just adding a random number generator to show it's basic funcitonality.
 
         // Imagine this is returning a random food instead of a random number.
-        return Math.random();
+        return foods[Math.floor(Math.random() * (foods.length))];
     }
 
     // This function works to display the random food. We are using a function in case we want to add more functionality.
     function DisplayFood() {
         // clickFood contains a string variable containing a random food.
-        return (
-            <div>
-                <h3>{clickFood}</h3>
-            </div>
-        );
+        if (!show) {
+            return (
+                <div>
+                    <h3>{clickFood}</h3>
+                </div>
+            );
+        } else {
+            return (
+                <div></div>
+            );
+        }
     }
 
 

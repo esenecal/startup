@@ -103,8 +103,16 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - In find.jsx, I added a useState for the Random Food button, which has a mocked function for accessing an API on a click.
+- [x] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
+- [x] **Hooks** - In find.jsx, I added a useState for the Random Food button, which has a mocked function for accessing an API on a click.
+
+    To see a full test, enter a user ID and a password and click "Create ID". Note that if you try to sign in with another password, you will be unable too, and if you have a failed login, the recipe data will not be submitted to localstorage even if you hit submit and it clears (see the console). 
+
+    After you have signed in (a green box should show), enter a Recipe Title and some Recipe text, and select a recipe tag. REMEMBER THE TAG YOU SELECT. Hit submit. The fields should clear.
+
+    Then, go to the Find Recipes page. You will see a default recipe. If you click "Random Food", then the recipe will disappear and a random number will appear. This random number is a placeholder for a random
+
+
 
 ## 🚀 Service deliverable
 
