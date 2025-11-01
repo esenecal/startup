@@ -5,20 +5,31 @@ const app = express();
 
 app.use(express.static('public'));
 
-const url = "https://api.github.com/users/octocat";
+const url = "https://thereportoftheweekapi.com/api/v1/reports/?category=Running%20On%20Empty";
 
-app.get('/login', (req, res, next) => {
+// These are food reviews. This is my idea:
+// On a call to the api, concatenate a random category. (running on empty or drink review.)
+// Then load up a list containing all of those objects, and then print one.
+
+// function to get a random int between min and max, including min but NOT including max.
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+app.get('/get', (req, res, next) => {
     fetch(url)
     .then((x) => {
-        console.log(typeof(x) + " " + x);       // x is first a response.
-        y = x.json();
-        console.log(typeof(y) + " " + y);       // Now it is a promise after calling .json
-        return y;                               // We return that promise, and the next .then will handle it.
+        // console.log(x)
+        return x.json();        // This is a response that we got from the API. .json is turning it into a promise,
+                                // Which when passed into the next .then will be ersolved to an object.
     })
     .then((response) => {
-        console.log(typeof(response));          // Now this got the promise from y and turned it into an object.
-        console.log(response);          // This gets the json from the api and prints out the object in the vscode console.
-        res.send({ login: response.login });     // This line prints in response to a curl request in the console. (the actual call?)
+        // Reports is an object with key "reports" with a value of an array
+        reviews = response.reports;     // Get the array of reviews.
+        console.log(reviews.length);
+        randomReview = reviews[getRandomInt(0, reviews.length)]     // Get a random review from the review array.
+        console.log(randomReview);
+        res.send({ product: randomReview.product });     // send the product line
     });
 
     
