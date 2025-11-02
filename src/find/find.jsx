@@ -163,14 +163,17 @@ export function Find() {
             if (show == true) {     // Random food displays when show is false. So, only change it if show is true.
                 updateShow(!show);
             }
+
             console.log("ClickFood clicked");
             try {
-                const food = await getRandomFood()
-                updateRandomFood(food);      // Updates clickFood to a random food name string returned by getRandomFood
-                console.log("clickFood set to " + clickFood);
+                const food = await getRandomFood();     // This is returning an object from the promise from getRandomFood
+                console.log(food);
+                updateRandomFood(food.product);      // Updates clickFood to a random food name string returned by getRandomFood
             } catch (err) {
                 console.log(err);
             }
+    
+            console.log("clickFood set to " + clickFood);
         }
 
         return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Random Food</button>);
@@ -178,15 +181,16 @@ export function Find() {
 
     // MOCK FUNCTION. Gets a random food from an API and returns it as a string.
     async function getRandomFood() {
-        fetch("/api/randomFood")
-        .then((response) => response.json())
-        .then((food) => {
-            console.log(food);
-            console.log(food.product);
-            return new Promise((resolve) => {
-                resolve(food.product);
-            });
-        });
+        try {
+            const response = await fetch("/api/randomFood");
+            console.log("1 " + response);
+            const food = response.json();
+            console.log("2 " + food);
+            return food;       // get promise from this.
+        } catch (err) {
+            console.log(err);
+        }
+
     }
 
     // This function works to display the random food. We are using a function in case we want to add more functionality.
