@@ -4,6 +4,8 @@ import "./find.css"     // page css file.
 
 // import { RecipeOutput } from "./display-recipe";    // For whatever reason, this must be uppercase.
 
+// Contains the two potential api endpoint calls.
+
 let defaultClickRecipe = (
         <div>
             <h2>Simple Rice</h2>
@@ -32,16 +34,16 @@ let defaultClickRecipe = (
 // localStorage.setItem("tagDropdown", "COLD");
 
 let tags = ["HOT", "COLD", "BREAKFAST", "LUNCH", "DINNER"];
-let foods = ["Bread", "Pasta", "Fried Chicken", "Steak", "Salad"];
+// let foods = ["Bread", "Pasta", "Fried Chicken", "Steak", "Salad"];      // Mock function for demonstrating clickFood functionality.
 
 export function Find() {
     const [clickRecipe, updateRecipe] = React.useState(defaultClickRecipe);     // State for random recipe. clickRecipe contains recipe text.
-    const [clickFood, updateRandomFood] = React.useState(foods[0]);  // State for the random food. Default is bread.
+    const [clickFood, updateRandomFood] = React.useState("Chicken");  // State for the random food. Default is bread.
     const [username, updateUsername] = React.useState(1);       // State for notifications. username is a number standing in for a name that would be received by websocket.
     const [tag, updateTag] = React.useState(tags[0]);   // State for tags for notifications. tag is an element in the tags array.
     const [show, updateShow] = React.useState(true);    // State for controlling if recipe or food should be displayed.
 
-    printLocalStorage();
+    
 
     function printLocalStorage() {
         console.log("LOCAL STORAGE ---------------------------");
@@ -63,7 +65,7 @@ export function Find() {
             const intervalID = setInterval(() => {
                 updateUsername(Math.trunc(Math.random()*10));
                 updateTag(tags[Math.floor(Math.random() * (tags.length))]);        // get a random tag for display.
-                console.log(username);
+                // console.log(username);
             }, 10000);
 
             // console.log(random);
@@ -88,6 +90,7 @@ export function Find() {
             let tagValue = document.getElementById("tagDropdown").value;      // Get the current value of the tag.
             console.log(tagValue);
             // console.log(clickRecipe)
+            printLocalStorage();
             let newRecipe = getRecipe(tagValue);
             updateRecipe(newRecipe);      // Set updateRecipe to a recipe
             // console.log(clickRecipe);
@@ -156,25 +159,34 @@ export function Find() {
     function ClickFood() {
 
         // run when button is clicked.
-        function onClicked() {
+        async function onClicked() {
             if (show == true) {     // Random food displays when show is false. So, only change it if show is true.
                 updateShow(!show);
             }
             console.log("ClickFood clicked");
-            updateRandomFood(getRandomFood());      // Updates clickFood to a random food name string returned by getRandomFood
-            console.log("clickFood set to " + clickFood);
+            try {
+                const food = await getRandomFood()
+                updateRandomFood(food);      // Updates clickFood to a random food name string returned by getRandomFood
+                console.log("clickFood set to " + clickFood);
+            } catch (err) {
+                console.log(err);
+            }
         }
 
         return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Random Food</button>);
     }
 
     // MOCK FUNCTION. Gets a random food from an API and returns it as a string.
-    function getRandomFood() {
-        // This is a mock function that will return a random food from an API. This random food will be passed into 
-        // updateRandomFood. For now, I am just adding a random number generator to show it's basic funcitonality.
-
-        // Imagine this is returning a random food instead of a random number.
-        return foods[Math.floor(Math.random() * (foods.length))];
+    async function getRandomFood() {
+        fetch("/api/randomFood")
+        .then((response) => response.json())
+        .then((food) => {
+            console.log(food);
+            console.log(food.product);
+            return new Promise((resolve) => {
+                resolve(food.product);
+            });
+        });
     }
 
     // This function works to display the random food. We are using a function in case we want to add more functionality.
