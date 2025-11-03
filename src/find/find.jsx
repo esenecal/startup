@@ -83,7 +83,7 @@ export function Find() {
     // When the Find Recipe button, this updates clickRecipe to a recipe from getRecipe.
     function ClickRecipe() {
 
-        function onClicked() {
+        async function onClicked() {
             if (show == false) {     // Random food displays when show is false. So, only change it if show is true.
                 updateShow(!show);
             }
@@ -91,7 +91,7 @@ export function Find() {
             console.log(tagValue);
             // console.log(clickRecipe)
             printLocalStorage();
-            let newRecipe = getRecipe(tagValue);
+            let newRecipe = await getRecipe(tagValue);
             updateRecipe(newRecipe);      // Set updateRecipe to a recipe
             // console.log(clickRecipe);
         }
@@ -100,7 +100,7 @@ export function Find() {
     }
 
     // MOCK Function that gets recipes from database. Right now we are using localstorage.
-    function getRecipe(tagValue) {
+    async function getRecipe(tagValue) {
 
         // console.log(tagValue);
 
@@ -115,6 +115,14 @@ export function Find() {
         // console.log(recipeText);
         // console.log(tagValue);
         // console.log(recipeTag);
+
+        try {
+            const randomRecipe = await fetch("/api/getRandomRecipe");
+            console.log 
+        } catch (err) {
+            
+        }
+        
 
         let output;
         // Check for the tag. In this case, we are assuming we want to get a COLD recipe in the database, so the recipe
@@ -156,6 +164,7 @@ export function Find() {
     // FUNCTIONS FOR RANDOM FOOD
 
     // Function for the button for Random Food
+    // Clickfood updates every render as this is inside the render function, from what I can tell.
     function ClickFood() {
 
         // run when button is clicked.
@@ -164,29 +173,31 @@ export function Find() {
                 updateShow(!show);
             }
 
-            console.log("ClickFood clicked");
+            // console.log("ClickFood clicked");
             try {
-                const food = await getRandomFood();     // This is returning an object from the promise from getRandomFood
+                const food = await getRandomFood();     // This is resolving the promise from getRandomFood.
                 console.log(food);
                 updateRandomFood(food.product);      // Updates clickFood to a random food name string returned by getRandomFood
             } catch (err) {
                 console.log(err);
+            } finally {
+                console.log("DONE");
             }
-    
-            console.log("clickFood set to " + clickFood);
+            
         }
+        console.log("clickFood set to " + clickFood);
 
         return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Random Food</button>);
     }
 
-    // MOCK FUNCTION. Gets a random food from an API and returns it as a string.
+    // Gets a random food from an API and returns it as a string.
     async function getRandomFood() {
         try {
-            const response = await fetch("/api/randomFood");
-            console.log("1 " + response);
-            const food = response.json();
-            console.log("2 " + food);
-            return food;       // get promise from this.
+            const response = await fetch("/api/randomFood");        // Retrieve a response
+            // console.log("1 " + response);
+            const food = response.json();                           // Parse that response into a promise.
+            // console.log("2 " + food);
+            return food;                                            // Return the promise.
         } catch (err) {
             console.log(err);
         }

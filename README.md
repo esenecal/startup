@@ -139,7 +139,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Used express in service/index.js to 
 - [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
 - [x] **Calls to third party endpoints** - Call to the ```/api/v1/reports/?category=Running%20On%20Empty``` and ```/api/v1/reports/?category=Drink%20Review``` endpoints to get food data that will be sent to the frontend.
 - [ ] **Backend service endpoints** - I did not complete this part of the deliverable.

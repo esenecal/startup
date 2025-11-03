@@ -15,17 +15,25 @@ const urls = ["https://thereportoftheweekapi.com/api/v1/reports/?category=Runnin
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// NEXT: implement drink part of the api.
+// To complete:
+// endpoint for sending a recipe to a server. Includes recipe title, text, and tag.
+// endpoint for retrieving a recipe from a server, according to the tag. A lot of this will be handled when the database is made.
+// endpoint for creating a new user
+// endpoint for logging in.
 
-// These are food reviews. This is my idea:
-// On a call to the api, concatenate a random category. (running on empty or drink review.)
-// Then load up a list containing all of those objects, and then print one.
 
 // function to get a random int between min and max, including min but NOT including max.
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+// Endpoint to retrieve a recipe according to a tag.
+apiRouter.get('/getRandomRecipe', (req, res) => {
+    console.log("YAY");
+    res.send({ recipe: "RECIPE" });
+});
+
+// Called by frontend to access the Report of the Week API.
 apiRouter.get('/randomFood', (req, res) => {
     // Get a random url. This if statement is to even out the amount of calls (since drinks is smaller than running on empty)
     // So we tune how often we want one list to show up compared to the other.
@@ -35,7 +43,6 @@ apiRouter.get('/randomFood', (req, res) => {
     } else {
         randomURL = urls[0];
     }
-    
 
     fetch(randomURL)
     .then((x) => {
@@ -45,10 +52,10 @@ apiRouter.get('/randomFood', (req, res) => {
     })
     .then((response) => {
         // Reports is an object with key "reports" with a value of an array
-        console.log(response);          // The object with the array.
-        console.log(randomURL);         // Which endpoint was called
+        // console.log(response);          // The object with the array.
+        // console.log(randomURL);         // Which endpoint was called
         reviews = response.reports;     // Get the array of reviews.
-        console.log(reviews.length);    // Get the array length
+        // console.log(reviews.length);    // Get the array length
         randomReview = reviews[getRandomInt(0, reviews.length)]     // Get a random review from the review array.
         console.log(randomReview);
         
