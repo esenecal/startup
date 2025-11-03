@@ -1113,3 +1113,22 @@ async function foo() {
 ```
 
 This gives us more control. This one and the previous function are not identical--the promise's resolution is a bit different on execution. In order to get the resolve for the latter one, we would need to call await foo(). Thus, console.log(await foo()); would give us wow, but console.log(foo()) wouldn't--it would give us some pending promise stuff.
+
+
+
+
+For testing with the backend, you should run the index.js file (through node or vscode) and then also run npm run dev or test with curl. You are essentially running the backend simultaneously.
+
+
+  function onClicked() {
+    console.log("button")
+    fetch('/api/click', {
+      method: "post",     // You need to clarify what method it is.
+    }) 
+    .then(() => {
+      console.log("clicked 2");
+    });
+    console.log("end button");
+  }
+
+  clarify the method.
