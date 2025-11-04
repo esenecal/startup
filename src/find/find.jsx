@@ -6,6 +6,8 @@ import "./find.css"     // page css file.
 
 // Contains the two potential api endpoint calls.
 
+// refreshes because all the functions and whatnot are 
+
 let defaultClickRecipe = (
         <div>
             <h2>Simple Rice</h2>
@@ -89,17 +91,22 @@ export function Find() {
             }
             let tagValue = document.getElementById("tagDropdown").value;      // Get the current value of the tag.
             console.log(tagValue);
-            // console.log(clickRecipe)
-            printLocalStorage();
-            let newRecipe = await getRecipe(tagValue);
-            updateRecipe(newRecipe);      // Set updateRecipe to a recipe
-            // console.log(clickRecipe);
+            console.log(clickRecipe);
+
+            try {
+                const newRecipe = await getRecipe(tagValue);
+                console.log(newRecipe);
+                updateRecipe(newRecipe.recipe);      // Set updateRecipe to a recipe
+            } catch (err) {
+                console.log("Error: " + err);
+            }
+            
         }
 
         return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
     }
 
-    // MOCK Function that gets recipes from database. Right now we are using localstorage.
+    // Function that gets recipes from database. Right now we are using localstorage.
     async function getRecipe(tagValue) {
 
         // console.log(tagValue);
@@ -107,40 +114,43 @@ export function Find() {
         // Code to get a recipe with the correct tag using tagValue. Use an object! recipename: tag?
         // console.log(localStorage.getItem("a")); //
 
-        let recipeTitle = localStorage.getItem("recipeTitle");
-        let recipeText = localStorage.getItem("recipeText");
-        let recipeTag = localStorage.getItem("tagDropdown");
+        // let recipeTitle = localStorage.getItem("recipeTitle");
+        // let recipeText = localStorage.getItem("recipeText");
+        // let recipeTag = localStorage.getItem("tagDropdown");
 
         // console.log(recipeTitle);
         // console.log(recipeText);
         // console.log(tagValue);
         // console.log(recipeTag);
 
-        try {
-            const randomRecipe = await fetch("/api/getRandomRecipe");
-            console.log 
-        } catch (err) {
-            
-        }
+        // let output;
+        // // Check for the tag. In this case, we are assuming we want to get a COLD recipe in the database, so the recipe
+        // // will only display if a cold tag is selected, as that is what it will match.
+        // if (tagValue == recipeTag) {
+        //     output = (
+        //         <div>
+        //             <h2>{`${recipeTitle}`}</h2>
+        //             <blockquote>
+        //                 <p>{`${recipeText}`}</p>
+        //             </blockquote>
+        //         </div>
+        //     );
+        // } else {
+        //     output = (<div></div>);
+        // }
+
+        // return output
         
-
-        let output;
-        // Check for the tag. In this case, we are assuming we want to get a COLD recipe in the database, so the recipe
-        // will only display if a cold tag is selected, as that is what it will match.
-        if (tagValue == recipeTag) {
-            output = (
-                <div>
-                    <h2>{`${recipeTitle}`}</h2>
-                    <blockquote>
-                        <p>{`${recipeText}`}</p>
-                    </blockquote>
-                </div>
-            );
-        } else {
-            output = (<div></div>);
+        console.log("Getting Recipe");
+        try {
+            const response = await fetch("/api/getRandomRecipe");   // response
+            const randomRecipePromise = response.json()                          // promise
+            // console.log(randomRecipePromise);
+            return randomRecipePromise
+        } catch (err) {
+            console.log("Error: " + err);
         }
-
-        return output
+    
     }
 
 

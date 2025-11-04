@@ -29,7 +29,7 @@ function getRandomInt(min, max) {
 
 // Endpoint to retrieve a recipe according to a tag.
 apiRouter.get('/getRandomRecipe', (req, res) => {
-    console.log("YAY");
+    console.log("Request received");
     res.send({ recipe: "RECIPE" });
 });
 
