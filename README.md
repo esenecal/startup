@@ -142,7 +142,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Node.js/Express HTTP service** - Used express in service/index.js to 
 - [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
 - [x] **Calls to third party endpoints** - Call to the ```/api/v1/reports/?category=Running%20On%20Empty``` and ```/api/v1/reports/?category=Drink%20Review``` endpoints to get food data that will be sent to the frontend.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
+- [x] **Backend service endpoints** - Wrote endpoints for accessing an external API, getting a random recipe from the database (FINISH), 
 - [x] **Frontend calls service endpoints** - The Frontend element for Random Food makes a call to the Review of the Week API. Due to CORS issues, instead of doing a call directly from Frontend, I instead had Frontend make an API call to the backend express, which then handled the API call.
 - [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
 

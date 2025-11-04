@@ -94,9 +94,9 @@ export function Find() {
             console.log(clickRecipe);
 
             try {
-                const newRecipe = await getRecipe(tagValue);
+                const newRecipe = await getRecipe(tagValue);    // get recipe object
                 console.log(newRecipe);
-                updateRecipe(newRecipe.recipe);      // Set updateRecipe to a recipe
+                updateRecipe(newRecipe.title);      // Set updateRecipe to a recipe
             } catch (err) {
                 console.log("Error: " + err);
             }
@@ -108,38 +108,6 @@ export function Find() {
 
     // Function that gets recipes from database. Right now we are using localstorage.
     async function getRecipe(tagValue) {
-
-        // console.log(tagValue);
-
-        // Code to get a recipe with the correct tag using tagValue. Use an object! recipename: tag?
-        // console.log(localStorage.getItem("a")); //
-
-        // let recipeTitle = localStorage.getItem("recipeTitle");
-        // let recipeText = localStorage.getItem("recipeText");
-        // let recipeTag = localStorage.getItem("tagDropdown");
-
-        // console.log(recipeTitle);
-        // console.log(recipeText);
-        // console.log(tagValue);
-        // console.log(recipeTag);
-
-        // let output;
-        // // Check for the tag. In this case, we are assuming we want to get a COLD recipe in the database, so the recipe
-        // // will only display if a cold tag is selected, as that is what it will match.
-        // if (tagValue == recipeTag) {
-        //     output = (
-        //         <div>
-        //             <h2>{`${recipeTitle}`}</h2>
-        //             <blockquote>
-        //                 <p>{`${recipeText}`}</p>
-        //             </blockquote>
-        //         </div>
-        //     );
-        // } else {
-        //     output = (<div></div>);
-        // }
-
-        // return output
         
         console.log("Getting Recipe");
         try {
