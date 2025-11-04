@@ -8,9 +8,15 @@ import "./find.css"     // page css file.
 
 // refreshes because all the functions and whatnot are 
 
-let defaultClickRecipe = (
+const defaultClickRecipeTitle = {
+    title: "Simple Rice",
+    text: "Measure out rice (example: 1 cup). Add to pot. Wash rice thoroughly. Measure out twice as much water as rice (example: 2 cups). Add to pot. Bring to boil uncovered. Once boiling, cover and put on low heat. Cook until soft. Some experimentation needed. For an easier time, buy a rice cooker.",
+    tag: "HOT",
+}
+
+(
         <div>
-            <h2>Simple Rice</h2>
+            <h2></h2>
             <blockquote>
                 <p>Ingredients:</p>
                 <ul>
@@ -19,12 +25,7 @@ let defaultClickRecipe = (
                 </ul>
                 <p>Directions:</p>
                 <ol>
-                    <li>Measure out rice (example: 1 cup). Add to pot.</li>
-                    <li>Wash rice thoroughly.</li>
-                    <li>Measure out twice as much water as rice (example: 2 cups). Add to pot.</li>
-                    <li>Bring to boil uncovered. Once boiling, cover and put on low heat. Cook until soft.</li>
-                    <li>Some experimentation needed.</li>
-                    <li>For an easier time, buy a rice cooker.</li>
+                    <li></li>
                 </ol>
             </blockquote>
         </div>
@@ -39,7 +40,9 @@ let tags = ["HOT", "COLD", "BREAKFAST", "LUNCH", "DINNER"];
 // let foods = ["Bread", "Pasta", "Fried Chicken", "Steak", "Salad"];      // Mock function for demonstrating clickFood functionality.
 
 export function Find() {
-    const [clickRecipe, updateRecipe] = React.useState(defaultClickRecipe);     // State for random recipe. clickRecipe contains recipe text.
+    const [clickRecipeTitle, updateClickRecipeTitle] = React.useState(defaultClickRecipeTitle);     // State for recipe title. 
+    const [clickRecipeText, updateClickRecipeText] = React.useState();     // State for recipe text.
+    const [clickRecipeTag, updateClickRecipeTag] = React.useState();     // State for recipe tag.
     const [clickFood, updateRandomFood] = React.useState("Chicken");  // State for the random food. Default is bread.
     const [username, updateUsername] = React.useState(1);       // State for notifications. username is a number standing in for a name that would be received by websocket.
     const [tag, updateTag] = React.useState(tags[0]);   // State for tags for notifications. tag is an element in the tags array.
@@ -82,8 +85,8 @@ export function Find() {
 
     // FUNCTIONS FOR FIND RECIPE
 
-    // When the Find Recipe button, this updates clickRecipe to a recipe from getRecipe.
-    function ClickRecipe() {
+    // When the Find Recipe button, this updates clickRecipeTitle to a recipe from getRecipe.
+    function ClickRecipeTitle() {
 
         async function onClicked() {
             if (show == false) {     // Random food displays when show is false. So, only change it if show is true.
@@ -91,12 +94,13 @@ export function Find() {
             }
             let tagValue = document.getElementById("tagDropdown").value;      // Get the current value of the tag.
             console.log(tagValue);
-            console.log(clickRecipe);
+            console.log(clickRecipeTitle);
 
             try {
                 const newRecipe = await getRecipe(tagValue);    // get recipe object
                 console.log(newRecipe);
-                updateRecipe(newRecipe.title);      // Set updateRecipe to a recipe
+                updateClickRecipeTitle(newRecipe.title);      // Set updateClickRecipeTitle to a recipe
+                updateClickRecipeText(newRecipe.text)
             } catch (err) {
                 console.log("Error: " + err);
             }
@@ -122,13 +126,16 @@ export function Find() {
     }
 
 
-    // Displays clickRecipe
+    // Displays clickRecipeTitle
     function DisplayRecipe() {
 
         if (show) {
             return(
                 <div>
-                    {clickRecipe}
+                    <h2>{clickRecipeTitle}</h2>
+                    <blockquote>
+                        {clickRecipeText}
+                    </blockquote>
                 </div>
             );
         } else {
@@ -220,7 +227,7 @@ export function Find() {
                         <option>LUNCH</option>
                         <option>DINNER</option>
                     </select>
-                    <ClickRecipe />
+                    <ClickRecipeTitle />
                     <ClickFood />
                 </div>
                 
