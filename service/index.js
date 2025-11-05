@@ -21,7 +21,7 @@ app.use(`/api`, apiRouter);
 // endpoint for sending a recipe to a server. Includes recipe title, text, and tag.
         // Add functionality in frontend.
         // Add functionality that places recipe in correct "collection" according to tag.
-// endpoint for retrieving a recipe from a server, according to the tag. A lot of this will be handled when the database is made.
+// DONE: endpoint for retrieving a recipe from a server, according to the tag. A lot of this will be handled when the database is made.
         // Mostly done, but add functionality for tag.
         // Added functionality for tag. However, bug: if the tag doesn't exist in the
         // recipes array, then it will run forever.
@@ -58,18 +58,39 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-function sendRecipe(recipe) {
-    // add functionality to sort correct recipe.
-    // recipes.push(recipe);
+function sendRecipe(recipe) {   // recipe is a recipe object.
+    switch (recipe.tag) {     // Check the tag value and add to the corres. array.
+        case "HOT":
+            recipes_HOT.push(recipe);
+            console.log(recipes_HOT);
+            break;
+        case "COLD":
+            recipes_COLD.push(recipe);
+            console.log(recipes_COLD);
+            break;
+        case "BREAKFAST":
+            recipes_BREAKFAST.push(recipe);
+            console.log(recipes_BREAKFAST);
+            break;
+        case "LUNCH":
+            recipes_LUNCH.push(recipe);
+            console.log(recipes_LUNCH);
+            break;
+        case "DINNER":
+            recipes_DINNER.push(recipe);
+            console.log(recipes_DINNER);
+            break;
+        default:        // If there is no match, then say so.
+            console.log("NO VALID TAG");
+    }
 }
 
 // Endpoint to send a recipe to a server.
 apiRouter.post('/sendRecipe', (req, res) => {
     console.log("Sending Recipe");
     // console.log(req.body);
-    sendRecipe(req.body);
-    console.log(recipes);
-    res.send(req.body);
+    sendRecipe(req.body);       // Give the recipe object to sendRecipe. Place it in the correct collection.
+    res.send(req.body);         // Check if you need to do anything here to send this to a specific collection.
 });
 
 // Endpoint to retrieve a recipe according to a tag.
