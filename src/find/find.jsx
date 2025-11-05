@@ -81,7 +81,7 @@ export function Find() {
 
             try {
                 const newRecipe = await getRecipe(tagValue);    // get recipe object
-                console.log(newRecipe);
+                console.log(newRecipe);                       // This is a recipe object.
                 updateClickRecipeTitle(newRecipe.title);      // Set updateClickRecipeTitle to a recipe
                 updateClickRecipeText(newRecipe.text);
                 updateClickRecipeTag(newRecipe.tag);

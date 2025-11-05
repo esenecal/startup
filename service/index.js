@@ -20,6 +20,7 @@ app.use(`/api`, apiRouter);
 // To complete:
 // endpoint for sending a recipe to a server. Includes recipe title, text, and tag.
         // Add functionality in frontend.
+        // Add functionality that places recipe in correct "collection" according to tag.
 // endpoint for retrieving a recipe from a server, according to the tag. A lot of this will be handled when the database is made.
         // Mostly done, but add functionality for tag.
         // Added functionality for tag. However, bug: if the tag doesn't exist in the
@@ -30,9 +31,9 @@ app.use(`/api`, apiRouter);
 // endpoint for creating a new user
 // endpoint for logging in.
 
-// Mock database.
+// Mock database. Each type of tag has its own "collection". When entering
 // This may be changed, as also for now it stands in as our database mockup.
-let recipes = [
+let recipes_HOT = [
     {
         title: "Rice",
         text: "Boil the water!!",
@@ -42,13 +43,15 @@ let recipes = [
         title: "Goulash",
         text: "Boil Pasta",
         tag: "HOT"
-    },
-    {
+    }];
+let recipes_COLD = [{
         title: "Jello",
         text: "Boil some water and let it cool",
         tag: "COLD"
-    }
-];
+    }];
+let recipes_BREAKFAST = [];
+let recipes_LUNCH = [];
+let recipes_DINNER = [];
 
 // function to get a random int between min and max, including min but NOT including max.
 function getRandomInt(min, max) {
@@ -56,7 +59,8 @@ function getRandomInt(min, max) {
 }
 
 function sendRecipe(recipe) {
-    recipes.push(recipe);
+    // add functionality to sort correct recipe.
+    // recipes.push(recipe);
 }
 
 // Endpoint to send a recipe to a server.
@@ -72,10 +76,42 @@ apiRouter.post('/sendRecipe', (req, res) => {
 apiRouter.get('/getRandomRecipe/:id', (req, res) => {
     console.log("Request received");
     let tagValue = req.params.id;
-    do {        // Find a random recipe, and if the tag isn't what we were looking for, find another.
-        random = recipes[getRandomInt(0, recipes.length)]
-        console.log(tagValue + " " + random.tag);
-    } while(tagValue != random.tag);
+    let recipeArray;        // Where we will put the recipe "collection"
+    switch (tagValue) {     // Check the tag value and get the corres. collection.
+        case "HOT":
+            recipeArray = recipes_HOT;
+            break;
+        case "COLD":
+            recipeArray = recipes_COLD;
+            break;
+        case "BREAKFAST":
+            recipeArray = recipes_BREAKFAST;
+            break;
+        case "LUNCH":
+            recipeArray = recipes_LUNCH;
+            break;
+        case "DINNER":
+            recipeArray = recipes_DINNER;
+            break;
+        default:        // If there is no match, then say so.
+            console.log("NO VALID TAG");
+    }
+
+    // Check if it is empty.
+    if (recipeArray.length === 0) {
+        // Create a "recipe" that simply says we don't have any recipes of that type.
+        random = {
+            title: `No Recipe of type ${tagValue}`,
+            text: "Sorry!",
+            tag: null,
+        };
+    } else {
+        // Get a random recipe in the selected recipe collection.
+        random = recipeArray[getRandomInt(0, recipeArray.length)];
+    }
+    
+    console.log(tagValue + " " + random.tag);
+
     res.send(random);
 });
 
