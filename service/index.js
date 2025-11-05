@@ -22,6 +22,11 @@ app.use(`/api`, apiRouter);
         // Add functionality in frontend.
 // endpoint for retrieving a recipe from a server, according to the tag. A lot of this will be handled when the database is made.
         // Mostly done, but add functionality for tag.
+        // Added functionality for tag. However, bug: if the tag doesn't exist in the
+        // recipes array, then it will run forever.
+        // Maybe make multiple arrays, each for a different recipe tag type, to simulate
+        // having multiple collections. That way we just pull from that collection,
+        // and avoid this bug altogether.
 // endpoint for creating a new user
 // endpoint for logging in.
 
@@ -64,9 +69,13 @@ apiRouter.post('/sendRecipe', (req, res) => {
 });
 
 // Endpoint to retrieve a recipe according to a tag.
-apiRouter.get('/getRandomRecipe', (req, res) => {
+apiRouter.get('/getRandomRecipe/:id', (req, res) => {
     console.log("Request received");
-    random = recipes[getRandomInt(0, recipes.length)]
+    let tagValue = req.params.id;
+    do {        // Find a random recipe, and if the tag isn't what we were looking for, find another.
+        random = recipes[getRandomInt(0, recipes.length)]
+        console.log(tagValue + " " + random.tag);
+    } while(tagValue != random.tag);
     res.send(random);
 });
 

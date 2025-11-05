@@ -77,7 +77,7 @@ export function Find() {
             }
             let tagValue = document.getElementById("tagDropdown").value;      // Get the current value of the tag.
             console.log(tagValue);
-            console.log(clickRecipeTitle);
+            // console.log(clickRecipeTitle);
 
             try {
                 const newRecipe = await getRecipe(tagValue);    // get recipe object
@@ -99,9 +99,9 @@ export function Find() {
         
         console.log("Getting Recipe");
         try {
-            const response = await fetch("/api/getRandomRecipe");   // response
+            const response = await fetch(`/api/getRandomRecipe/${tagValue}`);   // response. Send with the tagValue
             const randomRecipePromise = response.json()                          // promise
-            // console.log(randomRecipePromise);
+            console.log(randomRecipePromise);
             return randomRecipePromise
         } catch (err) {
             console.log("Error: " + err);
