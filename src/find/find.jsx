@@ -8,28 +8,11 @@ import "./find.css"     // page css file.
 
 // refreshes because all the functions and whatnot are 
 
-const defaultClickRecipeTitle = {
+const defaultClickRecipe = {
     title: "Simple Rice",
     text: "Measure out rice (example: 1 cup). Add to pot. Wash rice thoroughly. Measure out twice as much water as rice (example: 2 cups). Add to pot. Bring to boil uncovered. Once boiling, cover and put on low heat. Cook until soft. Some experimentation needed. For an easier time, buy a rice cooker.",
-    tag: "HOT",
-}
-
-(
-        <div>
-            <h2></h2>
-            <blockquote>
-                <p>Ingredients:</p>
-                <ul>
-                    <li>Rice</li>
-                    <li>Water</li>
-                </ul>
-                <p>Directions:</p>
-                <ol>
-                    <li></li>
-                </ol>
-            </blockquote>
-        </div>
-    );
+    tag: "HOT"
+};
 
 // This is a some mock local storage for recipes.
 // localStorage.setItem("recipeTitle", "How to make...");
@@ -40,9 +23,9 @@ let tags = ["HOT", "COLD", "BREAKFAST", "LUNCH", "DINNER"];
 // let foods = ["Bread", "Pasta", "Fried Chicken", "Steak", "Salad"];      // Mock function for demonstrating clickFood functionality.
 
 export function Find() {
-    const [clickRecipeTitle, updateClickRecipeTitle] = React.useState(defaultClickRecipeTitle);     // State for recipe title. 
-    const [clickRecipeText, updateClickRecipeText] = React.useState();     // State for recipe text.
-    const [clickRecipeTag, updateClickRecipeTag] = React.useState();     // State for recipe tag.
+    const [clickRecipeTitle, updateClickRecipeTitle] = React.useState(defaultClickRecipe.title);     // State for recipe title. 
+    const [clickRecipeText, updateClickRecipeText] = React.useState(defaultClickRecipe.text);     // State for recipe text.
+    const [clickRecipeTag, updateClickRecipeTag] = React.useState(defaultClickRecipe.tag);     // State for recipe tag.
     const [clickFood, updateRandomFood] = React.useState("Chicken");  // State for the random food. Default is bread.
     const [username, updateUsername] = React.useState(1);       // State for notifications. username is a number standing in for a name that would be received by websocket.
     const [tag, updateTag] = React.useState(tags[0]);   // State for tags for notifications. tag is an element in the tags array.
@@ -100,7 +83,8 @@ export function Find() {
                 const newRecipe = await getRecipe(tagValue);    // get recipe object
                 console.log(newRecipe);
                 updateClickRecipeTitle(newRecipe.title);      // Set updateClickRecipeTitle to a recipe
-                updateClickRecipeText(newRecipe.text)
+                updateClickRecipeText(newRecipe.text);
+                updateClickRecipeTag(newRecipe.tag);
             } catch (err) {
                 console.log("Error: " + err);
             }

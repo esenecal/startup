@@ -28,7 +28,7 @@ app.use(`/api`, apiRouter);
 let recipe = {
     title: "Rice",
     text: "Boil the water!!",
-    tag: "HOT"  
+    tag: "HOT"
 }
 
 // function to get a random int between min and max, including min but NOT including max.
