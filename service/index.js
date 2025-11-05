@@ -22,14 +22,25 @@ app.use(`/api`, apiRouter);
 // endpoint for creating a new user
 // endpoint for logging in.
 
-// A intermediary variable, made up of the recipe's title, text, and tag.
-// Recipes, when sent and retrieved, are loaded here for simplicity.
+// Mock database.
 // This may be changed, as also for now it stands in as our database mockup.
-let recipe = {
-    title: "Rice",
-    text: "Boil the water!!",
-    tag: "HOT"
-}
+let recipes = [
+    {
+        title: "Rice",
+        text: "Boil the water!!",
+        tag: "HOT"
+    }, 
+    {
+        title: "Goulash",
+        text: "Boil Pasta",
+        tag: "HOT"
+    },
+    {
+        title: "Jello",
+        text: "Boil some water and let it cool",
+        tag: "COLD"
+    }
+];
 
 // function to get a random int between min and max, including min but NOT including max.
 function getRandomInt(min, max) {
@@ -45,7 +56,8 @@ apiRouter.post('/sendRecipe', (req, res) => {
 // Endpoint to retrieve a recipe according to a tag.
 apiRouter.get('/getRandomRecipe', (req, res) => {
     console.log("Request received");
-    res.send(recipe);
+    random = recipes[getRandomInt(0, recipes.length)]
+    res.send(random);
 });
 
 // Called by frontend to access the Report of the Week API.
