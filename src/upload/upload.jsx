@@ -19,12 +19,17 @@ export function Upload() {
     
     // State for handling the authentication message.
     const [userAuth, updateUserAuth] = React.useState(null);
+    const [email, setEmail] = React.useState('');       // State and state functions for login.
+    const [password, setPassword] = React.useState('');
+    const [userInfo, setUserInfo] = React.useState('');
+  
 
-    // In the case that we get the 
     function CreateID() {
-        function onClick() {
-            sendLoginData();
-            updateUserAuth(true);       // When we create an ID, we assume they are also signing in.
+        async function onClick() {
+            createAuth('POST');
+            const res = await fetch('api/user/me');
+            const data = await res.json();
+            setUserInfo(data);
         }
 
         return <button type="button" className="btn btn-secondary" onClick={onClick}>Create ID</button>
@@ -32,70 +37,49 @@ export function Upload() {
 
     function SubmitID() {
 
-        function onClick() {
-            verifyID(userAuth, updateUserAuth);
-            console.log(userAuth);
-            printLocalStorage();
-
+        async function onClick() {
+            createAuth('PUT');
+            const res = await fetch('api/user/me');
+            const data = await res.json();
+            setUserInfo(data);
         }
 
         return <button type="button" className="btn btn-primary" onClick={onClick}>Submit ID</button>;
 
     }
 
-    // This is a mock function for login services--this would be replaced by a system to check the login.
-    function verifyID() {
-        // Here, we have code that interacts with the server to ensure that we have a correct login.
-        // Here, what we will do is make sure that the user credentials submitted by SubmitID equal
-        // the credentials submitted by CreateID.
-        
-        // Since we are working with localStorage, the credentials will be overwritten everytime CreateID is clicked,
-        // But that is unfortunately the limitations of the mockup.
-
-        // Save submitted user information to temporary localStorage. Then check it with the localStorage created by 
-        // CreateID.
-        const form = document.getElementById("loginData");
-        const formData = new FormData(form);
-        let formValues = formData.entries();
-        // console.log(formValues);
-
-        for (let pair of formValues) {      // Write each of the key/value pairs to local storage WITH a -temp added to the key.
-            // console.log(pair[0] + " " + pair[1]);
-            localStorage.setItem(pair[0] + "-temp", pair[1]);
-        }
-
-        let tempUserID = localStorage.getItem("userID-temp");
-        let tempPassword = localStorage.getItem("password-temp");
-        let userID = localStorage.getItem("userID");
-        let password = localStorage.getItem("password");
-
-        // Update the state.
-        if (tempUserID == "" && tempPassword == "") {   // if the credentials are blank, even if they match, it's false. 
-            updateUserAuth(false);
-        } else if (tempUserID == userID && tempPassword == password) {
-            updateUserAuth(true);
+    // Function for creating authentication and logging in.
+    async function createAuth(method) {
+        const res = await fetch('api/auth', {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
+        await res.json();
+        if (res.ok) {
+            console.log("yay");
         } else {
-            updateUserAuth(false);
+        alert('Authentication failed');
         }
-        
     }
 
     function DisplayAuthMessage() {
-        console.log("updated");
-        console.log(userAuth);
 
-        // If it is updated and userAuth is changed, set the output to that.
-        // This gets the user
-        let userID = localStorage.getItem("userID");
-        // console.log(userID); 
+        function handleLogout() {
+            fetch('api/auth', {
+            method: 'DELETE',
+            });
+        }
         
-        if (userAuth == null) {        // At the start, this is blank.
+        if (userInfo === '') {        // At the start, this is blank.
             return <div></div>;
-        } else if (userAuth === true) {
-            return <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{`${userID}`}</strong>!</p>;
         } else {
-            return <p id="user-alert" className="form-control border-3 border-danger">Incorrect login</p>;
-        }  
+            return (
+                <div>
+                    <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{userInfo.email}</strong>!</p>
+                    <button type='button' onClick={handleLogout}>Logout</button>
+                </div>);
+        }
     }
 
     // Mock function for sending login data to the server.
@@ -153,15 +137,6 @@ export function Upload() {
 
     }
 
-    // function for checking what is in local storage. Debugging.
-    function printLocalStorage() {
-        console.log("LOCAL STORAGE ---------------------------");
-        for (let i = 0; i < localStorage.length; i++) {
-            console.log(localStorage.key(i) + ": " + localStorage.getItem(localStorage.key(i)));
-        }
-        console.log("-----------------------------------------");
-    }
-
     return(
         <div className="body">
 
@@ -182,12 +157,12 @@ export function Upload() {
 
                         <label htmlFor="userID">User ID</label> 
                         <div className="col-2">
-                            <input id="userID" className="form-control" type="text" name="userID" required/>
+                            <input id="userID" className="form-control" type="text" name="userID" onChange={(e) => setEmail(e.target.value)} required/>
                         </div>
 
                         <label htmlFor="password">&ensp;Password</label> 
                         <div className="col-2">
-                            <input id="password" className="form-control" type="password" name="password" required/>
+                            <input id="password" className="form-control" type="password" name="password" onChange={(e) => setPassword(e.target.value)} required/>
                         </div>
 
                         <SubmitID />
