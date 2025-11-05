@@ -117,7 +117,7 @@ export function Upload() {
 
     // This function gets the recipe title, recipe text, and tag and sends it to the database.
     // We will use local data for now.
-    function sendRecipeData() {
+    async function sendRecipeData() {
 
         if (!userAuth) {        // If the user has not logged in, then we will not send the recipe data.
             return;
@@ -126,16 +126,31 @@ export function Upload() {
         const form = document.getElementById("recipeData");
         const formData = new FormData(form);
         let formValues = formData.entries();
-        // console.log(formValues);
+        console.log(formValues);
         
-        for (let pair of formValues) {      // Write each of the key/value pairs to localStorage.
+        const infoArray = []
+        for (let pair of formValues) {      // Write each of the key/value pairs to an array
             console.log(pair[0] + " " + pair[1]);
-            localStorage.setItem(pair[0], pair[1]);
+            infoArray.push(pair[1]);
         }
+        console.log(infoArray);
 
-        // Now we write that object into localstorage, thus allowing us to access it.
-        // For this mockup, we are just going to use the title and the text of the recipe.
-        printLocalStorage();
+        // use the array to populate the recipe information.
+        const recipe = {
+            title: infoArray[0],
+            text: infoArray[1],
+            tag: infoArray[2],
+        }
+        console.log(recipe);
+        console.log(JSON.stringify(recipe));
+
+        // backend call to push to server.
+        await fetch('/api/sendRecipe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(recipe),
+        });
+
     }
 
     // function for checking what is in local storage. Debugging.

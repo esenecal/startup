@@ -9,6 +9,8 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 
+app.use(express.json());
+
 // Contains the two potential api endpoint calls.
 const urls = ["https://thereportoftheweekapi.com/api/v1/reports/?category=Running%20On%20Empty", "https://thereportoftheweekapi.com/api/v1/reports/?category=Drink%20Review"];
 
@@ -19,6 +21,7 @@ app.use(`/api`, apiRouter);
 // endpoint for sending a recipe to a server. Includes recipe title, text, and tag.
         // Add functionality in frontend.
 // endpoint for retrieving a recipe from a server, according to the tag. A lot of this will be handled when the database is made.
+        // Mostly done, but add functionality for tag.
 // endpoint for creating a new user
 // endpoint for logging in.
 
@@ -47,10 +50,17 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+function sendRecipe(recipe) {
+    recipes.push(recipe);
+}
+
 // Endpoint to send a recipe to a server.
 apiRouter.post('/sendRecipe', (req, res) => {
     console.log("Sending Recipe");
-    res.send(recipe);
+    // console.log(req.body);
+    sendRecipe(req.body);
+    console.log(recipes);
+    res.send(req.body);
 });
 
 // Endpoint to retrieve a recipe according to a tag.
