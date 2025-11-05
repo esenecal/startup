@@ -18,7 +18,7 @@ When they are logged in, then they can submit the page.
 export function Upload() {
     
     // State for handling the authentication message.
-    const [userAuth, updateUserAuth] = React.useState(null);
+    const [userAuth, updateUserAuth] = React.useState(false);
     const [email, setEmail] = React.useState('');       // State and state functions for login.
     const [password, setPassword] = React.useState('');
     const [userInfo, setUserInfo] = React.useState('');
@@ -48,6 +48,13 @@ export function Upload() {
 
     }
 
+    function handleLogout() {
+        updateUserAuth(false);
+        fetch('api/auth', {
+        method: 'DELETE',
+        });
+    }
+
     // Function for creating authentication and logging in.
     async function createAuth(method) {
         const res = await fetch('api/auth', {
@@ -57,6 +64,7 @@ export function Upload() {
         });
         await res.json();
         if (res.ok) {
+            updateUserAuth(true);
             console.log("yay");
         } else {
         alert('Authentication failed');
@@ -64,20 +72,13 @@ export function Upload() {
     }
 
     function DisplayAuthMessage() {
-
-        function handleLogout() {
-            fetch('api/auth', {
-            method: 'DELETE',
-            });
-        }
         
-        if (userInfo === '') {        // At the start, this is blank.
+        if (userAuth != true) {        // At the start, this is blank.
             return <div></div>;
         } else {
             return (
                 <div>
                     <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{userInfo.email}</strong>!</p>
-                    <button type='button' onClick={handleLogout}>Logout</button>
                 </div>);
         }
     }
@@ -104,6 +105,7 @@ export function Upload() {
     async function sendRecipeData() {
 
         if (!userAuth) {        // If the user has not logged in, then we will not send the recipe data.
+            alert("Please log in");
             return;
         }
 
@@ -203,6 +205,7 @@ export function Upload() {
                         {/* The clear button can remain--it does its job. */}
                         <button id="submitRecipeData" type="submit" className="btn btn-primary">Submit</button>
                         <button type="reset" className="btn btn-secondary">Clear</button>
+                        <button type='button' className="btn btn-secondary" onClick={handleLogout}>Logout</button>
                     </div>
                 </form>
             </main>

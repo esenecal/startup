@@ -263,9 +263,6 @@ apiRouter.get('/randomFood', (req, res) => {
 
 // ------------------------------------------------------------------------------------------------------------------
 
-
-
-
 app.listen(port, function () {                          // Tells us which port we are listening on.
     console.log(`Listening on port ${port}`);
 });
