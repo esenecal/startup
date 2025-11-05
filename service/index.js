@@ -6,8 +6,7 @@ const cookieParser = require('cookie-parser');      // Use cookieparser.
 const uuid = require('uuid');           
 const bcrypt = require('bcryptjs');     // Encrypting
 
-var apiRouter = express.Router();
-app.use(`/api`, apiRouter);
+
 
 // Some middleware
 app.use(cookieParser());
@@ -18,7 +17,8 @@ app.use(express.json());
 
 // Contains the two potential api endpoint calls.
 const urls = ["https://thereportoftheweekapi.com/api/v1/reports/?category=Running%20On%20Empty", "https://thereportoftheweekapi.com/api/v1/reports/?category=Drink%20Review"];
-
+var apiRouter = express.Router();
+app.use(`/api`, apiRouter);
 
 // To complete:
 // endpoint for creating a new user

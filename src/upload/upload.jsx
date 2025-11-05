@@ -25,11 +25,9 @@ export function Upload() {
   
 
     function CreateID() {
-        async function onClick() {
+        function onClick() {
             createAuth('POST');
-            const res = await fetch('api/user/me');
-            const data = await res.json();
-            setUserInfo(data);
+            
         }
 
         return <button type="button" className="btn btn-secondary" onClick={onClick}>Create ID</button>
@@ -39,9 +37,6 @@ export function Upload() {
 
         async function onClick() {
             createAuth('PUT');
-            const res = await fetch('api/user/me');
-            const data = await res.json();
-            setUserInfo(data);
         }
 
         return <button type="button" className="btn btn-primary" onClick={onClick}>Submit ID</button>;
@@ -76,6 +71,13 @@ export function Upload() {
         if (userAuth != true) {        // At the start, this is blank.
             return <div></div>;
         } else {
+            
+            (async () => {
+                const res = await fetch('api/user/me');
+                const data = await res.json();
+                setUserInfo(data);
+            });
+        
             return (
                 <div>
                     <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{userInfo.email}</strong>!</p>
