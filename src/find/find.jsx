@@ -69,7 +69,7 @@ export function Find() {
     // FUNCTIONS FOR FIND RECIPE
 
     // When the Find Recipe button, this updates clickRecipeTitle to a recipe from getRecipe.
-    function ClickRecipeTitle() {
+    function ClickRecipe() {
 
         async function onClicked() {
             if (show == false) {     // Random food displays when show is false. So, only change it if show is true.
@@ -211,7 +211,7 @@ export function Find() {
                         <option>LUNCH</option>
                         <option>DINNER</option>
                     </select>
-                    <ClickRecipeTitle />
+                    <ClickRecipe />
                     <ClickFood />
                 </div>
                 

@@ -18,7 +18,7 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // To complete:
-// endpoint for sending a recipe to a server. Includes recipe title, text, and tag.
+// DONE: endpoint for sending a recipe to a server. Includes recipe title, text, and tag.
         // Add functionality in frontend.
         // Add functionality that places recipe in correct "collection" according to tag.
 // DONE: endpoint for retrieving a recipe from a server, according to the tag. A lot of this will be handled when the database is made.
