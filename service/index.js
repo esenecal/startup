@@ -2,32 +2,21 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 const express = require('express');
 const app = express();
-
 const cookieParser = require('cookie-parser');      // Use cookieparser.
+const uuid = require('uuid');           
+const bcrypt = require('bcryptjs');     // Encrypting
 
+// Some middleware
 app.use(cookieParser());
-
 app.use(express.static('public'));
-
 app.use(express.json());
 
 // Contains the two potential api endpoint calls.
 const urls = ["https://thereportoftheweekapi.com/api/v1/reports/?category=Running%20On%20Empty", "https://thereportoftheweekapi.com/api/v1/reports/?category=Drink%20Review"];
-
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // To complete:
-// DONE: endpoint for sending a recipe to a server. Includes recipe title, text, and tag.
-        // Add functionality in frontend.
-        // Add functionality that places recipe in correct "collection" according to tag.
-// DONE: endpoint for retrieving a recipe from a server, according to the tag. A lot of this will be handled when the database is made.
-        // Mostly done, but add functionality for tag.
-        // Added functionality for tag. However, bug: if the tag doesn't exist in the
-        // recipes array, then it will run forever.
-        // Maybe make multiple arrays, each for a different recipe tag type, to simulate
-        // having multiple collections. That way we just pull from that collection,
-        // and avoid this bug altogether.
 // endpoint for creating a new user
 // endpoint for logging in.
 
@@ -52,6 +41,8 @@ let recipes_COLD = [{
 let recipes_BREAKFAST = [];
 let recipes_LUNCH = [];
 let recipes_DINNER = [];
+
+// ENDPOINTS FOR RECIPE SENDING AND FETCHING. ------------------------------------------------------------
 
 // function to get a random int between min and max, including min but NOT including max.
 function getRandomInt(min, max) {
@@ -166,6 +157,14 @@ apiRouter.get('/randomFood', (req, res) => {
     });
 
 });
+
+// ------------------------------------------------------------------------------------------------------------------
+
+
+// LOGIN ENDPOINTS
+
+
+
 
 
 app.listen(port, function () {                          // Tells us which port we are listening on.
