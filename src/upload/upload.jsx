@@ -167,7 +167,7 @@ export function Upload() {
 
                     {/* <!--This is example text for when they submit their user credentials, so they know they can proceed--> */}
                     
-                <form id="recipeData" onSubmit={sendRecipeData}>
+                <form id="recipeData" action={sendRecipeData}>
                     <div id="recipe-title-input" className="mb-3">
                         <label htmlFor="recipeTitle">Recipe Title&ensp;</label>
                         <div className="col-3">
