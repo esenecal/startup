@@ -62,7 +62,7 @@ export function Upload() {
             updateUserAuth(true);
             console.log("yay");
         } else {
-        alert('Authentication failed');
+            alert('Authentication failed');
         }
     }
 
@@ -105,11 +105,6 @@ export function Upload() {
     // This function gets the recipe title, recipe text, and tag and sends it to the database.
     // We will use local data for now.
     async function sendRecipeData() {
-
-        if (!userAuth) {        // If the user has not logged in, then we will not send the recipe data.
-            alert("Please log in");
-            return;
-        }
 
         const form = document.getElementById("recipeData");
         const formData = new FormData(form);

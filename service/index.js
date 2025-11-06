@@ -6,14 +6,12 @@ const cookieParser = require('cookie-parser');      // Use cookieparser.
 const uuid = require('uuid');           
 const bcrypt = require('bcryptjs');     // Encrypting
 
-
+const authCookieName = 'token';
 
 // Some middleware
 app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.json());
-
-
 
 // Contains the two potential api endpoint calls.
 const urls = ["https://thereportoftheweekapi.com/api/v1/reports/?category=Running%20On%20Empty", "https://thereportoftheweekapi.com/api/v1/reports/?category=Drink%20Review"];
@@ -61,38 +59,38 @@ app.use((req, res, next) => {
 
 // Create a user. Check to see if they exist, and if they do not, then create them.
 app.post('/api/auth', async (req, res) => {
-    console.log(req.body.email);
-    if (await getUser('email', req.body.email)) {
-        res.status(409).send({ msg: 'Existing user' });
-    } else {
-        const user = await createUser(req.body.email, req.body.password);
-        setAuthCookie(res, user);
+  if (await findUser('email', req.body.email)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await createUser(req.body.email, req.body.password);
 
-        res.send({ email: user.email });
-    }
+    setAuthCookie(res, user.token);
+    res.send({ email: user.email });
+  }
 });
 
 // logging in. Get the hashed password, compare it to provided password, then save authorization token in a cookie.
 app.put('/api/auth', async (req, res) => {
-    const user = await getUser('email', req.body.email);
-    if (user && (await bcrypt.compare(req.body.password, user.password))) {
-        setAuthCookie(res, user);
-
-        res.send({ email: user.email });
-    } else {
-        res.status(401).send({ msg: 'Unauthorized' });
+  const user = await findUser('email', req.body.email);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      user.token = uuid.v4();
+      setAuthCookie(res, user.token);
+      res.send({ email: user.email });
+      return;
     }
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
 });
 
 // Logout.
 app.delete('/api/auth', async (req, res) => {
-  const token = req.cookies['token'];
-  const user = await getUser('token', token);
+  const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
-    clearAuthCookie(res, user);
+    delete user.token;
   }
-
-  res.send({});
+  res.clearCookie(authCookieName);
+  res.status(204).end();
 });
 
 // Get.
@@ -109,16 +107,16 @@ app.get('/api/user/me', async (req, res) => {
 const users = [];
 
 async function createUser(email, password) {
-    const passwordHash = await bcrypt.hash(password, 10);
+  const passwordHash = await bcrypt.hash(password, 10);
 
-    const user = {
-        email: email,
-        password: passwordHash,
-    };
+  const user = {
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  users.push(user);
 
-    users.push(user);
-
-    return user;
+  return user;
 }
 
 function getUser(field, value) {
@@ -128,61 +126,23 @@ function getUser(field, value) {
     return null;
 }
 
-function setAuthCookie(res, user) {
-    user.token = uuid.v4();
-
-    res.cookie('token', user.token, {
-        secure: true,
-        httpOnly: true,
-        sameSite: 'strict',
-    });
-}
-
-function clearAuthCookie(res, user) {
-  delete user.token;
-  res.clearCookie('token');
-}
+const verifyAuth = async (req, res, next) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+};
 
 // -------------------------------------------------------------------------------------------------------
 
 // ENDPOINTS FOR RECIPE SENDING AND FETCHING. ------------------------------------------------------------
 
-// function to get a random int between min and max, including min but NOT including max.
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-function sendRecipe(recipe) {   // recipe is a recipe object.
-    switch (recipe.tag) {     // Check the tag value and add to the corres. array.
-        case "HOT":
-            recipes_HOT.push(recipe);
-            console.log(recipes_HOT);
-            break;
-        case "COLD":
-            recipes_COLD.push(recipe);
-            console.log(recipes_COLD);
-            break;
-        case "BREAKFAST":
-            recipes_BREAKFAST.push(recipe);
-            console.log(recipes_BREAKFAST);
-            break;
-        case "LUNCH":
-            recipes_LUNCH.push(recipe);
-            console.log(recipes_LUNCH);
-            break;
-        case "DINNER":
-            recipes_DINNER.push(recipe);
-            console.log(recipes_DINNER);
-            break;
-        default:        // If there is no match, then say so.
-            console.log("NO VALID TAG");
-    }
-}
-
 // Endpoint to send a recipe to a server.
-apiRouter.post('/sendRecipe', (req, res) => {
+apiRouter.post('/sendRecipe', verifyAuth, (req, res) => {
     console.log("Sending Recipe");
-    // console.log(req.body);
+    console.log(req.body);
     sendRecipe(req.body);       // Give the recipe object to sendRecipe. Place it in the correct collection.
     res.send(req.body);         // Check if you need to do anything here to send this to a specific collection.
 });
@@ -261,7 +221,55 @@ apiRouter.get('/randomFood', (req, res) => {
 
 });
 
+// function to get a random int between min and max, including min but NOT including max.
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+function sendRecipe(recipe) {   // recipe is a recipe object.
+    switch (recipe.tag) {     // Check the tag value and add to the corres. array.
+        case "HOT":
+            recipes_HOT.push(recipe);
+            console.log(recipes_HOT);
+            break;
+        case "COLD":
+            recipes_COLD.push(recipe);
+            console.log(recipes_COLD);
+            break;
+        case "BREAKFAST":
+            recipes_BREAKFAST.push(recipe);
+            console.log(recipes_BREAKFAST);
+            break;
+        case "LUNCH":
+            recipes_LUNCH.push(recipe);
+            console.log(recipes_LUNCH);
+            break;
+        case "DINNER":
+            recipes_DINNER.push(recipe);
+            console.log(recipes_DINNER);
+            break;
+        default:        // If there is no match, then say so.
+            console.log("NO VALID TAG");
+    }
+}
+
 // ------------------------------------------------------------------------------------------------------------------
+
+async function findUser(field, value) {
+  if (!value) return null;
+
+  return users.find((u) => u[field] === value);
+}
+
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
 
 app.listen(port, function () {                          // Tells us which port we are listening on.
     console.log(`Listening on port ${port}`);

@@ -144,7 +144,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Calls to third party endpoints** - Call to the ```/api/v1/reports/?category=Running%20On%20Empty``` and ```/api/v1/reports/?category=Drink%20Review``` endpoints to get food data that will be sent to the frontend.
 - [x] **Backend service endpoints** - Wrote endpoints for accessing an external API (get /randomFood), getting a random recipe from the database according to a tag (get /RandomRecipe/:id called from ClickRecipe), and pushing a random recipe to the database (post /sendRecipe called from sendRecipeData).
 - [x] **Frontend calls service endpoints** - The frontend element for Random Food makes a call to the Review of the Week API. Due to CORS issues, instead of doing a call directly from frontend to the API, I instead had frontend make an API call to the backend, which then handled the API call. In find.jsx, the frontend element of ClickRecipe, when clicked, calls getRecipe, which makes a service endpoint call at GET /getRandomRecipe/:id.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Supports registration, login, logout, and restricted endpoint** - This was completed. I added this functionality, and recipes cannot be sent without being logged in. Used cookies to restrict endpoint.
 
 
 ## 🚀 DB deliverable
