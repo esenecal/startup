@@ -2,34 +2,29 @@ import React from "react";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing bootstrap components.
 import "./upload.css"; // page css file
 
-// localStorage.clear();   
-
-/* Some things to change:
-    Change the main header so that it has one picture. Place the page buttons on this header, so that this will not change.
-
-    Then, for a smaller header, you can use the smaller title that describes the page.
-*/
-
-/*
-Basic flow of use:
-A user logs in. They cannot submit the page unless they are authorized (userAuth is true).
-When they are logged in, then they can submit the page.
- */
 export function Upload() {
     
     // State for handling the authentication message.
     const [email, setEmail] = React.useState('');       // State and state functions for login.
     const [password, setPassword] = React.useState('');
-    const [userInfo, setUserInfo] = React.useState('');
+    const [userInfo, setUserInfo] = React.useState(false);
 
-    // UNAUTHORIZED is a protected email value.
+    // React.useEffect(() => {
+    //     (async () => {
+    //     const res = await fetch('api/user/me');
+    //     const data = await res.json();
+    //     setUserInfo(data);
+    //     })();
+    // }, []);
+
     function CreateID() {
         function onClick() {
-            if(email === '' && password === '' || email === "UNAUTHORIZED"){
+            if(email === '' || password === '') {
                 alert("Please enter valid credentials.");
                 return;
+            } else {
+                createAuth('POST');
             }
-            createAuth('POST');
             
         }
 
@@ -39,7 +34,13 @@ export function Upload() {
     function SubmitID() {
 
         async function onClick() {
-            createAuth('PUT');
+            if(email === '' || password === ''){
+                alert("Please enter valid credentials.");
+                return;
+            } else {
+                createAuth('PUT');
+            }
+            
         }
 
         return <button type="button" className="btn btn-primary" onClick={onClick}>Submit ID</button>;
@@ -47,8 +48,9 @@ export function Upload() {
     }
 
     function handleLogout() {
+        setUserInfo(false);
         fetch('api/auth', {
-        method: 'DELETE',
+            method: 'DELETE',
         });
     }
 
@@ -61,8 +63,8 @@ export function Upload() {
         });
         await res.json();
         if (res.ok) {
-
             console.log("yay");
+            setUserInfo(email);
         } else {
             alert('Authentication failed');
         }
@@ -70,23 +72,25 @@ export function Upload() {
 
     function DisplayAuthMessage() {
 
-        React.useEffect(() => {
-            (async () => {
-            const res = await fetch('api/user/me');
-            const data = await res.json();
-            setUserInfo(data);
-            })();
-        }, []);
+        // React.useEffect(() => {
+        //     (async () => {
+        //     const res = await fetch('api/user/me');
+        //     const data = await res.json();
+        //     setUserInfo(data);
+        //     })();
+        // }, []);
         
         // If the get gets the unauthorized value, this is a set value that means
         // That the user have not been authenticated, and they should not be notified of a 
         // login.
-        if (userInfo.email === "UNAUTHORIZED") {        // At the start, this is blank.
+
+        if (!userInfo) {        // At the start, this is blank.
             return <div></div>;
         } else {
+
             return (
                 <div>
-                    <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{userInfo.email}</strong>!</p>
+                    <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{userInfo}</strong>!</p>
                 </div>
             );
         }
@@ -132,7 +136,7 @@ export function Upload() {
 
                 <div id="header-text">
                     <h3>Upload Recipe</h3>
-                    <p>Upload your favorite recipe below!</p>
+                    <p>Upload your favorite recipe below! You will remain logged in until you click Logout, even if you navigate to another page.</p>
                 </div>
 
             </header>
@@ -163,7 +167,7 @@ export function Upload() {
 
                     {/* <!--This is example text for when they submit their user credentials, so they know they can proceed--> */}
                     
-                <form id="recipeData" action={sendRecipeData}>
+                <form id="recipeData" onSubmit={sendRecipeData}>
                     <div id="recipe-title-input" className="mb-3">
                         <label htmlFor="recipeTitle">Recipe Title&ensp;</label>
                         <div className="col-3">

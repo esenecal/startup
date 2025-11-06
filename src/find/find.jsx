@@ -196,7 +196,7 @@ export function Find() {
             <header>
                 <div id="header-text">
                     <h3>Find</h3>
-                    <p>Select a tag to randomly search by or a random food</p>
+                    <p>Select a tag to randomly search by or a random food.</p>
                 </div>
             </header>
 
