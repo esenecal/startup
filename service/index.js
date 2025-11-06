@@ -47,13 +47,13 @@ let recipes_DINNER = [];
 
 // ENDPOINTS FOR LOGIN. ---------------------------------------------------------------------------------
 
-// Login middleware
+// Debugging middleware.
 app.use((req, res, next) => {
-  console.log("----------");
-  console.log(req.method);
-  console.log(req.originalUrl);
-  console.log(req.body);
-  console.log(users);
+//   console.log("----------");
+//   console.log(req.method);
+//   console.log(req.originalUrl);
+//   console.log(req.body);
+//   console.log(users);
   next();
 });
 
@@ -100,7 +100,8 @@ app.get('/api/user/me', async (req, res) => {
   if (user) {
     res.send({ email: user.email });
   } else {
-    res.status(401).send({ msg: 'Unauthorized' });
+    res.send({ email: "UNAUTHORIZED" } )
+    // res.status(401).send({ msg: 'Unauthorized' });
   }
 });
 

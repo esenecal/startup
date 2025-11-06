@@ -18,14 +18,17 @@ When they are logged in, then they can submit the page.
 export function Upload() {
     
     // State for handling the authentication message.
-    const [userAuth, updateUserAuth] = React.useState(false);
     const [email, setEmail] = React.useState('');       // State and state functions for login.
     const [password, setPassword] = React.useState('');
     const [userInfo, setUserInfo] = React.useState('');
-  
 
+    // UNAUTHORIZED is a protected email value.
     function CreateID() {
         function onClick() {
+            if(email === '' && password === '' || email === "UNAUTHORIZED"){
+                alert("Please enter valid credentials.");
+                return;
+            }
             createAuth('POST');
             
         }
@@ -44,7 +47,6 @@ export function Upload() {
     }
 
     function handleLogout() {
-        updateUserAuth(false);
         fetch('api/auth', {
         method: 'DELETE',
         });
@@ -59,7 +61,7 @@ export function Upload() {
         });
         await res.json();
         if (res.ok) {
-            updateUserAuth(true);
+
             console.log("yay");
         } else {
             alert('Authentication failed');
@@ -67,38 +69,26 @@ export function Upload() {
     }
 
     function DisplayAuthMessage() {
+
+        React.useEffect(() => {
+            (async () => {
+            const res = await fetch('api/user/me');
+            const data = await res.json();
+            setUserInfo(data);
+            })();
+        }, []);
         
-        if (userAuth != true) {        // At the start, this is blank.
+        // If the get gets the unauthorized value, this is a set value that means
+        // That the user have not been authenticated, and they should not be notified of a 
+        // login.
+        if (userInfo.email === "UNAUTHORIZED") {        // At the start, this is blank.
             return <div></div>;
         } else {
-            
-            (async () => {
-                const res = await fetch('api/user/me');
-                const data = await res.json();
-                setUserInfo(data);
-            });
-        
             return (
                 <div>
                     <p id="user-alert" className="form-control border-3 border-success">ID submitted! Welcome <strong>{userInfo.email}</strong>!</p>
-                </div>);
-        }
-    }
-
-    // Mock function for sending login data to the server.
-    // Write now, we are just writing each value to a key that describes it. Of course, this means we only get
-    // One set of data, but this is good enough for our mockup.
-    function sendLoginData() {
-        const form = document.getElementById("loginData");
-        const formData = new FormData(form);
-        let formValues = formData.entries();
-        console.log(formValues);
-
-        // console.log(formValues);
-        for (let pair of formValues) {      // Write each of the key/value pairs to localStorage
-
-            // console.log(pair[0] + " " + pair[1]);
-            localStorage.setItem(pair[0], pair[1]);
+                </div>
+            );
         }
     }
 
@@ -133,7 +123,6 @@ export function Upload() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(recipe),
         });
-
     }
 
     return(
