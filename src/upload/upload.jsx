@@ -136,7 +136,7 @@ export function Upload() {
 
                 <div id="header-text">
                     <h3>Upload Recipe</h3>
-                    <p>Upload your favorite recipe below! You will remain logged in until you click Logout, even if you navigate to another page.</p>
+                    <p>Upload recipes below! You will remain logged in and able to submit recipes until you click Logout, even if you navigate to another page.</p>
                 </div>
 
             </header>

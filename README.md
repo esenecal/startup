@@ -140,12 +140,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **Node.js/Express HTTP service** - Used express in service/index.js to set up the express HTTP service.
-- [x] **Static middleware for frontend** - set up ```app.use(express.static('public'))```
-- [x] **Calls to third party endpoints** - Call to the ```/api/v1/reports/?category=Running%20On%20Empty``` and ```/api/v1/reports/?category=Drink%20Review``` endpoints to get food data that will be sent to the frontend.
-- [x] **Backend service endpoints** - Wrote endpoints for accessing an external API (get /randomFood), getting a random recipe from the database according to a tag (get /RandomRecipe/:id called from ClickRecipe), and pushing a random recipe to the database (post /sendRecipe called from sendRecipeData).
-- [x] **Frontend calls service endpoints** - The frontend element for Random Food makes a call to the Review of the Week API. Due to CORS issues, instead of doing a call directly from frontend to the API, I instead had frontend make an API call to the backend, which then handled the API call. In find.jsx, the frontend element of ClickRecipe, when clicked, calls getRecipe, which makes a service endpoint call at GET /getRandomRecipe/:id.
-- [x] **Supports registration, login, logout, and restricted endpoint** - This was completed. I added this functionality, and recipes cannot be sent without being logged in. Used cookies to restrict endpoint. The cookies also allow you to remain logged in.
-
+- [x] **Static middleware for frontend** - set up ```app.use(express.static('public'))```. Not really a need to serve up anything from public.
+- [x] **Calls to third party endpoints** - Call to the ```/api/v1/reports/?category=Running%20On%20Empty``` and ```/api/v1/reports/?category=Drink%20Review``` endpoints of the Report of the Week API to get food data that would be sent to the frontend.
+- [x] **Backend service endpoints** - Wrote endpoints for accessing an external API (get /randomFood), getting a random recipe from the database according to a tag (get /RandomRecipe/:id called from ClickRecipe), and pushing a random recipe to the database (post /sendRecipe called from sendRecipeData). There are also service endpoints for creating a userID, logging in, logging out, and getting user information (this one was unused).
+- [x] **Frontend calls service endpoints** - The frontend element for Random Food makes a call to the Review of the Week API. Due to CORS issues, instead of doing a call directly from frontend to the API, I instead had frontend make an API call to the backend, which then handled the API call. In find.jsx, the frontend element of ClickRecipe, when clicked, calls getRecipe, which makes a service endpoint call at GET /getRandomRecipe/:id. In upload.jsx, the components responsible for creating an ID, submitting an ID, logging out, and sending a recipe call service endpoints on the backend corresponding with their functionality. All these calls use fetch.
+- [x] **Supports registration, login, logout, and restricted endpoint** - This was completed. Registration, login, and logout functionality exists and use cookies. Recipes cannot be sent without being logged in through authentication, thus restricting the /sendRecipe endpoint.
 
 ## 🚀 DB deliverable
 
