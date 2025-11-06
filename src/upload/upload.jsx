@@ -25,7 +25,7 @@ export function Upload() {
     // UNAUTHORIZED is a protected email value.
     function CreateID() {
         function onClick() {
-            if(email === '' && password === '' || email === "UNAUTHORIZED"){
+            if((email === '' && password === '') || email === "UNAUTHORIZED"){
                 alert("Please enter valid credentials.");
                 return;
             }
@@ -61,7 +61,6 @@ export function Upload() {
         });
         await res.json();
         if (res.ok) {
-
             console.log("yay");
         } else {
             alert('Authentication failed');
