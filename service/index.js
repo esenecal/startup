@@ -151,12 +151,12 @@ apiRouter.post('/sendRecipe', verifyAuth, async (req, res) => {
 // Endpoint to retrieve a recipe according to a tag.
 apiRouter.get('/getRandomRecipe/:id', async (req, res) => {
     console.log("Request received");
-    let tagValue = req.params.id;
-    randomRecipe = await DB.getRecipe(tagValue); 
-    console.log(randomRecipe);
+    let tagValue = req.params.id;   // Get the tag value.
+    randomRecipe = await DB.getRecipe(tagValue);    // Get a random recipe from the database by this database.js call.
+    console.log(randomRecipe);    // debugging--print the received recipe and check that the tags are the same.
     console.log(tagValue + " " + randomRecipe.tag);
 
-    res.send(randomRecipe);
+    res.send(randomRecipe); // Send it.
 });
 
 // Called by frontend to access the Report of the Week API.

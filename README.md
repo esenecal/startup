@@ -150,7 +150,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** - Done. In ```database.js```, I added the addRecipe function that will take a recipe and, according to the recipe tag, place it in a MongoDB collection associated with that tag. This function was then called at the POST /sendRecipe endpoint. I also wrote the getRecipe function that will select a random recipe from a collection according to the selected tag. This is called by the GET /getRandomRecipe/:id endpoint, which then sends the result to the frontend.
 - [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
 
 ## 🚀 WebSocket deliverable
