@@ -5,6 +5,7 @@ const app = express();
 const cookieParser = require('cookie-parser');      // Use cookieparser.
 const uuid = require('uuid');           
 const bcrypt = require('bcryptjs');     // Encrypting
+const DB = require('./database.js');
 
 const authCookieName = 'token';
 
@@ -143,7 +144,7 @@ const verifyAuth = async (req, res, next) => {
 apiRouter.post('/sendRecipe', verifyAuth, (req, res) => {
     console.log("Sending Recipe");
     console.log(req.body);
-    sendRecipe(req.body);       // Give the recipe object to sendRecipe. Place it in the correct collection.
+    DB.addRecipe(req.body);       // Give the recipe object to sendRecipe. Place it in the correct collection.
     res.send(req.body);         // Check if you need to do anything here to send this to a specific collection.
 });
 
@@ -152,7 +153,7 @@ apiRouter.get('/getRandomRecipe/:id', (req, res) => {
     console.log("Request received");
     let tagValue = req.params.id;
 
-    
+
     let recipeArray;        // Where we will put the recipe "collection"
     switch (tagValue) {     // Check the tag value and get the corres. collection.
         case "HOT":

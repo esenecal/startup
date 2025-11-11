@@ -32,8 +32,6 @@ A recipe object:
   try {
     await db.command({ ping: 1 });
     console.log(`Connect to database`);
-    // Clear the clickCollection collection.
-    clickCollection.deleteMany();
   } catch (ex) {
     console.log(`Unable to connect to database with ${url} because ${ex.message}`);
     process.exit(1);
