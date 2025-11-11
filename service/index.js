@@ -151,6 +151,8 @@ apiRouter.post('/sendRecipe', verifyAuth, (req, res) => {
 apiRouter.get('/getRandomRecipe/:id', (req, res) => {
     console.log("Request received");
     let tagValue = req.params.id;
+
+    
     let recipeArray;        // Where we will put the recipe "collection"
     switch (tagValue) {     // Check the tag value and get the corres. collection.
         case "HOT":

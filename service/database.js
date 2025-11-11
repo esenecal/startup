@@ -64,6 +64,51 @@ async function addRecipe(recipe) {
     }
 }
 
-async function getRecipe() {
+// return a promise--the current implementation we have in find expects a promise.
+async function getRecipe(tag) {       // tag is the selected tag value.
+    let recipeCollection;
 
+    // Assign recipeCollection to a specific collection depending on tag.
+    switch (tag) {
+        case "HOT":
+            recipeCollection = hotRecipes;
+            break;
+        case "COLD":
+            recipeCollection = coldRecipes;
+            break;
+        case "BREAKFAST":
+            recipeCollection = breakfastRecipes;
+            break;
+        case "LUNCH":
+            recipeCollection = lunchRecipes;
+            break;
+        case "DINNER":
+            recipeCollection = dinnerRecipes;
+            break;
+        default:        // If there is no match, then say so.
+            console.log("NOT VALID TAG");
+    }
+
+    // Check if the current collection is empty.
+    if (await recipeCollection.countDocuments() === 0) {
+         // Create a "recipe" that simply says we don't have any recipes of that type.
+        random = [{
+            title: `No Recipe of type ${tagValue}`,
+            text: "Sorry!",
+            tag: null,
+        }];
+    } else {
+        // Get a random recipe in the selected recipe collection.
+        random = await recipeCollection.aggregate({ $sample: {size: 1 }}).toArray()
+    }
+
+    console.log(random);
+
+    return random[0]
+
+}
+
+module.exports = {
+    addRecipe,
+    getRecipe,
 }
