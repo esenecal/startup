@@ -91,18 +91,18 @@ async function getRecipe(tag) {       // tag is the selected tag value.
     if (await recipeCollection.countDocuments() === 0) {
          // Create a "recipe" that simply says we don't have any recipes of that type.
         random = [{
-            title: `No Recipe of type ${tagValue}`,
+            title: `No Recipe of type ${tag}`,
             text: "Sorry!",
             tag: null,
         }];
     } else {
-        // Get a random recipe in the selected recipe collection.
+        // Get a random recipe in the selected recipe collection. This uses the aggregate function to get one from the database and place it in an array.
         random = await recipeCollection.aggregate([{ $sample: {size: 1 }}]).toArray()
     }
 
-    console.log(random);
+    console.log("Database call: " + random);
 
-    return random[0]
+    return random[0];       // Return the recipe. This will be returned as a pending promise.
 
 }
 

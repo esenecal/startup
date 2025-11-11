@@ -152,43 +152,7 @@ apiRouter.post('/sendRecipe', verifyAuth, async (req, res) => {
 apiRouter.get('/getRandomRecipe/:id', async (req, res) => {
     console.log("Request received");
     let tagValue = req.params.id;
-
-    randomRecipe = await DB.getRecipe(tagValue);
-
-    // let recipeArray;        // Where we will put the recipe "collection"
-    // switch (tagValue) {     // Check the tag value and get the corres. collection.
-    //     case "HOT":
-    //         recipeArray = recipes_HOT;
-    //         break;
-    //     case "COLD":
-    //         recipeArray = recipes_COLD;
-    //         break;
-    //     case "BREAKFAST":
-    //         recipeArray = recipes_BREAKFAST;
-    //         break;
-    //     case "LUNCH":
-    //         recipeArray = recipes_LUNCH;
-    //         break;
-    //     case "DINNER":
-    //         recipeArray = recipes_DINNER;
-    //         break;
-    //     default:        // If there is no match, then say so.
-    //         console.log("NO VALID TAG");
-    // }
-
-    // // Check if it is empty.
-    // if (recipeArray.length === 0) {
-    //     // Create a "recipe" that simply says we don't have any recipes of that type.
-    //     random = {
-    //         title: `No Recipe of type ${tagValue}`,
-    //         text: "Sorry!",
-    //         tag: null,
-    //     };
-    // } else {
-    //     // Get a random recipe in the selected recipe collection.
-    //     random = recipeArray[getRandomInt(0, recipeArray.length)];
-    // }
-    
+    randomRecipe = await DB.getRecipe(tagValue); 
     console.log(randomRecipe);
     console.log(tagValue + " " + randomRecipe.tag);
 
@@ -230,35 +194,6 @@ apiRouter.get('/randomFood', (req, res) => {
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
-
-/* DEPRECATED Old function for using arrays as a database.
-function sendRecipe(recipe) {   // recipe is a recipe object.
-    switch (recipe.tag) {     // Check the tag value and add to the corres. array.
-        case "HOT":
-            recipes_HOT.push(recipe);
-            console.log(recipes_HOT);
-            break;
-        case "COLD":
-            recipes_COLD.push(recipe);
-            console.log(recipes_COLD);
-            break;
-        case "BREAKFAST":
-            recipes_BREAKFAST.push(recipe);
-            console.log(recipes_BREAKFAST);
-            break;
-        case "LUNCH":
-            recipes_LUNCH.push(recipe);
-            console.log(recipes_LUNCH);
-            break;
-        case "DINNER":
-            recipes_DINNER.push(recipe);
-            console.log(recipes_DINNER);
-            break;
-        default:        // If there is no match, then say so.
-            console.log("NO VALID TAG");
-    }
-}
-*/
 
 // ------------------------------------------------------------------------------------------------------------------
 
