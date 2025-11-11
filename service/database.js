@@ -97,7 +97,7 @@ async function getRecipe(tag) {       // tag is the selected tag value.
         }];
     } else {
         // Get a random recipe in the selected recipe collection.
-        random = await recipeCollection.aggregate({ $sample: {size: 1 }}).toArray()
+        random = await recipeCollection.aggregate([{ $sample: {size: 1 }}]).toArray()
     }
 
     console.log(random);
