@@ -4,6 +4,9 @@
 
 Domain name: hstart260.click
 
+to add:
+- http requests (and how to implement)
+
 ## Helpful links
 
 - [Course instruction](https://github.com/webprogramming260)
@@ -49,6 +52,7 @@ Domain name: hstart260.click
   - [Functions](#functions)
   - [Object and Classes](#objects-and-classes)
   - [Promises and Async](#promises-and-async)
+- [Database](#database)
 
 ## Git and Github
 
@@ -1114,6 +1118,50 @@ async function foo() {
 
 This gives us more control. This one and the previous function are not identical--the promise's resolution is a bit different on execution. In order to get the resolve for the latter one, we would need to call await foo(). Thus, console.log(await foo()); would give us wow, but console.log(foo()) wouldn't--it would give us some pending promise stuff.
 
+## Database
+
+We are using MongoDB, which is a database made up of collection. Each collection contains JSON documents. So think of a collection as an array of Javascript objects, each with a unique ID assigned.
+
+In order to use MongoDB, we need to put credentials in our code. Place these credentials (the hostname, username, and password) in a ```dbConfig.json``` file, and add it to gitignore.
+
+To use MongoDB, make sure you:
+
+1. install MongoDB to your application.
+```bash
+npm init -y
+npm install mongodb
+```
+
+2. Import your credentials and use the MongoDBClient 
+
+example:
+
+```js
+const { MongoClient } = require('mongodb'); // require mongodb
+const config = require('./dbConfig.json');  // import dbConfig
+
+// The url of our server, with our credentials
+const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+
+// get client
+const client = new MongoClient(url);
+const db = client.db('rental');   // create a new database of the name db
+const collection = db.collection('house');  // create a new collection in that database named house.
+```
+
+3. This code checks your connection to the database
+```js
+async function main() {
+  try {
+    // Test that you can connect to the database
+    await db.command({ ping: 1 });
+    console.log(`DB connected to ${config.hostname}`);
+  } catch (ex) {
+    console.log(`Connection failed to ${url} because ${ex.message}`);
+    process.exit(1);
+  }
+}
+```
 
 
 
