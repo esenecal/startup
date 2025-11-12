@@ -6,6 +6,9 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);    // get client.
 const db = client.db("recipes")    // recipe databases
 
+// Collection for users
+const userCollection = db.collection("users");
+
 // Collections for different types of recipes.
 const hotRecipes = db.collection("HOT");
 const coldRecipes = db.collection("COLD ");
@@ -23,9 +26,9 @@ A recipe object:
 */
 
 // to complete:
-// write out functions for adding and getting recipes
 // replace backend functions with database ones.
 // Set up user database
+// make sure code is in place for checking if a user already exists.
 
 // Test the connection.
 (async function testConnection() {
@@ -37,6 +40,25 @@ A recipe object:
     process.exit(1);
   }
 })();
+
+// get an email/user from the database
+function getUser(email) {
+    return userCollection.findOne({ email: email });
+}
+
+// get a user from the database with their token.
+function getUserByToken(token) {
+    return userCollection.findOne({ token: token });
+}
+
+// add a user to the database.
+async function addUser(user) {
+    await userCollection.insertOne(user);
+}
+
+async function updateUser(user) {
+    await userCollection.updateOne({ email: user.email }, { $set: user });
+}
 
 // Check to see if you should use await or return.
 // Add a recipe to the proper database
@@ -109,4 +131,8 @@ async function getRecipe(tag) {       // tag is the selected tag value.
 module.exports = {
     addRecipe,
     getRecipe,
+    getUser,
+    getUserByToken,
+    addUser,
+    updateUser,
 }
