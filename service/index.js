@@ -19,32 +19,6 @@ const urls = ["https://thereportoftheweekapi.com/api/v1/reports/?category=Runnin
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// To complete:
-// endpoint for creating a new user
-// endpoint for logging in.
-
-// Mock database. Each type of tag has its own "collection". When entering
-// This may be changed, as also for now it stands in as our database mockup.
-let recipes_HOT = [
-    {
-        title: "Rice",
-        text: "Boil the water!!",
-        tag: "HOT"
-    }, 
-    {
-        title: "Goulash",
-        text: "Boil Pasta",
-        tag: "HOT"
-    }];
-let recipes_COLD = [{
-        title: "Jello",
-        text: "Boil some water and let it cool",
-        tag: "COLD"
-    }];
-let recipes_BREAKFAST = [];
-let recipes_LUNCH = [];
-let recipes_DINNER = [];
-
 
 // ENDPOINTS FOR LOGIN. ---------------------------------------------------------------------------------
 
@@ -54,7 +28,6 @@ app.use((req, res, next) => {
   console.log(req.method);
   console.log(req.originalUrl);
   // console.log(req.body);
-  console.log(users);
   next();
 });
 
@@ -106,8 +79,6 @@ app.get('/api/user/me', async (req, res) => {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
-
-const users = [];
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
@@ -191,12 +162,6 @@ function getRandomInt(min, max) {
 }
 
 // ------------------------------------------------------------------------------------------------------------------
-
-// async function findUser(field, value) {
-//   if (!value) return null;
-
-//   return users.find((u) => u[field] === value);
-// }
 
 async function findUser(field, value) {
   if (!value) return null;

@@ -25,11 +25,6 @@ A recipe object:
 }
 */
 
-// to complete:
-// replace backend functions with database ones.
-// Set up user database
-// make sure code is in place for checking if a user already exists.
-
 // Test the connection.
 (async function testConnection() {
   try {

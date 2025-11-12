@@ -1165,6 +1165,7 @@ async function main() {
 
 
 
+
 For testing with the backend, you should run the index.js file (through node or vscode) and then also run npm run dev or test with curl. You are essentially running the backend simultaneously.
 
 
