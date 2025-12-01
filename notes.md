@@ -53,6 +53,7 @@ to add:
   - [Object and Classes](#objects-and-classes)
   - [Promises and Async](#promises-and-async)
 - [Database](#database)
+- [Packages](#packages)
 
 ## Git and Github
 
@@ -1181,3 +1182,11 @@ For testing with the backend, you should run the index.js file (through node or 
   }
 
   clarify the method.
+
+## Packages
+You have a lot of packages to install:
+
+```bash
+npm init -y
+npm install express cookie-parser bcryptjs uuid mongodb ws
+```
