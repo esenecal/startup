@@ -2,11 +2,10 @@ import React from "react";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing bootstrap components.
 import "./find.css"     // page css file.
 
+
 // import { RecipeOutput } from "./display-recipe";    // For whatever reason, this must be uppercase.
 
 // Contains the two potential api endpoint calls.
-
-// refreshes because all the functions and whatnot are 
 
 const defaultClickRecipe = {
     title: "Simple Rice",
@@ -22,7 +21,7 @@ const defaultClickRecipe = {
 let tags = ["HOT", "COLD", "BREAKFAST", "LUNCH", "DINNER"];
 // let foods = ["Bread", "Pasta", "Fried Chicken", "Steak", "Salad"];      // Mock function for demonstrating clickFood functionality.
 
-export function Find() {
+export function Find({ webSocket }) {
     const [clickRecipeTitle, updateClickRecipeTitle] = React.useState(defaultClickRecipe.title);     // State for recipe title. 
     const [clickRecipeText, updateClickRecipeText] = React.useState(defaultClickRecipe.text);     // State for recipe text.
     const [clickRecipeTag, updateClickRecipeTag] = React.useState(defaultClickRecipe.tag);     // State for recipe tag.
@@ -62,9 +61,9 @@ export function Find() {
             
     }, [username]);
 
-    function UserNotification() {
-        return <p id="user-notification" className="form-control border-3 border-success"> User {`${username}`} just uploaded a {`${tag}`} recipe!</p>;
-    }
+    // function UserNotification() {
+    //     return <p id="user-notification" className="form-control border-3 border-success"> User {`${username}`} just uploaded a {`${tag}`} recipe!</p>;
+    // }
 
     // FUNCTIONS FOR FIND RECIPE
 
@@ -229,7 +228,7 @@ export function Find() {
                     {/* <!--Notification Alert. Ideally, this will be off to the side, so CSS will be needed to place this in the correct place.-->
                     <!--Sample Notification alert.--> */}
 
-                    <UserNotification />
+                    <UserNotification webSocket={webSocket}/>
 
                 </div>
 
@@ -237,4 +236,63 @@ export function Find() {
 
         </div>
     );
+}
+
+function UserNotification({ webSocket }) {
+    // notification will contain an object with the user's name and the recipe tag.
+    const [notification, updateNotification] = React.useState([]);
+
+    // Update on change.
+    React.useEffect(() => {
+
+    }, [webSocket]);
+
+    return <p id="user-notification" className="form-control border-3 border-success"> User {`${username}`} just uploaded a {`${tag}`} recipe!</p>;
+}
+
+// Manage websocket. Send the "messages" which will be the username and the tag of the recipe uploaded.
+class notificationClient {
+    observers = [];     // Observers are objects with an event type, username of the person who submitted the recipe, and the tag.
+    connected = false;
+
+    constructor() {
+        // Adjust websocket protocol for connection protocol.
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        
+        this.socket.onopen = (event) => {
+            // We verify the connection by putting it into observers.
+            this.notifyObservers('system', 'websocket', 'connected');
+            this.connected = true;
+        };
+
+        // display
+        this.socket.onmessage = async (event) => {
+            const text = await event.data.text();
+            const notify = JSON.parse(text);
+            this.notifyObservers('received', notify.newUploadUser, notify.tag);
+        };
+
+        // close.
+        this.socket.onclose = (event) => {
+            this.notifyObservers('system', 'websocket', 'disconnected');
+            this.connected = false;
+        }
+
+    }
+
+    uploadNotification(newUploadUser, tag) {
+        this.notifyObservers('sent', newUploadUser, tag);
+        this.socket.send(JSON.stringify({ newUploadUser, tag }));
+    }
+
+    // Add an observer to the observer array.
+    addObserver(observer) {
+        this.observers.push(observer);
+    }
+
+    // username for the name, tag for the recipe tag.
+    notifyObservers(event, username, tag) {
+        this.observers.forEach((h) => h({ event, username, tag }));
+    }
 }
