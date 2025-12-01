@@ -240,14 +240,19 @@ export function Find({ webSocket }) {
 
 function UserNotification({ webSocket }) {
     // notification will contain an object with the user's name and the recipe tag.
+    // See addObserver in the websocket client class.
     const [notification, updateNotification] = React.useState([]);
 
     // Update on change.
     React.useEffect(() => {
-
+        // We replace whatever the prior notification was with this new one.
+        webSocket.addObserver((notif) => {
+            updateNotification(notif);
+        });
     }, [webSocket]);
 
-    return <p id="user-notification" className="form-control border-3 border-success"> User {`${username}`} just uploaded a {`${tag}`} recipe!</p>;
+    // Now for rendering this thing
+    return <p id="user-notification" className="form-control border-3 border-success"> User {`${notification.username}`} just uploaded a {`${notification.tag}`} recipe!</p>;
 }
 
 // Manage websocket. Send the "messages" which will be the username and the tag of the recipe uploaded.
