@@ -33,7 +33,7 @@ export default function App() {
                 </header>
             
                 <Routes>
-                    <Route path="/" element={<Upload />} />
+                    <Route path="/" element={<Upload webSocket={new notificationClient()}/>} />
                     <Route path="/find" element={<Find webSocket={new notificationClient()}/>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>

@@ -2,7 +2,7 @@ import React from "react";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing bootstrap components.
 import "./upload.css"; // page css file
 
-export function Upload() {
+export function Upload({ webSocket }) {
     
     // State for handling the authentication message.
     const [email, setEmail] = React.useState('');       // State and state functions for login.
@@ -96,6 +96,11 @@ export function Upload() {
         }
     }
 
+     // Function for sending information to websocket. Called when form is submitted.
+    function sendNotification(username, tag) {
+        webSocket.uploadNotification(username, tag);
+    }
+
     // This function gets the recipe title, recipe text, and tag and sends it to the database.
     // We will use local data for now.
     async function sendRecipeData() {
@@ -120,6 +125,9 @@ export function Upload() {
         }
         console.log(recipe);
         console.log(JSON.stringify(recipe));
+
+        // sends the notification to the websocket.
+        sendNotification(email, recipe.tag);
 
         // backend call to push to server.
         await fetch('/api/sendRecipe', {
