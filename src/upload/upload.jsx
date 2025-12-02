@@ -127,6 +127,7 @@ export function Upload({ webSocket }) {
         console.log(JSON.stringify(recipe));
 
         // sends the notification to the websocket.
+        console.log("Sending ")
         sendNotification(email, recipe.tag);
 
         // backend call to push to server.

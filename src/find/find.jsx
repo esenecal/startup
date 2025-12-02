@@ -246,6 +246,7 @@ function UserNotification({ webSocket }) {
     // Update on change.
     React.useEffect(() => {
         // We replace whatever the prior notification was with this new one.
+        console.log("A");
         webSocket.addObserver((notif) => {
             updateNotification(notif);
         });

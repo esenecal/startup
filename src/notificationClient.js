@@ -31,17 +31,20 @@ class notificationClient {
     }
 
     uploadNotification(newUploadUser, tag) {
+        console.log("uploading " + newUploadUser + " " + tag);
         this.notifyObservers('sent', newUploadUser, tag);
         this.socket.send(JSON.stringify({ newUploadUser, tag }));
     }
 
     // Add an observer to the observer array.
     addObserver(observer) {
+        console.log("Added Observer: " + observer);
         this.observers.push(observer);
     }
 
     // username for the name, tag for the recipe tag.
     notifyObservers(event, username, tag) {
+        console.log("notifyObservers running");
         this.observers.forEach((h) => h({ event, username, tag }));
     }
 }

@@ -1,11 +1,14 @@
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
+const { WebSocketServer } = require('ws');  // websocket.
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');      // Use cookieparser.
 const uuid = require('uuid');           
 const bcrypt = require('bcryptjs');     // Encrypting
 const DB = require('./database.js');
+
+
 
 const authCookieName = 'token';
 
@@ -156,10 +159,39 @@ apiRouter.get('/randomFood', (req, res) => {
 
 });
 
+// Create websocket object
+const socketServer = new WebSocketServer({ server });
+
+socketServer.on('connection', (socket) => {
+  socket.isAlive = true;
+
+  // send notification to all clients.
+  socket.on('notification', function notification(data) {
+    si
+  });
+
+  // Respond to the ping by setting the socket as alive.
+  socket.on('pong', () => {
+    socket.isAlive = true;
+  });
+});
+
+
+// Check connection by sending out pings
+setInterval(() => {
+  socketServer.clients.forEach(function each(client) {
+    if (client.isAlive === false) return client.terminate();
+
+    client.isAlive = false;
+    client.ping();
+  });
+});
+
 // function to get a random int between min and max, including min but NOT including max.
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
+
 
 // ------------------------------------------------------------------------------------------------------------------
 
