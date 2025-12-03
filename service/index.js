@@ -22,7 +22,7 @@ app.use(`/api`, apiRouter);
 
 // server for websocket
 server = app.listen(port, () => {
-  console.log(`Listening on ${port}`);
+  console.log(`Websocket listening on ${port}`);
 });
 
 
@@ -174,6 +174,7 @@ socketServer.on('connection', (socket) => {
   socket.on('notification', function notification(data) {
     socketServer.clients.forEach(function each(client) {
       if (client !== socket && client.readyState === WebSocket.OPEN) {
+        console.log("WS: Sending from backend");
         client.send(data);
       }
     });
@@ -181,6 +182,7 @@ socketServer.on('connection', (socket) => {
 
   // Respond to the ping by setting the socket as alive.
   socket.on('pong', () => {
+    console.log("client alive");
     socket.isAlive = true;
   });
 
@@ -189,13 +191,13 @@ socketServer.on('connection', (socket) => {
 
 // Check connection by sending out pings
 setInterval(() => {
+  console.log("checking ws connection");
   socketServer.clients.forEach(function each(client) {
     if (client.isAlive === false) return client.terminate();
-
     client.isAlive = false;
     client.ping();
   });
-});
+}, 10000);
 
 // ------------------------------------------------------------------------------------
 

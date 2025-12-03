@@ -153,7 +153,7 @@ export function Find({ webSocket }) {
             }
             
         }
-        console.log("clickFood set to " + clickFood);
+        // console.log("clickFood set to " + clickFood);
 
         return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Random Food</button>);
     }
@@ -246,7 +246,7 @@ function UserNotification({ webSocket }) {
     // Update on change.
     React.useEffect(() => {
         // We replace whatever the prior notification was with this new one.
-        console.log("A");
+        console.log("Updated " + username + " " + tag);
         webSocket.addObserver((notif) => {
             updateNotification(notif);
         });

@@ -63,7 +63,7 @@ export function Upload({ webSocket }) {
         });
         await res.json();
         if (res.ok) {
-            console.log("yay");
+            console.log("Logged in");
             setUserInfo(email);
         } else {
             alert('Authentication failed');
@@ -98,6 +98,7 @@ export function Upload({ webSocket }) {
 
      // Function for sending information to websocket. Called when form is submitted.
     function sendNotification(username, tag) {
+        console.log("uploadNotification " + username + " " + tag);
         webSocket.uploadNotification(username, tag);
     }
 
@@ -108,14 +109,14 @@ export function Upload({ webSocket }) {
         const form = document.getElementById("recipeData");
         const formData = new FormData(form);
         let formValues = formData.entries();
-        console.log(formValues);
+        // console.log(formValues);
         
         const infoArray = []
         for (let pair of formValues) {      // Write each of the key/value pairs to an array
-            console.log(pair[0] + " " + pair[1]);
+            // console.log(pair[0] + " " + pair[1]);
             infoArray.push(pair[1]);
         }
-        console.log(infoArray);
+        // console.log(infoArray);
 
         // use the array to populate the recipe information.
         const recipe = {
@@ -124,7 +125,7 @@ export function Upload({ webSocket }) {
             tag: infoArray[2],
         }
         console.log(recipe);
-        console.log(JSON.stringify(recipe));
+        // console.log(JSON.stringify(recipe));
 
         // sends the notification to the websocket.
         console.log("Sending ")

@@ -8,10 +8,12 @@ import { Find } from "./find/find";
 import { Upload } from "./upload/upload";
 import { notificationClient } from "./notificationClient";
 
+const myClient = new notificationClient();
 
 // Note that placing the className "body" was required, and changing app.css to accomodate it.
 // Make sure only App is listed as default.
 export default function App() {
+
     return (
         <BrowserRouter>
             <div className="body">
@@ -33,8 +35,8 @@ export default function App() {
                 </header>
             
                 <Routes>
-                    <Route path="/" element={<Upload webSocket={new notificationClient()}/>} />
-                    <Route path="/find" element={<Find webSocket={new notificationClient()}/>} />
+                    <Route path="/" element={<Upload webSocket={myClient}/>} />
+                    <Route path="/find" element={<Find webSocket={myClient}/>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
 

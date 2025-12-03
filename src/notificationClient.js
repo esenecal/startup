@@ -8,6 +8,7 @@ class notificationClient {
         // Adjust websocket protocol for connection protocol.
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
         this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        console.log("notificationClient opened " + this.socket);
         
         this.socket.onopen = (event) => {
             // We verify the connection by putting it into observers.
@@ -17,6 +18,7 @@ class notificationClient {
 
         // display
         this.socket.onmessage = async (event) => {
+            console.log("socket.onmessage");
             const text = await event.data.text();
             const notify = JSON.parse(text);
             this.notifyObservers('received', notify.newUploadUser, notify.tag);
@@ -31,7 +33,7 @@ class notificationClient {
     }
 
     uploadNotification(newUploadUser, tag) {
-        console.log("uploading " + newUploadUser + " " + tag);
+        console.log("Uploading " + newUploadUser + " " + tag);
         this.notifyObservers('sent', newUploadUser, tag);
         this.socket.send(JSON.stringify({ newUploadUser, tag }));
     }
