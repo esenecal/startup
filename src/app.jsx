@@ -8,9 +8,12 @@ import { Find } from "./find/find";
 import { Upload } from "./upload/upload";
 
 
+
+
 // Note that placing the className "body" was required, and changing app.css to accomodate it.
 // Make sure only App is listed as default.
-export default function App() {
+export default function App({ webSocket }) {
+
     return (
         <BrowserRouter>
             <div className="body">
@@ -32,8 +35,8 @@ export default function App() {
                 </header>
             
                 <Routes>
-                    <Route path="/" element={<Upload />} />
-                    <Route path="/find" element={<Find />} />
+                    <Route path="/" element={<Upload webSocket={webSocket}/>} />
+                    <Route path="/find" element={<Find webSocket={webSocket}/>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
 
