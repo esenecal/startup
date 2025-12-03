@@ -27,40 +27,7 @@ export function Find({ webSocket }) {
     const [clickRecipeText, updateClickRecipeText] = React.useState(defaultClickRecipe.text);     // State for recipe text.
     const [clickRecipeTag, updateClickRecipeTag] = React.useState(defaultClickRecipe.tag);     // State for recipe tag.
     const [clickFood, updateRandomFood] = React.useState("Chicken");  // State for the random food. Default is bread.
-    const [username, updateUsername] = React.useState(1);       // State for notifications. username is a number standing in for a name that would be received by websocket.
-    const [tag, updateTag] = React.useState(tags[0]);   // State for tags for notifications. tag is an element in the tags array.
     const [show, updateShow] = React.useState(true);    // State for controlling if recipe or food should be displayed.
-
-    
-
-    function printLocalStorage() {
-        console.log("LOCAL STORAGE ---------------------------");
-        for (let i = 0; i < localStorage.length; i++) {
-            console.log(localStorage.key(i) + ": " + localStorage.getItem(localStorage.key(i)));
-        }
-        console.log("-----------------------------------------");
-    }
-
-    // What is happening here:
-    // React us running on render. It says hey, run this interval. The interval runs the update funciton which 
-    // updates username. useEffect says, wait a minute, username was updated! So it runs again.
-    // Essentially, we are getting useEffect to run itself by having it update the very variable that it
-    // is waiting to be updated.
-    React.useEffect(() => {
-
-        // This is the MOCK server pull. Obviously, when actually implemented, actual usernames will be given.
-        // The random number generator is just to show that this is actually being updated.
-            const intervalID = setInterval(() => {
-                updateUsername(Math.trunc(Math.random()*10));
-                updateTag(tags[Math.floor(Math.random() * (tags.length))]);        // get a random tag for display.
-                // console.log(username);
-            }, 10000);
-
-            // console.log(random);
-
-            return () => clearInterval(intervalID);
-            
-    }, [username]);
 
     // FUNCTIONS FOR FIND RECIPE
 
@@ -90,7 +57,7 @@ export function Find({ webSocket }) {
         return(<button type="button" className="btn btn-secondary" onClick={onClicked}>Find Recipe</button>);
     }
 
-    // Function that gets recipes from database. Right now we are using localstorage.
+    // Function that gets recipes from database.
     async function getRecipe(tagValue) {
         
         console.log("Getting Recipe");
@@ -257,6 +224,5 @@ function UserNotification({ webSocket }) {
         // Notif is getting the fields from notifyObservers, where username = user and tag = t.
         return <p id="user-notification" className="form-control border-3 border-success"> {`${notif.user}`} uploaded a {`${notif.t}`} recipe!</p>;
     }
-
-    
+   
 }
