@@ -67,14 +67,6 @@ export function Upload({ webSocket }) {
     }
 
     function DisplayAuthMessage() {
-
-        // React.useEffect(() => {
-        //     (async () => {
-        //     const res = await fetch('api/user/me');
-        //     const data = await res.json();
-        //     setUserInfo(data);
-        //     })();
-        // }, []);
         
         // If the get gets the unauthorized value, this is a set value that means
         // That the user have not been authenticated, and they should not be notified of a 
