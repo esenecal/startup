@@ -247,5 +247,7 @@ function UserNotification({ webSocket }) {
     }, [webSocket]);
 
     console.log(notif);
+
+    // Notif is getting the fields from notifyObservers, where username = user and tag = t.
     return <p id="user-notification" className="form-control border-3 border-success"> User {`${notif.user}`} just uploaded a {`${notif.t}`} recipe!</p>;
 }
