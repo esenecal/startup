@@ -249,9 +249,10 @@ function UserNotification({ webSocket }) {
     console.log(notif);
 
     if (notif === null) {
-        return <p></p>;
+        return <p id="user-notification"></p>;
     } else if (notif.user === 'websocket' && notif.t === 'connected') {
-        return <p></p>;
+        return <p id="user-notification"></p>;
+        // return <p id="user-notification" className="form-control border-3 border-success"> {`${notif.user}`} uploaded a {`${notif.t}`} recipe!</p>;
     } else {
         // Notif is getting the fields from notifyObservers, where username = user and tag = t.
         return <p id="user-notification" className="form-control border-3 border-success"> {`${notif.user}`} uploaded a {`${notif.t}`} recipe!</p>;

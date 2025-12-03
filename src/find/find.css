@@ -26,9 +26,11 @@ main {
 }
 
 #recipe-output {
-    flex: 0 0 75vh;
+    flex: 1 1;
+    margin-right: 10px;
 }
 
 #user-notification {
-    flex: 0 0 25vh;
+    flex: 0 1 25vw;
+    justify-content: end;
 }
