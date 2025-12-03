@@ -156,7 +156,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 ## 🚀 WebSocket deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
+TO DO: clean up the notification render so it doesn't just say undefined, and comment my code better.
 - [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
 - [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
 - [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
