@@ -46,7 +46,7 @@ class notificationClient {
 
     // username for the name, tag for the recipe tag.
     notifyObservers(event, username, tag) {
-        console.log("notifyObservers running");
+        console.log("notified observers " + username + " " + tag);
         this.observers.forEach((h) => h({ event, username, tag }));
     }
 }

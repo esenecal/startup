@@ -25,6 +25,45 @@ server = app.listen(port, () => {
   console.log(`Websocket listening on ${port}`);
 });
 
+// WEBSOCKET ------------------------------------------------------------------------------
+
+// Create websocket object
+const socketServer = new WebSocketServer({ server });
+
+socketServer.on('connection', (socket) => {
+  socket.isAlive = true;
+
+  // send notification to all clients.
+  socket.on('notification', function notification(data) {
+    socketServer.clients.forEach(function each(client) {
+      if (client !== socket && client.readyState === WebSocket.OPEN) {
+        console.log("WS: Sending from backend");
+        client.send(data);
+      }
+    });
+  });
+
+  // Respond to the ping by setting the socket as alive.
+  socket.on('pong', () => {
+    // console.log("client alive");
+    socket.isAlive = true;
+  });
+
+});
+
+
+// Check connection by sending out pings
+setInterval(() => {
+  // console.log("checking ws connection");
+  socketServer.clients.forEach(function each(client) {
+    if (client.isAlive === false) return client.terminate();
+    client.isAlive = false;
+    client.ping();
+  });
+}, 10000);
+
+// ------------------------------------------------------------------------------------
+
 
 // ENDPOINTS FOR LOGIN. ---------------------------------------------------------------------------------
 
@@ -162,44 +201,7 @@ apiRouter.get('/randomFood', (req, res) => {
 
 });
 
-// WEBSOCKET ------------------------------------------------------------------------------
 
-// Create websocket object
-const socketServer = new WebSocketServer({ server });
-
-socketServer.on('connection', (socket) => {
-  socket.isAlive = true;
-
-  // send notification to all clients.
-  socket.on('notification', function notification(data) {
-    socketServer.clients.forEach(function each(client) {
-      if (client !== socket && client.readyState === WebSocket.OPEN) {
-        console.log("WS: Sending from backend");
-        client.send(data);
-      }
-    });
-  });
-
-  // Respond to the ping by setting the socket as alive.
-  socket.on('pong', () => {
-    console.log("client alive");
-    socket.isAlive = true;
-  });
-
-});
-
-
-// Check connection by sending out pings
-setInterval(() => {
-  console.log("checking ws connection");
-  socketServer.clients.forEach(function each(client) {
-    if (client.isAlive === false) return client.terminate();
-    client.isAlive = false;
-    client.ping();
-  });
-}, 10000);
-
-// ------------------------------------------------------------------------------------
 
 // function to get a random int between min and max, including min but NOT including max.
 function getRandomInt(min, max) {

@@ -6,13 +6,13 @@ import "./app.css";   // The local css file.
 import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
 import { Find } from "./find/find";
 import { Upload } from "./upload/upload";
-import { notificationClient } from "./notificationClient";
 
-const myClient = new notificationClient();
+
+
 
 // Note that placing the className "body" was required, and changing app.css to accomodate it.
 // Make sure only App is listed as default.
-export default function App() {
+export default function App({ webSocket }) {
 
     return (
         <BrowserRouter>
@@ -35,8 +35,8 @@ export default function App() {
                 </header>
             
                 <Routes>
-                    <Route path="/" element={<Upload webSocket={myClient}/>} />
-                    <Route path="/find" element={<Find webSocket={myClient}/>} />
+                    <Route path="/" element={<Upload webSocket={webSocket}/>} />
+                    <Route path="/find" element={<Find webSocket={webSocket}/>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
 
