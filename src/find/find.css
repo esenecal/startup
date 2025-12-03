@@ -26,5 +26,9 @@ main {
 }
 
 #recipe-output {
-    flex: 1 1;
+    flex: 0 0 75vh;
+}
+
+#user-notification {
+    flex: 0 0 25vh;
 }

@@ -237,7 +237,7 @@ export function Find({ webSocket }) {
 
 // handles the notifications. Websocket used.
 function UserNotification({ webSocket }) {
-    const [notif, setNotif] = React.useState({});
+    const [notif, setNotif] = React.useState(null);
 
     React.useEffect(() => {
         webSocket.addObserver((n) => {
@@ -248,6 +248,14 @@ function UserNotification({ webSocket }) {
 
     console.log(notif);
 
-    // Notif is getting the fields from notifyObservers, where username = user and tag = t.
-    return <p id="user-notification" className="form-control border-3 border-success"> User {`${notif.user}`} just uploaded a {`${notif.t}`} recipe!</p>;
+    if (notif === null) {
+        return <p></p>;
+    } else if (notif.user === 'websocket' && notif.t === 'connected') {
+        return <p></p>;
+    } else {
+        // Notif is getting the fields from notifyObservers, where username = user and tag = t.
+        return <p id="user-notification" className="form-control border-3 border-success"> {`${notif.user}`} uploaded a {`${notif.t}`} recipe!</p>;
+    }
+
+    
 }
