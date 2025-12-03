@@ -25,4 +25,12 @@ function notifProxy(httpServer) {
     });
 
     // Periodically send a ping to ensure clients are alive.
+    setInterval(() => {
+        socketServer.clients.forEach(function each(client) {
+            if (client.isAlive === false) return client.terminate();
+
+            client.isAlive = false;
+            client.ping();
+        });
+    }, 10000);
 }
