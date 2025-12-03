@@ -159,7 +159,7 @@ export function Find({ webSocket }) {
             <header>
                 <div id="header-text">
                     <h3>Find</h3>
-                    <p>Select a tag to randomly search for recipes or a random food. Special thanks to the Report of the Week API (https://github.com/andyklimczak/TheReportOfTheWeek-API)</p>
+                    <p>Select a tag to randomly search for recipes or a random food. Special thanks to the Report of the Week API (https://github.com/andyklimczak/TheReportOfTheWeek-API).</p>
                 </div>
             </header>
 
