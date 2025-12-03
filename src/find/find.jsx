@@ -22,7 +22,7 @@ const defaultClickRecipe = {
 let tags = ["HOT", "COLD", "BREAKFAST", "LUNCH", "DINNER"];
 // let foods = ["Bread", "Pasta", "Fried Chicken", "Steak", "Salad"];      // Mock function for demonstrating clickFood functionality.
 
-export function Find() {
+export function Find({ webSocket }) {
     const [clickRecipeTitle, updateClickRecipeTitle] = React.useState(defaultClickRecipe.title);     // State for recipe title. 
     const [clickRecipeText, updateClickRecipeText] = React.useState(defaultClickRecipe.text);     // State for recipe text.
     const [clickRecipeTag, updateClickRecipeTag] = React.useState(defaultClickRecipe.tag);     // State for recipe tag.
@@ -61,10 +61,6 @@ export function Find() {
             return () => clearInterval(intervalID);
             
     }, [username]);
-
-    function UserNotification() {
-        return <p id="user-notification" className="form-control border-3 border-success"> User {`${username}`} just uploaded a {`${tag}`} recipe!</p>;
-    }
 
     // FUNCTIONS FOR FIND RECIPE
 
@@ -229,7 +225,7 @@ export function Find() {
                     {/* <!--Notification Alert. Ideally, this will be off to the side, so CSS will be needed to place this in the correct place.-->
                     <!--Sample Notification alert.--> */}
 
-                    <UserNotification />
+                    <UserNotification webSocket={webSocket}/>
 
                 </div>
 
@@ -237,4 +233,16 @@ export function Find() {
 
         </div>
     );
+}
+
+// handles the notifications. Websocket used.
+function UserNotification({ webSocket }) {
+    const [notif, setNotif] = React.useState(null);
+    React.useEffect(() => {
+        webSocket.addObserver((n) => {
+            setNotif(n);
+        });
+    }, [webSocket]);
+
+    return <p id="user-notification" className="form-control border-3 border-success"> User {`${notif.username}`} just uploaded a {`${notif.tag}`} recipe!</p>;
 }

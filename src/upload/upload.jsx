@@ -9,12 +9,8 @@ export function Upload({ webSocket }) {
     const [password, setPassword] = React.useState('');
     const [userInfo, setUserInfo] = React.useState(false);
 
-    // state for the notification (websocket)
-    const [notif, setNotif] = React.useState('');
-
     function sendNotif(tag) {
         webSocket.sendNotification(email, tag);
-        setNotif('');
     }
 
     function CreateID() {
@@ -120,7 +116,7 @@ export function Upload({ webSocket }) {
         console.log(recipe);
         console.log(JSON.stringify(recipe));
         
-        // websocket stuff.
+        // websocket stuff. Sends the tag to the sendNotif, which sends it to the websocket.
         sendNotif(recipe.tag);
 
         // backend call to push to server.
