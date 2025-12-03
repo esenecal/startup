@@ -8,8 +8,6 @@ const uuid = require('uuid');
 const bcrypt = require('bcryptjs');     // Encrypting
 const DB = require('./database.js');
 
-
-
 const authCookieName = 'token';
 
 // Some middleware
@@ -21,6 +19,11 @@ app.use(express.json());
 const urls = ["https://thereportoftheweekapi.com/api/v1/reports/?category=Running%20On%20Empty", "https://thereportoftheweekapi.com/api/v1/reports/?category=Drink%20Review"];
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
+
+// server for websocket
+server = app.listen(port, () => {
+  console.log(`Listening on ${port}`);
+});
 
 
 // ENDPOINTS FOR LOGIN. ---------------------------------------------------------------------------------
@@ -159,6 +162,8 @@ apiRouter.get('/randomFood', (req, res) => {
 
 });
 
+// WEBSOCKET ------------------------------------------------------------------------------
+
 // Create websocket object
 const socketServer = new WebSocketServer({ server });
 
@@ -167,13 +172,18 @@ socketServer.on('connection', (socket) => {
 
   // send notification to all clients.
   socket.on('notification', function notification(data) {
-    si
+    socketServer.clients.forEach(function each(client) {
+      if (client !== socket && client.readyState === WebSocket.OPEN) {
+        client.send(data);
+      }
+    });
   });
 
   // Respond to the ping by setting the socket as alive.
   socket.on('pong', () => {
     socket.isAlive = true;
   });
+
 });
 
 
@@ -186,6 +196,8 @@ setInterval(() => {
     client.ping();
   });
 });
+
+// ------------------------------------------------------------------------------------
 
 // function to get a random int between min and max, including min but NOT including max.
 function getRandomInt(min, max) {
