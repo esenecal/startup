@@ -2,20 +2,20 @@ import React from "react";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';  // Importing bootstrap components.
 import "./upload.css"; // page css file
 
-export function Upload() {
+export function Upload({ webSocket }) {
     
     // State for handling the authentication message.
     const [email, setEmail] = React.useState('');       // State and state functions for login.
     const [password, setPassword] = React.useState('');
     const [userInfo, setUserInfo] = React.useState(false);
 
-    // React.useEffect(() => {
-    //     (async () => {
-    //     const res = await fetch('api/user/me');
-    //     const data = await res.json();
-    //     setUserInfo(data);
-    //     })();
-    // }, []);
+    // state for the notification (websocket)
+    const [notif, setNotif] = React.useState('');
+
+    function sendNotif(tag) {
+        webSocket.sendNotification(email, tag);
+        setNotif('');
+    }
 
     function CreateID() {
         function onClick() {
@@ -97,7 +97,6 @@ export function Upload() {
     }
 
     // This function gets the recipe title, recipe text, and tag and sends it to the database.
-    // We will use local data for now.
     async function sendRecipeData() {
 
         const form = document.getElementById("recipeData");
@@ -120,6 +119,9 @@ export function Upload() {
         }
         console.log(recipe);
         console.log(JSON.stringify(recipe));
+        
+        // websocket stuff.
+        sendNotif(recipe.tag);
 
         // backend call to push to server.
         await fetch('/api/sendRecipe', {
