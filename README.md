@@ -157,8 +157,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 TO DO: clean up the notification render so it doesn't just say undefined, and comment my code better.
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+
+I used the code from the websocket chat as the basis of what I did and got some code from it.
+
+- [x] **Backend listens for WebSocket connection** - the notifProxy.js file acts as the backend for the WebSocket and is imported and used in index.js. The proper server (httpService) is passed into the notifProxy function (defined in notifProxy.js) and is used in initializing the WebSocketServer. This function defines the backend, including ping/pong to check clients are alive, and for forwarding the notifications out to everyone.
+- [x] **Frontend makes WebSocket connection** - NotifClient.js provides a class that handles the WebSocket. A NotifClient object is passed into the App element in index.jsx, which is then passed to the required functions and elements in app.jsx, upload.jsx, and find.jsx. When the NotifClient object is initialized, it runs the constructor, which creates a new WebSocket object.
+- [x] **Data sent over WebSocket connection** - In upload.jsx, frontend WebSocket code is provided in the sendNotif function, which is called whenever recipe data is retrieved (the sendRecipeData function). It passes the email (username) and tag of the submitted recipe into the NotifClient object's sendNotification function. This sends the information over the WebSocket connection.
+- [x] **WebSocket data displayed** - The WebSocket data is displayed in the UserNotification element in find.jsx. It uses a useEffect to periodically update and a useState to contain the information from the WebSocket. Depending on the value of the state variable (notif) and what is contained in the object in it, the userNotification elements displays a notification with the information from the WebSocket or renders blank. It also uses the websocket addObserver function to update the state variable.
+- [x] **Application is fully functional** - All the desired functions have been implemented and it has been released to AWS.

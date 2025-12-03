@@ -1190,3 +1190,13 @@ You have a lot of packages to install:
 npm init -y
 npm install express cookie-parser bcryptjs uuid mongodb ws
 ```
+
+## Websocket
+
+Really, remember that WebSocket is a connection that allows for some real-time communication.
+
+This is the best of what I could figure out from the code provided in the class and some research:
+
+You create a frontend WebSocket object and a backend WebSocketServer object. The details you can see in the code, but basically, on the frontend (which we sometimes handle with a class) we have defined event handlers that do certain things depending on what we get from the backend and handles the connection. Then we also have function to send data to the backend over the connection. The backend code can use ping/pong functions to check the connection and also send the data received back out to certain clients.
+
+The basic flow would be: client opens the websocket in the frontend. The send a message, a recipe, whatever, which is sent using functions that handles sending over the websocket connection. The backend receives it, says, neat, and according to it's code, sends it back out to whomever (the original client, everyone, etc). Then, the frontend receives it, processes the code according to the defined event handlers in its code, and then does something with it.
