@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');      // Use cookieparser.
 const uuid = require('uuid');           
 const bcrypt = require('bcryptjs');     // Encrypting
 const DB = require('./database.js');
+const { notifProxy } = require('./notifProxy.js');
 
 const authCookieName = 'token';
 
@@ -181,7 +182,8 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-
-app.listen(port, function () {                          // Tells us which port we are listening on.
+const httpService = app.listen(port, () => {                          // Tells us which port we are listening on.
     console.log(`Listening on port ${port}`);
 });
+
+notifProxy(httpService);
