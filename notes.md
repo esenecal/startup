@@ -98,6 +98,11 @@ We use different port numbers for our subdomains. Caddy listens on port 80 and 4
 
 See Caddy for more information. HTTPS is HTTP with a secure connection--all data is encrypted using TLS. The server and the computer use a web certificate to ensure that a connection is legit.
 
+Content-Type
+
+HTTP headers specify metadata about a request/response, such as how to handle security, data formats, etc.
+Content Type specifically describes the content format in MIME types. ex: text/html
+
 #### HTTP Status Codes.
 
 HTTP status codes are standard codes in an HTTP response that allow a client know how to interpret it. There are 5 categories:
@@ -755,7 +760,6 @@ Hooks allow class style functionality for react components. Basically allows you
 
 useEffect allows for lifecycle events--running a function every time a compenent renders, for example.
 
-
 ```js
 function UseEffectHookDemo() {
   React.useEffect(() => {
@@ -770,6 +774,26 @@ root.render(<UseEffectHookDemo />);
 ```
 
 The function is the logic for the effect. Dependencies are reactive values referenced in the first parameter (the function).
+
+State lets a componenet remember information. It has a state variable and an update function for updating that variable.
+
+Context hooks allow a component to get information from a distant parent, no matter how deep. For example:
+
+```js
+function yay() {
+  const theme = useContext(Context)
+}
+```
+
+Ref Hooks allow a component to hold information that is NOT used for rendering. Updating a ref does NOT re-render your component (STATE DOES). useRef is used to declare a ref, and can hold anything.
+
+```js
+function func() {
+  const inputRef = useRef('');
+}
+```
+
+Performance Hooks allow you to optimize re-rendering by skipping anything unnecessary. So, hooks like useMemo (cache results of a calculation) and useCallback (cache funciton definition before passing it down) can help reduce unnecessary re-rendering. When re-rendering cannot be skipped, some hooks separate blocking and non-blocking updates to help improve performance. This includes funcitons like useTransition and useDeferredValue.
 
 ### Deploying React
 
@@ -1243,23 +1267,44 @@ async function main() {
 }
 ```
 
-
-
+MongoDB uses JSON objects 
 
 For testing with the backend, you should run the index.js file (through node or vscode) and then also run npm run dev or test with curl. You are essentially running the backend simultaneously.
 
+A database is made of collections. A collection contains a lot of JS objects with unique IDs.
 
-  function onClicked() {
-    console.log("button")
-    fetch('/api/click', {
-      method: "post",     // You need to clarify what method it is.
-    }) 
-    .then(() => {
-      console.log("clicked 2");
-    });
-    console.log("end button");
-  }
+Queries!! These are some examples from the github.
 
+```js
+// find all in food
+db.food.find();
+
+// find foods with two or more of something
+db.food.find({ key: { $gte: 2 } });
+
+// find something with a certain value AND less than another.
+db.food.find({ key: 'TEXT', unit: { $lt: 5 } });
+
+// find foods with less than one unit or another.
+db.food.find({ $or: [(key: { $lt: 10 }), (unit: { $lt: 6 })] });
+
+// find foods with certain words in a certain field.
+db.food.find({ field: /(word|word2)/i });
+```
+
+
+```js
+function onClicked() {
+  console.log("button")
+  fetch('/api/click', {
+    method: "post",     // You need to clarify what method it is.
+  }) 
+  .then(() => {
+    console.log("clicked 2");
+  });
+  console.log("end button");
+}
+```
   clarify the method.
 
 ## Packages
