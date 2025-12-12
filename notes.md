@@ -1200,6 +1200,13 @@ app.get('/path', (req, res, next) => {
 })
 ```
 
+Some verbs (which describe what a HTTP request is asking for):
+- GET: get requested resource (at the path, I believe). We used this to retrieve recipe data (called by the frontend, defined in the backed)
+- POST: Create a new resource. We used this in startup to push information to a database from the backend.
+- PUT: Update a resource.
+- DELETE: delete the resource.
+- OPTIONS: get metadata on resource.
+
 This function takes a URL path and a callback function. This callback function is invoked when the path matches the URl path of an incoming request.
 
 req represents the HTTP request object, res erpresents the response object, and next is a routing feature that is expected to be called if the routing funciton wants another function to generate a response.
