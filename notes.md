@@ -48,12 +48,15 @@ to add:
 - [JSON Files](#json-files)
 - [Javascript](#javascript)
   - [Node.js](#nodejs)
+    -[package.json](#packagejson)
   - [Syntax](#syntax)
   - [Functions](#functions)
   - [Object and Classes](#objects-and-classes)
   - [Promises and Async](#promises-and-async)
 - [Database](#database)
 - [Packages](#packages)
+- [Websocket](#websocket)
+- [pm2](#pm2)
 
 ## Git and Github
 
@@ -607,6 +610,8 @@ You can read their documentation [here](https://getbootstrap.com/). Good luck!
 
 Some definitions: JSX is a way for us to put HTML in JS. Use JSX.
 
+It is a JS variant that is converted into HTML and JS, using Vite.
+
 Okay.
 
 To create a basic Vite React template project:
@@ -887,7 +892,7 @@ You can also directly include it into the HTML within a ```script``` element, or
 
 ### Node.js
 
-Node.js is for deploying JS outside of a browser. You can run ```node``` in the command line to open a JS interpreter.
+Node.js is for deploying JS outside of a browser. You can run ```node``` in the command line to open a JS interpreter. It essentially opened up JS from not just browser work, but also running on a server. So, it can run the entire stack, not just the browser. It takes the V8 engine and runs it in a console instead of a browser.
 
 To install node, run these commands:
 
@@ -899,6 +904,30 @@ To install node, run these commands:
 
 > [!NOTE]
 > It's a good idea to add it to the bottom of, say, your body section, as it will act on whatever is loaded--and you want everything to be loaded before you start executing Javascript.
+
+The NPM (NODE PACKAGE MANAGER) is a package manager that allows you to load preexisting JS packages. It allows you to install the package locally on your machine and is bundled al`ong with Node.js. Code must be initialized to used npm through npm init.
+
+The NVM is the Node Version Manager.
+
+#### Package.json
+A package.json file contains 3 things:
+- Metadata about a project (name, default entry JS file, etc.)
+- Commands that can be executed (run, test, distribute, etc).
+- packages that the project depends on.
+
+This may be what it looks like:
+```json
+{
+  "name": "",
+  "version": "",
+  "description": "",
+}
+```
+et cetra.
+
+So, when you install a node package, it will be referenced within the package.json file.
+
+package-lock.json tracks teh version of the package installed, so it can be reinstalled at the proper version given a problem.
 
 ### Syntax
 
@@ -1200,3 +1229,9 @@ This is the best of what I could figure out from the code provided in the class 
 You create a frontend WebSocket object and a backend WebSocketServer object. The details you can see in the code, but basically, on the frontend (which we sometimes handle with a class) we have defined event handlers that do certain things depending on what we get from the backend and handles the connection. Then we also have function to send data to the backend over the connection. The backend code can use ping/pong functions to check the connection and also send the data received back out to certain clients.
 
 The basic flow would be: client opens the websocket in the frontend. The send a message, a recipe, whatever, which is sent using functions that handles sending over the websocket connection. The backend receives it, says, neat, and according to it's code, sends it back out to whomever (the original client, everyone, etc). Then, the frontend receives it, processes the code according to the defined event handlers in its code, and then does something with it.
+
+## pm2
+
+pm2 stands for Process Manager 2. As programs will terminate when closed or the computer restarts, you need to register programs as a daemon, meaning it will always work in the background.
+
+pm2 allows our services to run as dameons and provides a way to start and stop them. If you type in pm2 ls, you will see the services running.
