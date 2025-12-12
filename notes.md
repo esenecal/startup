@@ -54,6 +54,7 @@ to add:
   - [Functions](#functions)
   - [Object and Classes](#objects-and-classes)
   - [Promises and Async](#promises-and-async)
+  - [Web Services](#web-services)
 - [Express](#express)
 - [Authentication](#authentication)
 - [Database](#database)
@@ -1150,7 +1151,40 @@ async function foo() {
 
 This gives us more control. This one and the previous function are not identical--the promise's resolution is a bit different on execution. In order to get the resolve for the latter one, we would need to call await foo(). Thus, console.log(await foo()); would give us wow, but console.log(foo()) wouldn't--it would give us some pending promise stuff.
 
-## Express 
+## Web services
+
+The fetch function is a way to make HTTP requests. It takes a URL and returns a promise. The promise then function takes a callback function, and, if the returned content is of a certain json type, then this information can be converted into a JS object via the json function.
+
+```js
+fetch('url')
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    // code
+  });
+```
+
+## Express
+
+Express is a Node package that provides support for implementing a full web service. It allows for routing requests for service endpoints, manipulating HTTP requests, generating HTTP responses, and using middleware. It revolves around creating and using HTTP routing and middleware functions.
+
+You can define HTTP endpoints using the Express abb object, which supports HTTP verbs as functions.
+
+A get request on a path would be:
+```js
+app.get('/path', (req, res, next) => {
+  res.send({name: 'name'})
+})
+```
+
+This function takes a URL path and a callback function. This callback function is invoked when the path matches the URl path of an incoming request.
+
+req represents the HTTP request object, res erpresents the response object, and next is a routing feature that is expected to be called if the routing funciton wants another function to generate a response.
+
+Middleware is componentized pieces of fuctionality. A mediator loads tehse components and determines their execution order. A request comes in, and the mediator passes the request around. EXPRESS IS THE MEDIATOR, and middleware functions are the components.
+
+There are some standard functions, both built in and in Node packages.
+
+A middleware function has this pattern: ```function middlewareFunc(req, res, next)```. req, res, and next are fairly the same 
 
 ## Authentication
 
