@@ -20,6 +20,7 @@ to add:
 - [General Web Things](#general-web-things)
   - [Ports](#ports)
   - [HTTPS](#https)
+    - [HTTP Status Codes](#http-status-codes)
   - [Domains](#domains)
   - [DNS](#dns)
 - [AWS](#aws)
@@ -53,6 +54,8 @@ to add:
   - [Functions](#functions)
   - [Object and Classes](#objects-and-classes)
   - [Promises and Async](#promises-and-async)
+- [Express](#express)
+- [Authentication](#authentication)
 - [Database](#database)
 - [Packages](#packages)
 - [Websocket](#websocket)
@@ -93,6 +96,23 @@ We use different port numbers for our subdomains. Caddy listens on port 80 and 4
 ### HTTPS
 
 See Caddy for more information. HTTPS is HTTP with a secure connection--all data is encrypted using TLS. The server and the computer use a web certificate to ensure that a connection is legit.
+
+#### HTTP Status Codes.
+
+HTTP status codes are standard codes in an HTTP response that allow a client know how to interpret it. There are 5 categories:
+
+1. 1xx: Informational
+2. 2xx: Success
+3. 3xx: Redirect to some other location, or that the previously cached resource is still valid.
+4. 4xx: Client errors. Request invalid.
+5. 5xx: server errors. Request cannot be satisfied due to an error on server.
+
+There are some other specific ones:
+- 304: not modified, cached version of resource is valid.
+- 308: temporary redirect.
+- 400: bad request, request was malinformed or invalid.
+- 500: Internal server error: server failed to properly process request.
+  
 
 ### Domains
 
@@ -612,6 +632,8 @@ Some definitions: JSX is a way for us to put HTML in JS. Use JSX.
 
 It is a JS variant that is converted into HTML and JS, using Vite.
 
+Vite is a tool that bundles your code, provides debuggins support, provides support for JSX, TypeScript, CSS, etc.
+
 Okay.
 
 To create a basic Vite React template project:
@@ -728,9 +750,10 @@ Now that we have a way to change the state ```clicked```, we can use ```onClicke
 
 ### Hooks
 
-Hooks allow class style functionality for react components.
+Hooks allow class style functionality for react components. Basically allows you to use different React features from components.
 
 useEffect allows for lifecycle events--running a function every time a compenent renders, for example.
+
 
 ```js
 function UseEffectHookDemo() {
@@ -755,7 +778,7 @@ Delete the ```deployFiles.sh``` script, create a ```deployReact.sh```.
 
 In it, add:
 
-```
+```sh
 while getopts k:h:s: flag
 do
     case "${flag}" in
@@ -836,29 +859,8 @@ export default App
 
 ## React Part 2: Reactivity
 
-This was a lot of fun to see it all come together. I had to keep remembering to use React state instead of just manipulating the DOM directly.
 
-Handling the toggling of the checkboxes was particularly interesting.
 
-```jsx
-<div className="input-group sound-button-container">
-  {calmSoundTypes.map((sound, index) => (
-    <div key={index} className="form-check form-switch">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        value={sound}
-        id={sound}
-        onChange={() => togglePlay(sound)}
-        checked={selectedSounds.includes(sound)}
-      ></input>
-      <label className="form-check-label" htmlFor={sound}>
-        {sound}
-      </label>
-    </div>
-  ))}
-</div>
-```
 ## JSON files
 
 JSON stands for Javascript Object Notation. It's basically a simple way to store and share data, and can easily be converted to a JS object (or from one).
@@ -1148,6 +1150,20 @@ async function foo() {
 
 This gives us more control. This one and the previous function are not identical--the promise's resolution is a bit different on execution. In order to get the resolve for the latter one, we would need to call await foo(). Thus, console.log(await foo()); would give us wow, but console.log(foo()) wouldn't--it would give us some pending promise stuff.
 
+## Express 
+
+## Authentication
+
+A few things on here:
+
+A password should be stored in a token, contained in a cookie. The password itself should be hashed, with the hashed version being stored in the database. This means that the password is unreadable to people.
+
+A cookie can be made with different options to enhance euthentication:
+
+- HttpOnly: tells browser to NOT allow JS running on the browser to read the cookie.
+- Secure: requires HTTPS when cookie is sent back to server.
+- SameSite: only returns cookie to domain that generated it.
+
 ## Database
 
 We are using MongoDB, which is a database made up of collection. Each collection contains JSON documents. So think of a collection as an array of Javascript objects, each with a unique ID assigned.
@@ -1220,6 +1236,8 @@ npm init -y
 npm install express cookie-parser bcryptjs uuid mongodb ws
 ```
 
+
+
 ## Websocket
 
 Really, remember that WebSocket is a connection that allows for some real-time communication.
@@ -1235,3 +1253,5 @@ The basic flow would be: client opens the websocket in the frontend. The send a 
 pm2 stands for Process Manager 2. As programs will terminate when closed or the computer restarts, you need to register programs as a daemon, meaning it will always work in the background.
 
 pm2 allows our services to run as dameons and provides a way to start and stop them. If you type in pm2 ls, you will see the services running.
+
+You can start services with names and ports, and stop them.
